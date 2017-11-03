@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "CreateReceipt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="header bg-ui-general">
+
+    <div class="header-action">
+        <nav class="nav">
+            <a class="nav-link active" href="/Receipt/SearchReceipt">Search Receipt</a>
+            <a class="nav-link " href="/Receipt/CreateReceipt">Create Receipt</a>
+            <a class="nav-link" href="/Receipt/ReceiptList">Receipt List</a>
+        </nav>
+    </div>
+</header><!--/.header -->
+
+<div class="main-content">
+    <div class="row">
+
+
+        <!--
+        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+        | Basic controls
+        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+        !-->
+        <div class="col-12">
+            <div class="card">
+                <h4 class="card-title"><strong>Search</strong> Receipt</h4>
+                <div class="card-body">
+                    <div class="row">
+
+
+                            <div class="col-md-2"></div>
+
+                            <div class="col-md-6">
+
+                                <br class="clearfix" />
+
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control" placeholder="Enter Bill Number">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-center" type="button">Details</button>
+                                    </span>
+                                </div>
+                            </div>
+                        
+                            <br class="clearfix"/>
+                            <br class="clearfix" />
+                            <br class="clearfix" />
+                            <br class="clearfix" />
+                            <br class="clearfix" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    | Modal center
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    !-->
+        <div class="col-md-6 col-lg-4">
+
+            <div class="modal modal-center fade" id="modal-center" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Your content comes here</p>
+                            <br><br><br><br><br><br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-bold btn-pure btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div><!--/.main-content -->
+
+<script type="text/javascript">
+    $("window").ready(function () {
+
+            $('#modal-center').modal('show');
+      
+    });
+</script>

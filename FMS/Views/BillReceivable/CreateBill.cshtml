@@ -1,0 +1,173 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateBill</title>
+</head>
+<body>
+
+    <div class="main-content">
+        <div class="row">
+
+
+            <!--
+            |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+            | Basic controls
+            |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+            !-->
+            <div class="col-12">
+                <div class="card">
+                    <h4 class="card-title"><strong>Create</strong> Bill</h4>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group  required">
+                                    <label for="date">Date</label>
+                                        <input type="text" id="date" name="date" class="form-control date" placeholder="Pick date" readonly required />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Bill No</label>
+                                    <select class="form-control" id="billno" name="billno">
+                                        <option value="">-- Select one --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Bill From</label>
+                                    <input type="text" id="BillFrom" name="BillFrom" class="form-control" required />
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea type="text" class="form-control" id="Description" name="Description" required></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Org</label>
+                                    <select name="Org" id="Org" class="form-control"></select>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Economic</label>
+                                    <select name="Economic" id="Economic" class="form-control"></select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Fund</label>
+                                    <select name="Fund" id="Fund" class="form-control"></select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Geocode</label>
+                                    <select name="Geocode" id="Geocode" class="form-control"></select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Function</label>
+                                    <select name="Function" id="Function" class="form-control"></select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Programme</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="programme" name="programme" required />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">Go!</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="text" class="form-control" id="Quantity" name="Quantity" required />
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Rate</label>
+
+                                    <input type="text" class="form-control" id="Rate" name="Rate" required />
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Amount</label>
+
+
+                                    <input type="text" class="form-control" id="Amount" name="Amount" required />
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div><!--/.main-content -->
+
+
+</body>
+</html>
