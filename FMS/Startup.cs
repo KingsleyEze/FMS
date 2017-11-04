@@ -8,17 +8,37 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using FMS.Repository;
 using FMS.Repository.Interface;
+using FMS.Core.Context;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using FMS.Core;
 
 namespace FMS
 {
     public class Startup
     {
+        IConfigurationRoot Configuration;
+
+        public Startup(IHostingEnvironment env)
+        {
+            Configuration = new ConfigurationBuilder()
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json").Build();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IBudgetPaymentRepository, BudgetPaymentRepository>();
-            services.AddMvc();
+            try
+            {
+
+                services.AddDbContext<DataContext>(((options) =>
+                                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])), ServiceLifetime.Transient);
+                services.AddFMSCoreServices();
+                services.AddMvc();
+
+            }catch(Exception ex) { }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
