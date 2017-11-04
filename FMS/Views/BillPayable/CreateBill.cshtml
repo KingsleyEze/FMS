@@ -16,83 +16,99 @@
             !-->
             <div class="col-12">
                 <div class="card">
-                    <h4 class="card-title"><strong>Create</strong> Bill</h4>
+                    <h4 class="card-title">BILL PAYABLE - CREATE</h4>
                     <div class="card-body">
+
+                            <div class="row">
+                                
+                                <div class="col-md-8">
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <hr class="d-md-none">
+                                            <label for="date">Date</label><br/>
+                                            <div class="input-group  required">
+                                                <input type="text" id="date" name="date" class="form-control date" placeholder="Pick date" data-provide="datepicker" readonly required />
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <hr class="d-md-none">
+                                            <div class="form-group">
+                                                <label>Payer</label>
+                                                <select class="form-control" id="payerId" name="userId">
+                                                    <option value="">-- Select one --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br class="clearfix"/>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea type="text" class="form-control" id="Description" name="Description" maxlenght="140" rows="6" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        <br class="clearfix" /><br class="clearfix" />
+                            <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Organisation</label>
+                                        <select class="form-control" id="billno" name="billno">
+                                            <option value="">-- Select one --</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Economic</label>
+                                        <select name="Economic" id="Economic" class="form-control"></select>
+                                    </div>
+                                </div>
+
+                                </div>
+
+                                <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Fund</label>
+                                        <select name="Fund" id="Fund" class="form-control"></select>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Geo Code</label>
+                                        <select name="Geocode" id="Geocode" class="form-control"></select>
+                                    </div>
+                                </div>
+
+                                    </div>
+
                         <div class="row">
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group  required">
-                                    <label for="date">Date</label>
-                                    <input type="text" id="date" name="date" class="form-control date" placeholder="Pick date" readonly required />
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Bill From</label>
-                                    <select class="form-control" id="billno" name="billno">
-                                        <option value="">-- Select one --</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Payer ID</label>
-                                    <select class="form-control" id="billno" name="billno">
-                                        <option value="">-- Select one --</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea type="text" class="form-control" id="Description" name="Description" maxlenght="140" required></textarea>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Org</label>
-                                    <select class="form-control" id="billno" name="billno">
-                                        <option value="">-- Select one --</option>
-                                    </select>                               
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Economic</label>
-                                    <select name="Economic" id="Economic" class="form-control"></select>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Fund</label>
-                                    <select name="Fund" id="Fund" class="form-control"></select>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Geocode</label>
-                                    <select name="Geocode" id="Geocode" class="form-control"></select>
-                                </div>
-                            </div>
-
-
                             <div class="col-md-4">
                                 <hr class="d-md-none">
                                 <div class="form-group">
@@ -109,6 +125,10 @@
 
                                 </div>
                             </div>
+
+                            </div>
+
+                        <div class="row">
 
 
                             <div class="col-md-4">
@@ -131,12 +151,20 @@
 
                                 </div>
                             </div>
-
-
-                            
-
-
                         </div>
+
+                        <br class="clearfix" />
+                            <div class="row">
+
+                                <div class="col-md-8">
+
+                                    <button type="submit" class="btn btn-w-md btn-bold btn-primary pull-right">Create</button>
+
+                                </div>
+                            </div>
+
+
+                        <br class="clearfix" /><br class="clearfix" /><br class="clearfix" /><br class="clearfix" />
                     </div>
                 </div>
             </div>
