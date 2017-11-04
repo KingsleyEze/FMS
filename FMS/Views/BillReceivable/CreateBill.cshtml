@@ -1,4 +1,4 @@
-﻿
+﻿@model FMS.Models.BillReceivable.CreateReceivableView
 @{
     Layout = "_Layout";
 }
@@ -25,152 +25,173 @@
                 <div class="card">
                     <h4 class="card-title">BILL RECEIVABLE - CREATE</h4>
                     <div class="card-body">
+                        <form  asp-action="SaveBill" asp-controller="BillReceivable">
+                            <div class="row">
 
-                        <div class="row">
+                                <div class="col-md-8">
 
-                            <div class="col-md-8">
+                                    <div class="row">
 
-                                <div class="row">
+                                        <div class="col-md-6">
+                                            <hr class="d-md-none">
+                                            <label for="date">Date</label><br />
+                                            <div class="input-group  required">
+                                                <input type="text" class="form-control date" placeholder="Pick date" data-provide="datepicker" required asp-for="TransactionDate" />
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
 
-                                    <div class="col-md-6">
-                                        <hr class="d-md-none">
-                                        <label for="date">Date</label><br />
-                                        <div class="input-group  required">
-                                            <input type="text" id="date" name="date" class="form-control date" placeholder="Pick date" data-provide="datepicker" readonly required />
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </span>
+
+                                        <div class="col-md-6">
+                                            <hr class="d-md-none">
+                                            <div class="form-group">
+                                                <label>Payee</label>
+                                                <select class="form-control" asp-for="PayeeId">
+                                                    <option value="">-- Select one --</option>
+                                                    <option value="Ezeora Nnanna">Ezeora Nnanna</option>
+                                                    <option value="Okeke Ifeanyi">Okeke Ifeanyi</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
+                            <br class="clearfix" />
 
-                                    <div class="col-md-6">
-                                        <hr class="d-md-none">
-                                        <div class="form-group">
-                                            <label>Payee</label>
-                                            <select class="form-control" id="payeeId" name="userId">
-                                                <option value="">-- Select one --</option>
-                                            </select>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea type="text" class="form-control" asp-for="Description" maxlenght="140" rows="6" required></textarea>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <br class="clearfix" />
+                            <br class="clearfix" /><br class="clearfix" />
+                            <div class="row">
 
-                        <div class="row">
-                            <div class="col-md-8">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea type="text" class="form-control" id="Description" name="Description" maxlenght="140" rows="6" required></textarea>
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Organisation</label>
+                                        <select class="form-control" asp-for="Organisation">
+                                            <option value="">-- Select one --</option>
+                                            <option value="FEDERAL STAFF CLINICS, AWKA">FEDERAL STAFF CLINICS, AWKA</option>
+                                            <option value="FEDERAL STAFF EYE CLINICS, ABUJA">FEDERAL STAFF EYE CLINICS, ABUJA</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Economic</label>
+                                        <select class="form-control" asp-for="Economic">
+                                            <option value="">-- Select Economic --</option>
+                                            <option value="CONSTRUCTION/PROVISION OF MILITARY BARACKS">CONSTRUCTION/PROVISION OF MILITARY BARACKS</option>
+                                            <option value="CONSTRUCTION/PROVISION OF DEFENCE EQUIPMENTS">CONSTRUCTION/PROVISION OF DEFENCE EQUIPMENTS</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Fund</label>
+                                        <select class="form-control" asp-for="Fund">
+                                            <option value="">-- Select Fund --</option>
+                                            <option value="FAAC DIRECT ALLOCATION">FAAC DIRECT ALLOCATION</option>
+                                            <option value="MAIN ENVELOP - BUDGETARY ALLOCATION">MAIN ENVELOP - BUDGETARY ALLOCATION</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Geo Code</label>
+                                        <select class="form-control" asp-for="GeoCode">
+
+                                            <option value="">-- Select Geo Code --</option>
+                                            <option value="ABUJA MUNICIPAL">ABUJA MUNICIPAL</option>
+                                            <option value="GWAGWALADA">GWAGWALADA</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Function</label>
+                                        <select class="form-control" asp-for="Function">
+                                            <option value="">-- Select Function --</option>
+                                            <option value="EXECUTIVE AND LEGISLATIVE ORGANS">EXECUTIVE AND LEGISLATIVE ORGANS</option>
+                                            <option value="FINANCIAL AND FISCAL AFFAIRS">FINANCIAL AND FISCAL AFFAIRS</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="text" class="form-control" asp-for="Quantity" required />
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Rate</label>
+
+                                        <input type="text" class="form-control" asp-for="Rate" required />
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Amount</label>
+
+
+                                        <input type="text" class="form-control" asp-for="Amount" required />
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <br class="clearfix" />
+                            <div class="row">
 
-                        <br class="clearfix" /><br class="clearfix" />
-                        <div class="row">
+                                <div class="col-md-8">
 
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Organisation</label>
-                                    <select class="form-control" id="billno" name="billno">
-                                        <option value="">-- Select one --</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Economic</label>
-                                    <select name="Economic" id="Economic" class="form-control"></select>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Fund</label>
-                                    <select name="Fund" id="Fund" class="form-control"></select>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Geo Code</label>
-                                    <select name="Geocode" id="Geocode" class="form-control"></select>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Function</label>
-                                    <select name="Function" id="Function" class="form-control"></select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Quantity</label>
-                                    <input type="text" class="form-control" id="Quantity" name="Quantity" required />
+                                    <button type="submit" class="btn btn-w-md btn-bold btn-primary pull-right">Create</button>
 
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="row">
-
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Rate</label>
-
-                                    <input type="text" class="form-control" id="Rate" name="Rate" required />
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <hr class="d-md-none">
-                                <div class="form-group">
-                                    <label>Amount</label>
-
-
-                                    <input type="text" class="form-control" id="Amount" name="Amount" required />
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <br class="clearfix" />
-                        <div class="row">
-
-                            <div class="col-md-8">
-
-                                <button type="submit" class="btn btn-w-md btn-bold btn-primary pull-right">Create</button>
-
-                            </div>
-                        </div>
-
-
+                        </form>
                         <br class="clearfix" /><br class="clearfix" /><br class="clearfix" /><br class="clearfix" />
                     </div>
                 </div>
