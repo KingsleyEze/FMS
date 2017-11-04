@@ -1,7 +1,7 @@
-﻿
+﻿@model List<FMS.Core.Model.BillReceivable>
 @{
-    ViewData["Title"] = "ReceiptList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Receipt List";
+    Layout = "_Layout";
 }
 
 
@@ -55,42 +55,25 @@
                        <thead>
                            <tr>
                                <th>#</th>
-                               <th>Table heading</th>
-                               <th>Table heading</th>
-                               <th>Table heading</th>
-                               <th>Table heading</th>
-                               <th>Table heading</th>
-                               <th>Table heading</th>
+                               <th>Bill Number</th>
+                               <th>Payee</th>
+                               <th>Description</th>
+                               <th>Transaction Date</th>
+                               <th>Action</th>
                            </tr>
                        </thead>
                        <tbody>
-                           <tr>
-                               <th scope="row">1</th>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                           </tr>
-                           <tr>
-                               <th scope="row">2</th>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                           </tr>
-                           <tr>
-                               <th scope="row">3</th>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                               <td>Table cell</td>
-                           </tr>
+                          @foreach (var line in Model)
+                            {
+                               <tr>
+                                   <th scope="row">#</th>
+                                   <td>@line.BillNumber</td>
+                                   <td>@line.PayeeId</td>
+                                   <td>@line.Description</td>
+                                   <td>@line.TransactionDate</td>
+                                   <td><a href="/Receipt/ReceiptDetail?receiptId=@line.Id" class="btn btn-w-md btn-bold btn-warning">VIEW</a></td>
+                               </tr>
+                            }
                        </tbody>
                    </table>
                </div>

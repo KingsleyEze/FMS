@@ -463,14 +463,15 @@
 
                             <div class="col-md-10 col-md-offset-2">
                                 <br class="clearfix" />
+                                <form>
+                                    <div class="input-group">
 
-                                <div class="input-group">
-
-                                    <input type="text" class="form-control" placeholder="Enter Bill Number">
-                                    <span class="input-group-btn">
-                                        <a href="/Receipt/ReceiptList" class="btn btn-primary" data-toggle="modal" id="receiptModelBtn"  type="button">Details</a>
-                                    </span>
-                                </div>
+                                        <input type="text" id="receiptBillNumber" class="form-control" placeholder="Enter Bill Number" required>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" data-toggle="modal" id="receiptModelBtn" type="button">Details</button>
+                                        </span>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -499,13 +500,15 @@
                             <div class="col-md-10 col-md-offset-2">
                                 <br class="clearfix" />
 
-                                <div class="input-group">
+                                <form>
+                                    <div class="input-group">
 
-                                    <input type="text" class="form-control" placeholder="Enter Bill Number">
-                                    <span class="input-group-btn">
-                                        <a href="/Payment/PaymentList"class="btn btn-primary" data-toggle="modal"  id="paymentModelBtn"  type="button">Details</a>
-                                    </span>
-                                </div>
+                                        <input type="text" id="paymentBillNumber" class="form-control" placeholder="Enter Bill Number" required>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" data-toggle="modal" id="paymentModelBtn" type="button">Details</button>
+                                        </span>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -574,14 +577,18 @@
 
                 $('#modal-payment').modal('hide');
 
-                window.location.replace("/Payment/PaymentList");
+                let billNumber = $('#paymentBillNumber').val();
+
+                window.location.replace("/Payment/PaymentList?billNumber=" + billNumber);
             });
 
             $("#receiptModelBtn").on("click", function () {
 
                 $('#modal-receipt').modal('hide');
 
-                window.location.replace("/Receipt/ReceiptList");
+                let billNumber = $('#receiptBillNumber').val();
+
+                window.location.replace("/Receipt/ReceiptList?billNumber=" + billNumber);
             });
 
         });
