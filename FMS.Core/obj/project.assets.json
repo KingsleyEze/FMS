@@ -5968,11 +5968,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\fms\\FMS.Core\\FMS.Core.csproj",
+      "projectUniqueName": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj",
       "projectName": "FMS.Core",
-      "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\fms\\FMS.Core\\FMS.Core.csproj",
+      "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj",
       "packagesPath": "C:\\Users\\Kingsley-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\fms\\FMS.Core\\obj\\",
+      "outputPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

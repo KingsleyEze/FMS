@@ -27,7 +27,14 @@ namespace FMS.Controllers
 
         public IActionResult CreateBill()
         {
-            return View();
+
+           // ViewBag["billNumber"] = TempData["billNumber"] ?? null;
+
+            var viewModel = new CreateReceivableView();
+
+            viewModel.TransactionDate = DateTime.Now.ToString("dd/MM/yyyy");
+
+            return View(viewModel);
         }
 
         public IActionResult SaveBill(CreateReceivableView viewModel)
@@ -57,6 +64,8 @@ namespace FMS.Controllers
 
             _unitOfWork.BillReceivablesRepository.Insert(receivable);
             _unitOfWork.SaveChanges();
+
+            TempData["billNumber"] = randomNumber;
 
             return RedirectToAction("CreateBill");
         }

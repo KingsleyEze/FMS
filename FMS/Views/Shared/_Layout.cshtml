@@ -21,6 +21,14 @@
     <meta property="og:image" content="http://thetheme.io/theadmin/assets/img/og-img.jpg">
     <meta property="og:url" content="http://thetheme.io/theadmin/">
     <meta name="twitter:card" content="summary_large_image">
+    <style>
+        .req {
+            color: red !important;
+            font-weight :bold;
+            font-size:10pt;
+        }
+
+    </style>
 </head>
 <body class="sidebar-folded">
     
@@ -80,34 +88,6 @@
                 </li>
                 <li class="menu-item">
                     <a class="menu-link" href="#">
-                        <span class="icon fa fa-mail-forward"></span>
-                        <span class="title">Bill Payable</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="menu-submenu">
-                        <li class="menu-item">
-                            <a class="menu-link" href="/BillPayable/CreateBill">
-                                <span class="dot"></span>
-                                <span class="title">Create Bill</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" href="/BillPayable/ReviewBill">
-                                <span class="dot"></span>
-                                <span class="title">Review Bill</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" href="/BillPayable/FinalizeBill">
-                                <span class="dot"></span>
-                                <span class="title">Finalize Bill</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="menu-item">
-                    <a class="menu-link" href="#">
                         <span class="icon fa fa-mail-reply "></span>
                         <span class="title">Bill Receivable</span>
                         <span class="arrow"></span>
@@ -116,23 +96,39 @@
                         <li class="menu-item">
                             <a class="menu-link" href="/BillReceivable/CreateBill">
                                 <span class="dot"></span>
-                                <span class="title">Create Bill</span>
+                                <span class="title">Create New Receivable</span>
                             </a>
                         </li>
                         <li class="menu-item">
                             <a class="menu-link" href="/BillReceivable/ReviewBill">
                                 <span class="dot"></span>
-                                <span class="title">Review Bill</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" href="/BillReceivable/FinalizeBill">
-                                <span class="dot"></span>
-                                <span class="title">Finalize Bill</span>
+                                <span class="title">Review Receivable</span>
                             </a>
                         </li>
                     </ul>
                 </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="#">
+                        <span class="icon fa fa-mail-forward"></span>
+                        <span class="title">Bill Payable</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="menu-submenu">
+                        <li class="menu-item">
+                            <a class="menu-link" href="/BillPayable/CreateBill">
+                                <span class="dot"></span>
+                                <span class="title">Create New Payable</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="/BillPayable/ReviewBill">
+                                <span class="dot"></span>
+                                <span class="title">Review Payable</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="menu-item">
                     <a class="menu-link" href="#">
                         <span class="icon fa fa-calculator"></span>
@@ -468,7 +464,7 @@
 
                                         <input type="text" id="receiptBillNumber" class="form-control" placeholder="Enter Bill Number" required>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-primary" data-toggle="modal" id="receiptModelBtn" type="button">Details</button>
+                                            <button class="btn btn-primary" data-toggle="modal" id="receiptModelBtn" type="button">Search</button>
                                         </span>
                                     </div>
                                 </form>

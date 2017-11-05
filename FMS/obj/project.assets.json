@@ -13224,11 +13224,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\fms\\FMS\\FMS.csproj",
+      "projectUniqueName": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\FMS.csproj",
       "projectName": "FMS",
-      "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\fms\\FMS\\FMS.csproj",
+      "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\FMS.csproj",
       "packagesPath": "C:\\Users\\Kingsley-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\fms\\FMS\\obj\\",
+      "outputPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13247,8 +13247,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\fms\\FMS.Core\\FMS.Core.csproj": {
-              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\fms\\FMS.Core\\FMS.Core.csproj"
+            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj": {
+              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj"
             }
           }
         }

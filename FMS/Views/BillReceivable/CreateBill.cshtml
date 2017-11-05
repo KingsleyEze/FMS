@@ -3,7 +3,13 @@
     Layout = "_Layout";
 }
 
+@if (TempData["billNumber"] != null)
+{
 
+    <div class="alert alert-success">
+        Your bill was created successfully. Your bill number is @TempData["billNumber"].ToString() 
+    </div>
+}
 
     <div class="main-content">
         <div class="row">
@@ -16,7 +22,7 @@
             !-->
             <div class="col-12">
                 <div class="card">
-                    <h4 class="card-title">BILL RECEIVABLE - CREATE</h4>
+                    <h4 class="card-title">Bill Receivable - Create</h4>
                     <div class="card-body">
                         <form  asp-action="SaveBill" asp-controller="BillReceivable">
                             <div class="row">
@@ -29,7 +35,7 @@
                                             <hr class="d-md-none">
                                             <label for="date">Date</label><br />
                                             <div class="input-group  required">
-                                                <input type="text" class="form-control date" placeholder="Pick date" data-provide="datepicker" required asp-for="TransactionDate" />
+                                                <input type="text" class="form-control date" placeholder="Date"  asp-for="TransactionDate"  readonly/>
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </span>
@@ -40,7 +46,7 @@
                                         <div class="col-md-6">
                                             <hr class="d-md-none">
                                             <div class="form-group">
-                                                <label>Payee</label>
+                                                <label>Payee <span class="req">*</span></label>
                                                 <select class="form-control" asp-for="PayeeId">
                                                     <option value="">-- Select one --</option>
                                                     <option value="Ezeora Nnanna">Ezeora Nnanna</option>
@@ -58,32 +64,20 @@
                                 <div class="col-md-8">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Description</label>
+                                        <label>Description <span class="req">*</span></label>
                                         <textarea type="text" class="form-control" asp-for="Description" maxlenght="140" rows="6" required></textarea>
                                     </div>
                                 </div>
                             </div>
 
                             <br class="clearfix" /><br class="clearfix" />
+                            <h5 class="alert alert-info">Classification</h5><hr />
                             <div class="row">
 
-
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Organisation</label>
-                                        <select class="form-control" asp-for="Organisation">
-                                            <option value="">-- Select one --</option>
-                                            <option value="FEDERAL STAFF CLINICS, AWKA">FEDERAL STAFF CLINICS, AWKA</option>
-                                            <option value="FEDERAL STAFF EYE CLINICS, ABUJA">FEDERAL STAFF EYE CLINICS, ABUJA</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <hr class="d-md-none">
-                                    <div class="form-group">
-                                        <label>Economic</label>
+                                        <label>Economic <span class="req">*</span></label>
                                         <select class="form-control" asp-for="Economic">
                                             <option value="">-- Select Economic --</option>
                                             <option value="CONSTRUCTION/PROVISION OF MILITARY BARACKS">CONSTRUCTION/PROVISION OF MILITARY BARACKS</option>
@@ -92,6 +86,19 @@
                                     </div>
                                 </div>
 
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Function</label>
+                                        <select class="form-control" asp-for="Function" disabled>
+                                            <option value="">-- Select Function [Disabled] --</option>
+                                            <option value="EXECUTIVE AND LEGISLATIVE ORGANS">EXECUTIVE AND LEGISLATIVE ORGANS</option>
+                                            <option value="FINANCIAL AND FISCAL AFFAIRS">FINANCIAL AND FISCAL AFFAIRS</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="row">
@@ -100,9 +107,9 @@
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Fund</label>
+                                        <label>Fund <span class="req">*</span></label>
                                         <select class="form-control" asp-for="Fund">
-                                            <option value="">-- Select Fund --</option>
+                                            <option value="">-- Select Fund  --</option>
                                             <option value="FAAC DIRECT ALLOCATION">FAAC DIRECT ALLOCATION</option>
                                             <option value="MAIN ENVELOP - BUDGETARY ALLOCATION">MAIN ENVELOP - BUDGETARY ALLOCATION</option>
                                         </select>
@@ -114,9 +121,9 @@
                                     <hr class="d-md-none">
                                     <div class="form-group">
                                         <label>Geo Code</label>
-                                        <select class="form-control" asp-for="GeoCode">
+                                        <select class="form-control" asp-for="GeoCode" disabled>
 
-                                            <option value="">-- Select Geo Code --</option>
+                                            <option value="">-- Select Geo Code [Disabled] --</option>
                                             <option value="ABUJA MUNICIPAL">ABUJA MUNICIPAL</option>
                                             <option value="GWAGWALADA">GWAGWALADA</option>
 
@@ -126,16 +133,18 @@
 
                             </div>
 
+                            <br class="clearfix" /><br class="clearfix" />
+                            <h5 class="alert alert-info">Details</h5><hr />
+
                             <div class="row">
+
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Function</label>
-                                        <select class="form-control" asp-for="Function">
-                                            <option value="">-- Select Function --</option>
-                                            <option value="EXECUTIVE AND LEGISLATIVE ORGANS">EXECUTIVE AND LEGISLATIVE ORGANS</option>
-                                            <option value="FINANCIAL AND FISCAL AFFAIRS">FINANCIAL AND FISCAL AFFAIRS</option>
-                                        </select>
+                                        <label>Rate</label>
+
+                                        <input type="text" class="form-control" placeholder="Disable" asp-for="Rate" disabled />
+
                                     </div>
                                 </div>
 
@@ -143,7 +152,7 @@
                                     <hr class="d-md-none">
                                     <div class="form-group">
                                         <label>Quantity</label>
-                                        <input type="text" class="form-control" asp-for="Quantity" required />
+                                        <input type="text" class="form-control" placeholder="Disable" asp-for="Quantity" disabled />
 
                                     </div>
                                 </div>
@@ -152,28 +161,31 @@
 
                             <div class="row">
 
-
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Rate</label>
+                                        <label>Currency </label>
 
-                                        <input type="text" class="form-control" asp-for="Rate" required />
+
+                                        <input type="text" class="form-control" placeholder="Disable" name="Currency" disabled />
 
                                     </div>
                                 </div>
 
+
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Amount</label>
+                                        <label>Amount <span class="req">*</span></label>
 
 
-                                        <input type="text" class="form-control" asp-for="Amount" required />
+                                        <input type="text" class="form-control" placeholder="Enter Amount" asp-for="Amount" required />
 
                                     </div>
                                 </div>
                             </div>
+
+
                             <br class="clearfix" />
                             <div class="row">
 

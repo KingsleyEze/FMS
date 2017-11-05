@@ -33,8 +33,13 @@ namespace FMS.Controllers
         [HttpGet]
         public IActionResult CreateBill()
         {
+            //ViewBag["billNumber"] = TempData["billNumber"] ?? null;
 
-            return View(new CreatePayableView());
+            var viewModel = new CreatePayableView();
+
+            viewModel.TransactionDate = DateTime.Now.ToString("dd/MM/yyyy");
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -64,6 +69,8 @@ namespace FMS.Controllers
 
             _unitOfWork.BillPayablesRepository.Insert(payable);
             _unitOfWork.SaveChanges();
+
+            TempData["billNumber"] = randomNumber;
 
             return RedirectToAction("CreateBill");
         }
