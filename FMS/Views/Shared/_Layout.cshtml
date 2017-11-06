@@ -575,6 +575,7 @@
 
                 let billNumber = $('#paymentBillNumber').val();
 
+                //$(location).attr('href', "/Payment/PaymentList?billNumber=" + billNumber);
                 window.location.replace("/Payment/PaymentList?billNumber=" + billNumber);
             });
 
@@ -583,7 +584,7 @@
                 $('#modal-receipt').modal('hide');
 
                 let billNumber = $('#receiptBillNumber').val();
-
+                //$(location).attr('href', "/Receipt/ReceiptList?billNumber=" + billNumber);
                 window.location.replace("/Receipt/ReceiptList?billNumber=" + billNumber);
             });
 
