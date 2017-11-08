@@ -603,6 +603,8 @@
     <script src="/assets/js/app.min.js"></script>
     <script src="/assets/js/script.min.js"></script>
 
+    @RenderSection("scripts", false)
+
     <script>
         app.ready(function () {
 
@@ -613,54 +615,24 @@
 
             // Earning chart
             //
-            var chartjs2 = new Chart($("#chart-js-2"), {
-                type: 'line',
-                data: {
-                    labels: ["2012", "2013", "2014", "2015", "2016", "2017", "2018"],
-                    datasets: [
-                        {
-                            label: "Advertise",
-                            backgroundColor: "rgba(51,202,185,0.5)",
-                            borderColor: "rgba(51,202,185,0.5)",
-                            pointRadius: 0,
-                            data: [0, 6000, 8000, 5000, 2000, 5000, 7500]
-                        },
-                        {
-                            label: "Hosting",
-                            backgroundColor: "rgba(243,245,246,0.8)",
-                            borderColor: "rgba(243,245,246,0.8)",
-                            pointRadius: 0,
-                            data: [9000, 5000, 4000, 2000, 8000, 3000, 9000]
-                        }
-                    ]
-                },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                }
-            });
-
             $("#paymentModelBtn").on("click", function () {
 
                 $('#modal-payment').modal('hide');
-
-                alert('search payment');
+            
                 //let billNumber = $('#paymentBillNumber').val();
 
                 //$(location).attr('href', "/Payment/PaymentList?billNumber=" + billNumber);
-                window.location.replace("http://localhost:7606/Payment/SearchPayment");
+                window.location.replace("/Payment/SearchPayment");
             });
 
             $("#receiptModelBtn").on("click", function () {
 
                 $('#modal-receipt').modal('hide');
-
-                alert('search receipt');
+                
 
                 let billNumber = $('#receiptBillNumber').val();
                 //$(location).attr('href', "/Receipt/ReceiptList?billNumber=" + billNumber);
-                window.location.replace("http://localhost:7606/Receipt/SearchReceipt");
+                window.location.replace("/Receipt/SearchReceipt");
             });
 
         });

@@ -68,9 +68,9 @@ jQuery.fn.scrollToEnd = function() {
 
 
   app.dir = {
-    home:   app.corejs.replace('assets/js/core.min.js', ''),
-    assets: app.corejs.replace('js/core.min.js', ''),
-    vendor: app.corejs.replace('js/core.min.js', 'vendor/')
+    home:   app.corejs.replace('/assets/js/core.min.js', ''),
+    assets: app.corejs.replace('/js/core.min.js', ''),
+    vendor: app.corejs.replace('/js/core.min.js', 'vendor/')
   }
 
 
