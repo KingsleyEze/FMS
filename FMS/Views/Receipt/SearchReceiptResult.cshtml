@@ -1,0 +1,129 @@
+﻿@*@model List<FMS.Core.Model.BillReceivable>*@
+@model FMS.Models.Receipt.SearchReceiptView
+@{
+    ViewData["Title"] = "Receipt List";
+    Layout = "_Layout";
+
+    var receivableList = Model.SearchResult;
+}
+
+
+<header class="header bg-ui-general">
+
+    <div class="header-action">
+        <nav class="nav">
+
+            <a class="nav-link active" href="/Receipt/SearchReceipt">Search Receipt</a>
+        </nav>
+    </div>
+</header><!--/.header -->
+<!--
+          |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+          | Responsive tables
+          |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+          !-->
+<div class="col-12">
+    <div class="card">
+        <h4 class="card-title"><strong>Advance Search</strong></h4>
+        <div class="card-body">
+
+                <form asp-action="SearchReceiptResult" asp-controller="Receipt" method="get">
+
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <hr class="d-md-none">
+                            <label for="date">Date</label><br />
+                            <div class="input-group  required">
+                                <input type="text" class="form-control" placeholder="Date" data-provide="datepicker" />
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br class="clearfix" />
+                    <div class="row">
+
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <hr class="d-md-none">
+                            <div class="form-group">
+                                <label>Payer <span class="req">*</span></label>
+                                <select class="form-control">
+                                    <option value="">-- Select One --</option>
+                                    <option value="Ezeora Nnanna">Ezeora Nnanna</option>
+                                    <option value="Okeke Ifeanyi">Okeke Ifeanyi</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <hr class="d-md-none">
+                            <div class="form-group">
+                                <label>Amount <span class="req">*</span></label>
+
+
+                                <input type="text" class="form-control" placeholder="Enter Amount" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <br class="clearfix" />
+                    <div class="row">
+
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+
+                            <button type="submit" class="btn btn-primary pull-right">Search</button>
+                        </div>
+                    </div>
+                </form>
+                <br class="clearfix" />
+                <br class="clearfix" />
+                <br class="clearfix" />
+                <br class="clearfix" />
+                <br class="clearfix" />
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Bill Number</th>
+                                    <th>Payee</th>
+                                    <th>Description</th>
+                                    <th>Transaction Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var line in receivableList)
+                                {
+                                    <tr>
+                                        <th scope="row">#</th>
+                                        <td>@line.BillNumber</td>
+                                        <td>@line.PayeeId</td>
+                                        <td>@line.Description</td>
+                                        <td>@line.TransactionDate</td>
+                                        <td>
+                                            @*<a href="/Receipt/ReceiptDetail?receiptId=@line.Id" class="btn btn-w-md btn-bold btn-warning">VIEW</a>*@
+                                            <button  id="@line.BillNumber" class="btn btn-w-md btn-bold btn-warning addBillNumber">Add</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+</div>
+    </div>
+</div>
+
+
+
+

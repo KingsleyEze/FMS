@@ -1,7 +1,10 @@
-﻿@model List<FMS.Core.Model.BillReceivable>
+﻿@*@model List<FMS.Core.Model.BillReceivable>*@
+@model FMS.Models.Receipt.SearchReceiptView
 @{
     ViewData["Title"] = "Receipt List";
     Layout = "_Layout";
+
+    var receivableList = Model.SearchResult;
 }
 
 
@@ -23,45 +26,36 @@
           !-->
 <div class="col-12">
     <div class="card">
-        <h4 class="card-title"><strong>Receipts</strong></h4>
+        <h4 class="card-title"><strong>Advance Search</strong></h4>
         <div class="card-body">
 
                 <div class="row">
-
-                    <div class="col-md-6">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
                         <hr class="d-md-none">
                         <label for="date">Date</label><br />
                         <div class="input-group  required">
-                            <input type="text" class="form-control" placeholder="Date" required readonly />
+                            <input type="text" class="form-control" placeholder="Date" data-provide="datepicker" />
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </span>
                         </div>
                     </div>
-
-
-                    <div class="col-md-6">
-                        <hr class="d-md-none">
-                        <div class="form-group">
-                            <label>Payer <span class="req">*</span></label>
-                            <select class="form-control">
-                                <option value="">-- Select One --</option>
-                                <option value="Ezeora Nnanna">Ezeora Nnanna</option>
-                                <option value="Okeke Ifeanyi">Okeke Ifeanyi</option>
-                            </select>
-                        </div>
-                    </div>
+                    
                 </div>
+            <br class="clearfix"/>
             <div class="row">
 
+                <div class="col-md-2"></div>
                 <div class="col-md-4">
                     <hr class="d-md-none">
                     <div class="form-group">
-                        <label>Currency </label>
-
-
-                        <input type="text" class="form-control" placeholder="Disable" name="Currency" disabled />
-
+                        <label>Payer <span class="req">*</span></label>
+                        <select class="form-control">
+                            <option value="">-- Select One --</option>
+                            <option value="Ezeora Nnanna">Ezeora Nnanna</option>
+                            <option value="Okeke Ifeanyi">Okeke Ifeanyi</option>
+                        </select>
                     </div>
                 </div>
 
@@ -75,6 +69,15 @@
                         <input type="text" class="form-control" placeholder="Enter Amount"  required />
 
                     </div>
+                </div>
+            </div>
+            <br class="clearfix" />
+            <div class="row">
+
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+
+                    <button class="btn btn-primary pull-right">Search</button>
                 </div>
             </div>
 
@@ -99,7 +102,7 @@
                            </tr>
                        </thead>
                        <tbody>
-                          @foreach (var line in Model)
+                          @foreach (var line in receivableList)
                             {
                                <tr>
                                    <th scope="row">#</th>

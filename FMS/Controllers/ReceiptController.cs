@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FMS.Core.Abstract;
+using FMS.Models.Receipt;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,31 +25,53 @@ namespace FMS.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult SearchReceipt()
         {
             return View();
         }
 
-        public IActionResult CreateReceipt()
+        [HttpGet]
+        public IActionResult SearchReceiptResult(string date = null, string payee = null, string amount = null)
         {
-            return View();
+            var viewModel = new SearchReceiptView();
+
+            var repo = _unitOfWork.BillReceivablesRepository.Items;
+
+            if(date != null)
+                repo.Where(b => b.TransactionDate.Contains(date));
+            if (payee != null)
+                repo.Where(b => b.PayeeId.Contains(payee));
+            if (amount != null)
+                repo.Where(b => b.Amount.Contains(amount));
+
+            viewModel.SearchResult = repo.ToList();
+
+            return View(viewModel);
         }
-
-        public IActionResult ReceiptDetail(string receiptId)
+        public IActionResult ReceiptDetail(string billNumber)
         {
-            Guid Id = Guid.Parse(receiptId);
 
-            var receipt = _unitOfWork.BillReceivablesRepository.Items.Where(b => b.Id == Id).FirstOrDefault();
+            var receipt = _unitOfWork.BillReceivablesRepository.Items.Where(b => b.BillNumber == billNumber).FirstOrDefault();
 
             return View(receipt);
         }
 
-        public IActionResult ReceiptList(string billNumber)
-        {
+        //public IActionResult ReceiptList(string billNumber)
+        //{
+        //    var viewModel = new SearchReceiptView();
 
-            var receiptList = _unitOfWork.BillReceivablesRepository.Items.Where(b => b.BillNumber == billNumber).ToList();
+        //    viewModel.SearchResult = _unitOfWork.BillReceivablesRepository.Items.Where(b => b.BillNumber == billNumber).ToList();
 
-            return View(receiptList);
-        }
+        //    return View(viewModel);
+        //}
+
+        //public IActionResult CreateReceipt()
+        //{
+        //    return View();
+        //}
+
+
+
     }
 }

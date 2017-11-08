@@ -22,3 +22,16 @@ C:\xcore\_http\www\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.d
 C:\xcore\_http\www\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.pdb
 C:\xcore\_http\www\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.Core.dll
 C:\xcore\_http\www\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.Core.pdb
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.deps.json
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.runtimeconfig.json
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.runtimeconfig.dev.json
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.dll
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.pdb
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.Core.dll
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\bin\Debug\netcoreapp2.0\FMS.Core.pdb
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.csprojResolveAssemblyReference.cache
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.csproj.CoreCompileInputs.cache
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.AssemblyInfoInputs.cache
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.AssemblyInfo.cs
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.dll
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.pdb
