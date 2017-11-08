@@ -29,12 +29,15 @@ namespace FMS.Controllers
             return View();
         }
 
+        public IActionResult SearchBill()
+        {
+            return View();
+        }
+
 
         [HttpGet]
         public IActionResult CreateBill()
         {
-            //ViewBag["billNumber"] = TempData["billNumber"] ?? null;
-
             var viewModel = new CreatePayableView();
 
             viewModel.TransactionDate = DateTime.Now.ToString("dd/MM/yyyy");

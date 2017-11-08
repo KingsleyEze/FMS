@@ -460,19 +460,30 @@
                             <div class="col-md-10 col-md-offset-2">
                                 <br class="clearfix" />
                                 <form>
-                                    <div class="input-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
 
-                                        <input type="text" id="receiptBillNumber" class="form-control" placeholder="Enter Bill Number" required>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary" data-toggle="modal" id="receiptModelBtn" type="button">Search</button>
-                                        </span>
+                                                <input type="text" id="receiptBillNumber" class="form-control" placeholder="Enter Bill Number" required>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" data-toggle="modal" id="receiptModelBtn" type="button">Search</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br class="clearfix" />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-bold btn-default">Cancel</button>
+                                            <button class="btn btn-bold btn-warning pull-right">Accept</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>
+                        @*<button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>*@
                         @*<button type="button" class="btn btn-bold btn-pure btn-primary">Save changes</button>*@
                     </div>
                 </div>
@@ -485,7 +496,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Enter Bill Number</h5>
+                        <h5 class="modal-title">Enter Payment Bill Number</h5>
                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -497,20 +508,32 @@
                                 <br class="clearfix" />
 
                                 <form>
-                                    <div class="input-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
 
-                                        <input type="text" id="paymentBillNumber" class="form-control" placeholder="Enter Bill Number" required>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary" data-toggle="modal" id="paymentModelBtn" type="button">Details</button>
-                                        </span>
+                                                <input type="text" id="paymentBillNumber" class="form-control" placeholder="Enter Bill Number" required>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" data-toggle="modal" id="paymentModelBtn" type="button">Search</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br class="clearfix" />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-bold btn-default">Cancel</button>
+                                            <button class="btn btn-bold btn-warning pull-right">Accept</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>
-                        @*<button type="button" class="btn btn-bold btn-pure btn-primary">Save changes</button>*@
+                        @*<button type="button" class="btn btn-bold btn-pure btn-secondary pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-bold btn-pure btn-warning">Accept</button>*@
                     </div>
                 </div>
             </div>

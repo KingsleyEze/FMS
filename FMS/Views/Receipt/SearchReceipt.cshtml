@@ -29,30 +29,67 @@
                 <h4 class="card-title"><strong>Search</strong> Receipt</h4>
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-md-8">
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <hr class="d-md-none">
+                                    <label for="date">Date</label><br />
+                                    <div class="input-group  required">
+                                        <input type="text" class="form-control" placeholder="Date" required  readonly />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
 
 
-                            <div class="col-md-2"></div>
-
-                            <div class="col-md-6">
-
-                                <br class="clearfix" />
-
-                                <div class="input-group">
-
-                                    <input type="text" class="form-control" placeholder="Enter Bill Number">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary"  data-toggle="modal" data-target="#modal-center" type="button">Details</button>
-                                    </span>
+                                <div class="col-md-6">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Payer <span class="req">*</span></label>
+                                        <select class="form-control" >
+                                            <option value="">-- Select One --</option>
+                                            <option value="Ezeora Nnanna">Ezeora Nnanna</option>
+                                            <option value="Okeke Ifeanyi">Okeke Ifeanyi</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        
-                            <br class="clearfix"/>
-                            <br class="clearfix" />
-                            <br class="clearfix" />
-                            <br class="clearfix" />
-                            <br class="clearfix" />
+                            <div class="row">
 
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Currency </label>
+
+
+                                        <input type="text" class="form-control" placeholder="Disable" name="Currency" disabled />
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Amount <span class="req">*</span></label>
+
+
+                                        <input type="text" class="form-control" placeholder="Enter Amount" required />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+                    <br class="clearfix" />
                 </div>
             </div>
         </div>
