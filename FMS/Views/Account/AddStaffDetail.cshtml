@@ -4,5 +4,141 @@
     Layout = "_Layout";
 }
 
-<h2>Add Staff Detail</h2>
+
+<div class="main-content">
+    <div class="row">
+
+
+        <!--
+        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+        | Basic controls
+        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+        !-->
+        <div class="col-12">
+            <div class="card">
+                <h4 class="card-title">Add User - Staff Details</h4>
+                <div class="card-body">
+                    <form asp-action="SaveBankDetail" asp-controller="Account" method="post">
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Title: </label>
+                                    <input type="text" class="form-control" placeholder="Enter First Name" name="FirstName" />
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Rank <span class="req">*</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter Last Name" name="LastName" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <br class="clearfix" />
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Grade Level: </label>
+                                    <input type="text" class="form-control" placeholder="Enter Middle Name" name="MiddleName" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <br class="clearfix" />
+
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Date Of First Appointment: </label>
+                                    <input type="text" class="form-control" placeholder="Enter Phone Number" name="BVN" />
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Date Of Current Appointment <span class="req">*</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter Email Address" name="TIN" />
+                                </div>
+                            </div>
+                        </div>
+                        <br class="clearfix" />
+
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Department: </label>
+                                    <input type="text" class="form-control" placeholder="Enter Phone Number" name="BVN" />
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Division <span class="req">*</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter Email Address" name="TIN" />
+                                </div>
+                            </div>
+                        </div>
+                        <br class="clearfix" />
+
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Section: </label>
+                                    <input type="text" class="form-control" placeholder="Enter Phone Number" name="BVN" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <br class="clearfix" />
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Note <span class="req">*</span></label>
+                                    <textarea type="text" class="form-control"  maxlenght="140" rows="6" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <br class="clearfix" />
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-w-md btn-bold btn-primary pull-right">Next</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <br class="clearfix" /><br class="clearfix" /><br class="clearfix" /><br class="clearfix" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div><!--/.main-content -->
 
