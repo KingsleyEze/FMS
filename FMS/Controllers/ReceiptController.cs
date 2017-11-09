@@ -49,6 +49,7 @@ namespace FMS.Controllers
 
             return View(viewModel);
         }
+
         public IActionResult ReceiptDetail(string billNumber)
         {
 
@@ -56,22 +57,6 @@ namespace FMS.Controllers
 
             return View(receipt);
         }
-
-        //public IActionResult ReceiptList(string billNumber)
-        //{
-        //    var viewModel = new SearchReceiptView();
-
-        //    viewModel.SearchResult = _unitOfWork.BillReceivablesRepository.Items.Where(b => b.BillNumber == billNumber).ToList();
-
-        //    return View(viewModel);
-        //}
-
-        //public IActionResult CreateReceipt()
-        //{
-        //    return View();
-        //}
-
-
 
     }
 }

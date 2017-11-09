@@ -22,7 +22,7 @@ namespace FMS.Core.Model
         public string EmailAddress { get; set; }
         public string Fax { get; set; }
         public string PostalAddress { get; set; }
-        public string WebAddress { get; set; }
+        public string Website { get; set; }
         public string FileId { get; set; }
     }
 }

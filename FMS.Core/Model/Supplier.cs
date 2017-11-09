@@ -20,7 +20,7 @@ namespace FMS.Core.Model
         public string Mobile { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
-        public string WebAddress { get; set; }
+        public string Website { get; set; }
         public string Notes { get; set; }
 
     }

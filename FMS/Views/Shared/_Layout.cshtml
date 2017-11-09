@@ -28,9 +28,18 @@
             font-size:10pt;
         }
 
+        form input, form select, form textarea {
+            border: 1px solid #aaa !important;
+        }
+
+        form label, form input[placeholder] {
+            color: #555 !important;
+            font-weight: bolder;
+        }
+
     </style>
 </head>
-<body class="sidebar-folded">
+<body class="sidebar-folded" data-provide="pace">
     
     <!-- Preloader -->
     <div class="preloader">
@@ -90,42 +99,21 @@
 
                 <li class="menu-item">
                     <a class="menu-link" href="#">
-                        <span class="icon fa fa-mail-reply "></span>
-                        <span class="title">Bill Receivable</span>
+                        <span class="icon fa fa-money"></span>
+                        <span class="title">Bill Manager</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="menu-submenu">
                         <li class="menu-item">
                             <a class="menu-link" href="/BillReceivable/CreateBill">
                                 <span class="dot"></span>
-                                <span class="title">Create New Receivable</span>
+                                <span class="title">Create Receivable</span>
                             </a>
                         </li>
-                        <li class="menu-item">
-                            <a class="menu-link" href="/BillReceivable/ReviewBill">
-                                <span class="dot"></span>
-                                <span class="title">Review Receivable</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="#">
-                        <span class="icon fa fa-mail-forward"></span>
-                        <span class="title">Bill Payable</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="menu-submenu">
                         <li class="menu-item">
                             <a class="menu-link" href="/BillPayable/CreateBill">
                                 <span class="dot"></span>
-                                <span class="title">Create New Payable</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" href="/BillPayable/ReviewBill">
-                                <span class="dot"></span>
-                                <span class="title">Review Payable</span>
+                                <span class="title">Create Payable</span>
                             </a>
                         </li>
                     </ul>
@@ -181,50 +169,6 @@
                     </ul>
                 </li>
 
-                @*<li class="menu-item">
-                    <a class="menu-link" href="#">
-                        <span class="icon fa fa-money"></span>
-                        <span class="title">Cash Manager</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="menu-submenu">
-                        <li class="menu-item">
-                            <a class="menu-link" href="/">
-                                <span class="dot"></span>
-                                <span class="title">Cashflow</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" href="/">
-                                <span class="dot"></span>
-                                <span class="title">Bank Statements</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>*@
-
-
-                @*<li class="menu-item">
-                    <a class="menu-link" href="#">
-                        <span class="icon fa fa-cubes"></span>
-                        <span class="title">Reports Manager</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="menu-submenu">
-                        <li class="menu-item">
-                            <a class="menu-link" href="/">
-                                <span class="dot"></span>
-                                <span class="title">Cashbook</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a class="menu-link" href="/">
-                                <span class="dot"></span>
-                                <span class="title">Budget Execution</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>*@
 
                 
 
@@ -473,7 +417,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Enter Bill Number</h5>
+                        <h5 class="modal-title">Enter Receipt Bill Number</h5>
                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -483,14 +427,13 @@
 
                             <div class="col-md-10 col-md-offset-2">
                                 <br class="clearfix" />
-                                <form>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="input-group">
 
                                                 <input type="text" id="receiptBillNumber" class="form-control" placeholder="Enter Bill Number" required>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-primary" data-toggle="modal" id="receiptModelBtn" type="button">Search</button>
+                                                    <button class="btn btn-primary" data-toggle="modal" id="receiptSearchBtn" type="button">Search</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -499,10 +442,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button class="btn btn-bold btn-default">Cancel</button>
-                                            <button class="btn btn-bold btn-warning pull-right">Accept</button>
+                                            <button id="acceptReceiptNumber" class="btn btn-bold btn-warning pull-right">Accept</button>
                                         </div>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -514,6 +456,7 @@
             </div>
         </div>
     </div>
+
     <div class="col-md-6 col-lg-4">
 
         <div class="modal modal-center fade" id="modal-payment" tabindex="-1">
@@ -531,14 +474,13 @@
                             <div class="col-md-10 col-md-offset-2">
                                 <br class="clearfix" />
 
-                                <form>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="input-group">
 
                                                 <input type="text" id="paymentBillNumber" class="form-control" placeholder="Enter Bill Number" required>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-primary" data-toggle="modal" id="paymentModelBtn" type="button">Search</button>
+                                                    <button class="btn btn-primary" data-toggle="modal" id="paymentSearchBtn" type="button">Search</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -548,67 +490,15 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button class="btn btn-bold btn-default">Cancel</button>
-                                            <button class="btn btn-bold btn-warning pull-right">Accept</button>
+                                            <button id="acceptPaymentNumber" class="btn btn-bold btn-warning pull-right">Accept</button>
                                         </div>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         @*<button type="button" class="btn btn-bold btn-pure btn-secondary pull-left" data-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-bold btn-pure btn-warning">Accept</button>*@
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | Modal :
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
-    <div class="col-md-6 col-lg-4">
-
-        <div class="modal modal-center fade" id="modal-receipt-search" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Enter Bill Number</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-
-                            <div class="col-md-10 col-md-offset-2">
-                                <br class="clearfix" />
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group">
-
-                                                <input type="text" id="receiptSearchBillNumber" class="form-control" placeholder="Enter Bill Number" required>
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-primary" data-toggle="modal" id="receiptSearchModelBtn" type="button">Search</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br class="clearfix" />
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <button class="btn btn-bold btn-default" data-dismiss="modal">Cancel</button>
-                                            <button id="acceptReceiptNumber" class="btn btn-bold btn-warning pull-right">Accept</button>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        @*<button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>*@
-                        @*<button type="button" class="btn btn-bold btn-pure btn-primary">Save changes</button>*@
                     </div>
                 </div>
             </div>
@@ -635,54 +525,62 @@
             // Scoll to the end of chat content
             $('#chat-content').scrollToEnd();
 
+            //PAYMENT MODAL CONTROL
 
+            $("#paymentSearchBtn").on("click", function () {
 
-            // Earning chart
-            //
-            $("#paymentModelBtn").on("click", function () {
-
-                $('#modal-payment').modal('hide');
+                    $('#modal-payment').modal('hide');
             
-                //let billNumber = $('#paymentBillNumber').val();
+                    window.location.replace("/Payment/SearchPayment");
+                });
 
-                //$(location).attr('href', "/Payment/PaymentList?billNumber=" + billNumber);
-                window.location.replace("/Payment/SearchPayment");
-            });
+                $('.addPaymentBillNumber').on("click", function () {
 
-            $("#receiptModelBtn").on("click", function () {
+                    var id = $(this).attr('id');
 
-                $('#modal-receipt').modal('hide');
-                
+                    $('#paymentBillNumber').val(id);
 
-                let billNumber = $('#receiptBillNumber').val();
-                //$(location).attr('href', "/Receipt/ReceiptList?billNumber=" + billNumber);
-                window.location.replace("/Receipt/SearchReceipt");
-            });
+                    $('#modal-payment').modal('show');
+                });
+
+                $('#acceptPaymentNumber').on('click', function () {
+
+                    let billNumber = $('#paymentBillNumber').val();
+
+                    $(location).attr('href', "/Payment/PaymentDetail?billNumber=" + billNumber);
+                });
+            // END PAYMENT MODAL CONTROLS
+
+            //RECEIPT MODAL CONTROLS
+
+                $("#receiptSearchBtn").on("click", function () {
+
+                    $('#modal-receipt').modal('hide');
+
+                    window.location.replace("/Receipt/SearchReceipt");
+                });
+
+                $('.addReceiptBillNumber').on("click", function () {
+
+                    var id = $(this).attr('id');
+
+                    $('#receiptBillNumber').val(id);
+
+                    $('#modal-receipt').modal('show');
+                });
+
+                $('#acceptReceiptNumber').on('click', function () {
+
+                    let billNumber = $('#receiptBillNumber').val();
+
+                    $(location).attr('href', "/Receipt/ReceiptDetail?billNumber=" + billNumber);
+                });
+            // END RECEIPT MODAL CONTROLS
 
         });
     </script>
 
 
-    <script>
-        
-
-        $(document).ready(function () {
-
-            $('.addBillNumber').on("click", function () {
-                var id = $(this).attr('id');
-                $('#receiptSearchBillNumber').val(id);
-                $('#modal-receipt-search').modal('show');
-                //alert(id);
-            });
-
-            $('#acceptReceiptNumber').on('click', function () {
-
-                let billNumber = $('#receiptSearchBillNumber').val();
-
-                $(location).attr('href', "/Receipt/ReceiptDetail?billNumber=" + billNumber);
-            });
-        });
-    </script>
 
 </body>
 </html>
