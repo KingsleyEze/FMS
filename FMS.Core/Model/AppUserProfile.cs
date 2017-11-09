@@ -19,7 +19,7 @@ namespace FMS.Core.Model
         public string City { get; set; }
         public LGA LGA { get; set; }
         public string Phone { get; set; }
-        public string Mobile { get; set; }
+        public string EmailAddress { get; set; }
         public string Fax { get; set; }
         public string PostalAddress { get; set; }
         public string WebAddress { get; set; }
