@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewData["Title"] = "CreateReceipt";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Search Payment";
+    Layout = "_Layout";
 }
 
 <header class="header bg-ui-general">
@@ -9,11 +9,10 @@
     <div class="header-action">
         <nav class="nav">
             <a class="nav-link active" href="/Payment/SearchPayment">Search Payment</a>
-            <a class="nav-link" href="/Payment/CreatePayment">Create Payment</a>
-            <a class="nav-link" href="/Payment/PaymentList">Payment List</a>
         </nav>
     </div>
 </header><!--/.header -->
+
 
 <div class="main-content">
     <div class="row">
@@ -28,64 +27,69 @@
             <div class="card">
                 <h4 class="card-title"><strong>Search</strong> Payment</h4>
                 <div class="card-body">
-                    <div class="row">
 
-
+                    <form asp-action="SearchPaymentResult" asp-controller="Payment" method="get">
+                        <div class="row">
                             <div class="col-md-2"></div>
-
-                            <div class="col-md-6">
-
-                                <br class="clearfix" />
-
-                                <div class="input-group">
-
-                                    <input type="text" class="form-control" placeholder="Enter Bill Number">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-center" type="button">Details</button>
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <label for="date">Transaction Date</label><br />
+                                <div class="input-group  required">
+                                    <input type="text" name="date" class="form-control" placeholder="Date" data-provide="datepicker" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
                                     </span>
                                 </div>
                             </div>
-                        
-                            <br class="clearfix"/>
-                            <br class="clearfix" />
-                            <br class="clearfix" />
-                            <br class="clearfix" />
-                            <br class="clearfix" />
-                    </div>
+
+                        </div>
+                        <br class="clearfix" />
+                        <div class="row">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Payer</label>
+                                    <select name="payer" class="form-control">
+                                        <option value="">-- Select One --</option>
+                                        <option value="Ezeora Nnanna">Ezeora Nnanna</option>
+                                        <option value="Okeke Ifeanyi">Okeke Ifeanyi</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Amount</label>
+
+
+                                    <input type="text" name="amount" class="form-control" placeholder="Enter Amount" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <br class="clearfix" />
+                        <div class="row">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+
+                                <button type="submit" class="btn btn-primary pull-right">Search</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+                    <br class="clearfix" />
                 </div>
             </div>
         </div>
-
-
-        <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | Modal center
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
-        <div class="col-md-6 col-lg-4">
-            
-            <div class="modal modal-center fade" id="modal-center" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Your content comes here</p>
-                            <br><br><br><br><br><br>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-bold btn-pure btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
 
     </div>
