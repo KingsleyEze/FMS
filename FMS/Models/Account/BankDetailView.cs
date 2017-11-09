@@ -7,5 +7,10 @@ namespace FMS.Models.Account
 {
     public class BankDetailView
     {
+        public string Bank { get; set; }
+        public string AccountName { get; set; }
+        public string AccountNumber { get; set; }
+        public string BVN { get; set; }
+        public string TIN { get; set; }
     }
 }

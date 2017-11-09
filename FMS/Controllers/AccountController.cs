@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using FMS.Models.Account;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,11 +24,13 @@ namespace FMS.Controllers
         [HttpGet]
         public IActionResult AddUserDetail()
         {
-            return View();
+            var viewModel = new UserDetailView();
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult SaveUserDetail()
+        public IActionResult SaveUserDetail(UserDetailView viewModel)
         {
             return View();
         }
@@ -36,24 +39,28 @@ namespace FMS.Controllers
         [HttpGet]
         public IActionResult AddBankDetail()
         {
-            return View();
+            var viewModel = new BankDetailView();
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult SaveBankDetail()
+        public IActionResult SaveBankDetail(BankDetailView viewModel)
         {
-            return View();
+            return View(viewModel);
         }
 
         //Staff Detail
         [HttpGet]
         public IActionResult AddStaffDetail()
         {
-            return View();
+            var viewModel = new StaffDetailView();
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult SaveStaffDetail()
+        public IActionResult SaveStaffDetail(StaffDetailView viewModel)
         {
             return View();
         }
@@ -62,11 +69,13 @@ namespace FMS.Controllers
         [HttpGet]
         public IActionResult AddSupplierDetail()
         {
-            return View();
+            var viewModel = new SupplierDetailView();
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult SaveSupplierDetail()
+        public IActionResult SaveSupplierDetail(SupplierDetailView viewModel)
         {
             return View();
         }
