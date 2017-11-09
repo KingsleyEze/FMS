@@ -11,9 +11,10 @@ using System;
 namespace FMS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20171109200940_AddUserEntities")]
+    partial class AddUserEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,15 +67,13 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("BVN");
 
-                    b.Property<Guid?>("BankId");
+                    b.Property<string>("BankBranchCode");
 
                     b.Property<string>("TIN");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("BankId");
 
                     b.ToTable("AppUserBanks");
                 });
@@ -373,11 +372,6 @@ namespace FMS.Core.Migrations
                     b.HasOne("FMS.Core.Model.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("FMS.Core.Model.Bank", "Bank")
-                        .WithMany()
-                        .HasForeignKey("BankId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

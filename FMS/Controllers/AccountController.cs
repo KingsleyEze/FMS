@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FMS.Models.Account;
+using FMS.Extensions;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using FMS.Models.Constants;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,13 +30,26 @@ namespace FMS.Controllers
         {
             var viewModel = new UserDetailView();
 
+            var accountModel = new AccountDetailView();
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
             return View(viewModel);
         }
 
         [HttpPost]
         public IActionResult SaveUserDetail(UserDetailView viewModel)
         {
-            return View();
+            var accountModel = HttpContext.Session
+                    .GetObjectFromJson<AccountDetailView>("AccountDetailView");
+
+            if (accountModel.UserDetail == null) accountModel.UserDetail = new UserDetailView();
+
+            accountModel.UserDetail = viewModel;
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            return RedirectToAction("AddBankDetail");
         }
 
         //Bank Detail
@@ -47,13 +64,28 @@ namespace FMS.Controllers
         [HttpPost]
         public IActionResult SaveBankDetail(BankDetailView viewModel)
         {
-            return View(viewModel);
+            var accountModel = HttpContext.Session
+                    .GetObjectFromJson<AccountDetailView>("AccountDetailView");
+
+            if (accountModel.UserDetail == null) accountModel.BankDetail = new BankDetailView();
+
+            accountModel.BankDetail = viewModel;
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            return RedirectToAction("AddStaffDetail");
         }
 
         //Staff Detail
         [HttpGet]
         public IActionResult AddStaffDetail()
         {
+            var userDetail = HttpContext.Session
+                    .GetObjectFromJson<AccountDetailView>("AccountDetailView").UserDetail;
+            
+            if (UserType.STAFF != userDetail.UserType)
+                    return RedirectToAction("AddSupplierDetail");
+
             var viewModel = new StaffDetailView();
 
             return View(viewModel);
@@ -62,13 +94,28 @@ namespace FMS.Controllers
         [HttpPost]
         public IActionResult SaveStaffDetail(StaffDetailView viewModel)
         {
-            return View();
+            var accountModel = HttpContext.Session
+                    .GetObjectFromJson<AccountDetailView>("AccountDetailView");
+
+            if (accountModel.UserDetail == null) accountModel.StaffDetail = new StaffDetailView();
+
+            accountModel.StaffDetail = viewModel;
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            return RedirectToAction("AddSupplierDetail");
         }
 
         //Supplier Detail
         [HttpGet]
         public IActionResult AddSupplierDetail()
         {
+            var userDetail = HttpContext.Session
+                    .GetObjectFromJson<AccountDetailView>("AccountDetailView").UserDetail;
+
+            if (UserType.SUPPLIER != userDetail.UserType)
+                    return RedirectToAction("Confirmation");
+
             var viewModel = new SupplierDetailView();
 
             return View(viewModel);
@@ -77,13 +124,25 @@ namespace FMS.Controllers
         [HttpPost]
         public IActionResult SaveSupplierDetail(SupplierDetailView viewModel)
         {
-            return View();
+            var accountModel = HttpContext.Session
+                    .GetObjectFromJson<AccountDetailView>("AccountDetailView");
+
+            if (accountModel.UserDetail == null) accountModel.SupplierDetail = new SupplierDetailView();
+
+            accountModel.SupplierDetail = viewModel;
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            return RedirectToAction("Confirmation");
         }
 
         [HttpGet]
         public IActionResult Confirmation()
         {
-            return View();
+            var accountModel = HttpContext.Session
+                    .GetObjectFromJson<AccountDetailView>("AccountDetailView");
+
+            return View(accountModel);
         }
 
     }

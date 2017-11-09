@@ -35,8 +35,11 @@ namespace FMS
                                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])), ServiceLifetime.Transient);
                 services.AddFMSCoreServices();
                 services.AddMvc();
+                services.AddDistributedMemoryCache();
+                services.AddSession();
 
-            }catch(Exception ex) { }
+            }
+            catch(Exception ex) { }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +50,7 @@ namespace FMS
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSession();
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvc(routes => 
