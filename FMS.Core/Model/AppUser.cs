@@ -9,7 +9,7 @@ namespace FMS.Core.Model
 {
     public class AppUser
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public Guid Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
