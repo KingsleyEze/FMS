@@ -8,6 +8,8 @@ using FMS.Extensions;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using FMS.Models.Constants;
+using FMS.Core.Model;
+using FMS.Core.Abstract;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,6 +18,13 @@ namespace FMS.Controllers
     public class AccountController : Controller
     {
         //User Types: AppUser, Customer, Staff, Supplier
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        public AccountController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
 
         [HttpGet]
@@ -141,6 +150,21 @@ namespace FMS.Controllers
         {
             var accountModel = HttpContext.Session
                     .GetObjectFromJson<AccountDetailView>("AccountDetailView");
+
+            var userDetail = accountModel?.UserDetail;
+            var bankDetail = accountModel?.BankDetail;
+            var staffDetail = accountModel?.StaffDetail;
+            var supplierDetail = accountModel?.SupplierDetail;
+
+            var appUser = new AppUser
+            {
+                Username = userDetail.EmailAddress,
+                Password = "password"
+            };
+
+            //_unitOfWork.App
+
+           
 
             return View(accountModel);
         }
