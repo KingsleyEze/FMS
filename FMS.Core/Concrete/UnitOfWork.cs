@@ -64,7 +64,9 @@ namespace FMS.Core.Concrete
         public IRepository<AppUserFile> AppUserFilesRepository => _appUserFilesRepository.Value;
         public IRepository<Bank> BanksRepository => _banksRepository.Value;
         public IRepository<AppRole> AppRolesRepository => _appRolesRepository.Value;
-        public IRepository<Country> CountrysRepository => _countriesRepository.Value;
+        public IRepository<Country> CountriesRepository => _countriesRepository.Value;
+        public IRepository<Staff> StaffsRepository => _staffsRepository.Value;
+        public IRepository<Supplier> SuppliersRepository => _suppliersRepository.Value;
         public IRepository<State> StatesRepository => _statesRepository.Value;
         public IRepository<LGA> LGAsRepository => _lGAsRepository.Value;
         public IRepository<BillPayable> BillPayablesRepository => _billPayablesRepository.Value;

@@ -5191,7 +5191,7 @@
       ]
     },
     "Microsoft.AspNetCore.All/2.0.0": {
-      "sha512": "AQ4SM2ZY+yhkQ+kJADXP6OpBpR4xWScYsy7WtV77LxXSroSc8PBe3LORa1eycC1zF3ob/vq6WAn5SEtElaOZcQ==",
+      "sha512": "pOrxBowNk6DNUqVvPmXFOkJkOiQlLPDFujClPFdM5zqYlNGlj7TAtRRsPwuWzfKPwIJz9cIiIyrEUdPuiSyfJw==",
       "type": "package",
       "path": "microsoft.aspnetcore.all/2.0.0",
       "files": [
@@ -8101,7 +8101,7 @@
       ]
     },
     "Remotion.Linq/2.1.1": {
-      "sha512": "IJn0BqkvwEDpP+2qjvci7n4/a9f7DhKESLWb2/uG4xQh3rTkGTBUz69bI4IivCoKkTFAqjXxYDZw2K/npohjsw==",
+      "sha512": "zF0AkWXVr4p02CkGezrLKUTf0Vfo2VI9VQAFH4qpHhw1N7dNPkKfMHIoWbT2jaMahJHSY1qHB5C2lqjVbUB0qw==",
       "type": "package",
       "path": "remotion.linq/2.1.1",
       "files": [
@@ -13216,7 +13216,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kingsley-pc\\.nuget\\packages\\": {},
+    "C:\\Users\\Kingsley-Tech\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13225,17 +13225,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\FMS.csproj",
+      "projectUniqueName": "C:\\_\\_Qube\\_qnox\\_codelab_\\_tune\\_minion\\fms\\FMS\\FMS.csproj",
       "projectName": "FMS",
-      "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\FMS.csproj",
-      "packagesPath": "C:\\Users\\Kingsley-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\obj\\",
+      "projectPath": "C:\\_\\_Qube\\_qnox\\_codelab_\\_tune\\_minion\\fms\\FMS\\FMS.csproj",
+      "packagesPath": "C:\\Users\\Kingsley-Tech\\.nuget\\packages\\",
+      "outputPath": "C:\\_\\_Qube\\_qnox\\_codelab_\\_tune\\_minion\\fms\\FMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kingsley-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kingsley-Tech\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13243,13 +13243,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://www.myget.org/F/aspnet-contrib/api/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj": {
-              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj"
+            "C:\\_\\_Qube\\_qnox\\_codelab_\\_tune\\_minion\\fms\\FMS.Core\\FMS.Core.csproj": {
+              "projectPath": "C:\\_\\_Qube\\_qnox\\_codelab_\\_tune\\_minion\\fms\\FMS.Core\\FMS.Core.csproj"
             }
           }
         }
