@@ -17,6 +17,18 @@ namespace FMS.Core.Context
             //_contextAccessor = contextAccessor;
         }
 
+        public DbSet<AppRole> AppRoles { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppUserProfile> AppUserProfiles { get; set; }
+        public DbSet<AppUserBank> AppUserBanks { get; set; }
+        public DbSet<AppUserRole> AppUserRoles { get; set; }
+        public DbSet<AppUserFile> AppUserFiles { get; set; }
+        public DbSet<Bank> Banks { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<LGA> LGAs { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<BillPayable> BillPayables { get; set; }
         public DbSet<BillReceivable> BillReceivable { get; set; }
 

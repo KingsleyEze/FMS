@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -19,5 +20,11 @@ namespace FMS.Core.Model
         public string Division { get; set; }
         public string Section { get; set; }
         public string Notes { get; set; }
+
+        public static void ConfigureFluent(ModelBuilder builder)
+        {
+            builder.Entity<Staff>().Property(b => b.Id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWSEQUENTIALID()").Metadata.IsReadOnlyAfterSave = true;
+
+        }
     }
 }
