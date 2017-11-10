@@ -156,15 +156,90 @@ namespace FMS.Controllers
             var staffDetail = accountModel?.StaffDetail;
             var supplierDetail = accountModel?.SupplierDetail;
 
+            //AppUser Detail
             var appUser = new AppUser
             {
                 Username = userDetail.EmailAddress,
-                Password = "password"
+                Password = "password",
+                UserType = userDetail.UserType.ToString(),
+                IsActive = true,
             };
 
-            //_unitOfWork.App
+            _unitOfWork.AppUsersRepository.Insert(appUser);
 
-           
+            //Profile Detail
+            var appUserProfile = new AppUserProfile
+            {
+                FirstName = userDetail.FirstName,
+                LastName = userDetail.LastName,
+                MiddleName = userDetail.MiddleName,
+                Phone = userDetail.Phone,
+                EmailAddress = userDetail.EmailAddress,
+                Website = userDetail.Website,
+                Address = userDetail.Address,
+                City = userDetail.City,
+                AppUser = appUser,
+            };
+
+            _unitOfWork.AppUserProfilesRepository.Insert(appUserProfile);
+
+
+
+            //Bank Detail
+            if(bankDetail != null)
+            {
+
+                var appUserBank = new AppUserBank
+                {
+                    AccountName = bankDetail.AccountName,
+                    AccountNumber = bankDetail.AccountNumber,
+                    BVN = bankDetail.BVN,
+                    TIN =bankDetail.TIN,
+                    AppUser = appUser,
+                };
+
+                _unitOfWork.AppUserBanksRepository.Insert(appUserBank);
+            }
+
+            //Staff Detail
+            if(staffDetail != null)
+            {
+
+                var staff = new Staff
+                {
+                    Title = staffDetail.Title,
+                    Rank = staffDetail.Rank,
+                    GradeLevel = staffDetail.GradeLevel,
+                    DateOfFirstAppoint = staffDetail.DateOfFirstAppoint,
+                    DateOfCurrentAppoint = staffDetail.DateOfCurrentAppoint,
+                    Notes = staffDetail.Notes,
+                    AppUser = appUser,
+                };
+
+                _unitOfWork.StaffsRepository.Insert(staff);
+            }
+
+            //Supplier Detail
+            if(supplierDetail != null)
+            {
+
+                var supplier = new Supplier
+                {
+                    CompanyName = supplierDetail.CompanyName,
+                    ContactName = supplierDetail.ContactName,
+                    Address = supplierDetail.Address,
+                    City = supplierDetail.City,
+                    Mobile = supplierDetail.Mobile,
+                    OfficePhone = supplierDetail.OfficePhone,
+                    Email = supplierDetail.Email,
+                    Website = supplierDetail.Website,
+                    Notes = supplierDetail.Notes,
+                    AppUser = appUser,
+                };
+
+                _unitOfWork.SuppliersRepository.Insert(supplier);
+            }
+
 
             return View(accountModel);
         }
