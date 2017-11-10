@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FMS.Models
+namespace FMS.Models.Constants
 {
-    public class Class
+    public enum UserType
     {
+        CUSTOMER,
+        STAFF,
+        SUPPLIER
     }
 }

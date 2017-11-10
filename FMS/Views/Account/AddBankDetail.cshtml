@@ -1,4 +1,4 @@
-﻿
+﻿@model FMS.Models.Account.BankDetailView;
 @{
     ViewData["Title"] = "Add Bank Detail";
     Layout = "_Layout";
@@ -26,7 +26,11 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Bank: </label>
-                                    <input type="text" class="form-control" placeholder="Enter First Name" name="FirstName" />
+                                    <select asp-for="Bank" class="form-control">
+                                        <option value="">-- Select Bank --</option>
+                                        <option value="DiamondBank">Diamond Bank</option>
+                                        <option value="AccessBank">Access Bank</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -35,7 +39,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Acount Name <span class="req">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Enter Last Name" name="LastName" />
+                                    <input type="text" class="form-control" placeholder="Enter Account Name" asp-for="AccountName" />
                                 </div>
                             </div>
                         </div>
@@ -47,7 +51,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Account Number: </label>
-                                    <input type="text" class="form-control" placeholder="Enter Middle Name" name="MiddleName" />
+                                    <input type="text" class="form-control" placeholder="Enter Account Number" asp-for="AccountNumber" />
                                 </div>
                             </div>
 
@@ -61,7 +65,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>BVN: </label>
-                                    <input type="text" class="form-control" placeholder="Enter Phone Number" name="BVN" />
+                                    <input type="text" class="form-control" placeholder="Enter BVN" asp-for="BVN" />
                                 </div>
                             </div>
 
@@ -70,7 +74,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>TIN <span class="req">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Enter Email Address" name="TIN" />
+                                    <input type="text" class="form-control" placeholder="Enter TIN" asp-for="TIN" />
                                 </div>
                             </div>
                         </div>

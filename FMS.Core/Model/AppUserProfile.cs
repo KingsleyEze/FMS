@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -22,7 +23,13 @@ namespace FMS.Core.Model
         public string EmailAddress { get; set; }
         public string Fax { get; set; }
         public string PostalAddress { get; set; }
-        public string WebAddress { get; set; }
+        public string Website { get; set; }
         public string FileId { get; set; }
+
+        public static void ConfigureFluent(ModelBuilder builder)
+        {
+            builder.Entity<AppUserProfile>().Property(b => b.Id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWSEQUENTIALID()").Metadata.IsReadOnlyAfterSave = true;
+
+        }
     }
 }
