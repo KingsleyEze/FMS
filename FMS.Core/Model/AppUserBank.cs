@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,8 +14,14 @@ namespace FMS.Core.Model
         public AppUser AppUser { get; set; }
         public string AccountNumber  { get; set; }
         public string AccountName { get; set; }
-        public string BankBranchCode { get; set; }
+        public Bank Bank { get; set; }
         public string BVN { get; set; }
         public string TIN { get; set; }
+
+        public static void ConfigureFluent(ModelBuilder builder)
+        {
+            builder.Entity<AppUserBank>().Property(b => b.Id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWSEQUENTIALID()").Metadata.IsReadOnlyAfterSave = true;
+
+        }
     }
 }
