@@ -181,7 +181,7 @@ namespace FMS.Controllers
                 AppUser = appUser,
             };
 
-            _unitOfWork.AppUserProfilesRepository.Insert(appUserProfile);
+                _unitOfWork.AppUserProfilesRepository.Insert(appUserProfile);
 
 
 
@@ -239,6 +239,8 @@ namespace FMS.Controllers
 
                 _unitOfWork.SuppliersRepository.Insert(supplier);
             }
+
+            _unitOfWork.SaveChanges();
 
 
             return View(accountModel);
