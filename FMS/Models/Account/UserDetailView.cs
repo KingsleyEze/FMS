@@ -1,4 +1,5 @@
-﻿using FMS.Models.Constants;
+﻿using FMS.Core.Model;
+using FMS.Models.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,7 @@ namespace FMS.Models.Account
         public string PostalAddress { get; set; }
         public string Website { get; set; }
         public string FileId { get; set; }
+        public IList<Country> CountryList { get; set; }
+        public IList<State> StateList { get; set; }
     }
 }

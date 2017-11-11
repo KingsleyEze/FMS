@@ -11,8 +11,8 @@ using System;
 namespace FMS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20171109202212_AddBankToUserBank")]
-    partial class AddBankToUserBank
+    [Migration("20171111153843_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -107,7 +107,7 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<Guid?>("CountryId");
+                    b.Property<int?>("CountryId");
 
                     b.Property<string>("EmailAddress");
 
@@ -127,7 +127,7 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("PostalAddress");
 
-                    b.Property<Guid?>("StateId");
+                    b.Property<int?>("StateId");
 
                     b.Property<string>("Website");
 
@@ -246,17 +246,36 @@ namespace FMS.Core.Migrations
                     b.ToTable("BillReceivable");
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("StateId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("City");
+                });
+
             modelBuilder.Entity("FMS.Core.Model.Country", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool?>("IsActive")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+                        .HasDefaultValue(true);
 
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("FMS.Core.Model.LGA", b =>
@@ -267,13 +286,33 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid?>("StateId");
+                    b.Property<int?>("StateId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("StateId");
 
                     b.ToTable("LGAs");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.PublicHoliday", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CountryId");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("PublicHoliday");
                 });
 
             modelBuilder.Entity("FMS.Core.Model.Staff", b =>
@@ -311,11 +350,10 @@ namespace FMS.Core.Migrations
 
             modelBuilder.Entity("FMS.Core.Model.State", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("CountryId");
+                    b.Property<int>("CountryId");
 
                     b.Property<string>("Name");
 
@@ -342,7 +380,7 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("ContactName");
 
-                    b.Property<Guid?>("CountryId");
+                    b.Property<int?>("CountryId");
 
                     b.Property<string>("Email");
 
@@ -354,7 +392,7 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("OfficePhone");
 
-                    b.Property<Guid?>("StateId");
+                    b.Property<int?>("StateId");
 
                     b.Property<string>("Website");
 
@@ -426,11 +464,27 @@ namespace FMS.Core.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.City", b =>
+                {
+                    b.HasOne("FMS.Core.Model.State", "State")
+                        .WithMany("Cities")
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("FMS.Core.Model.LGA", b =>
                 {
                     b.HasOne("FMS.Core.Model.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.PublicHoliday", b =>
+                {
+                    b.HasOne("FMS.Core.Model.Country", "Country")
+                        .WithMany("PublicHolidays")
+                        .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -445,7 +499,7 @@ namespace FMS.Core.Migrations
             modelBuilder.Entity("FMS.Core.Model.State", b =>
                 {
                     b.HasOne("FMS.Core.Model.Country", "Country")
-                        .WithMany()
+                        .WithMany("States")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

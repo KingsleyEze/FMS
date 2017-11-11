@@ -43,6 +43,10 @@ namespace FMS.Controllers
 
             HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
 
+            viewModel.CountryList = _unitOfWork.CountriesRepository.Items.ToList();
+
+            viewModel.StateList = _unitOfWork.StatesRepository.Items.ToList();
+
             return View(viewModel);
         }
 
@@ -66,6 +70,8 @@ namespace FMS.Controllers
         public IActionResult AddBankDetail()
         {
             var viewModel = new BankDetailView();
+
+            viewModel.BankList = _unitOfWork.BanksRepository.Items.ToList();
 
             return View(viewModel);
         }

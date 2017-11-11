@@ -35,3 +35,5 @@ C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.Ass
 C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.AssemblyInfo.cs
 C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.dll
 C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS\obj\Debug\netcoreapp2.0\FMS.pdb
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\bin\Debug\netcoreapp2.0\FMS.Utilities.dll
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\bin\Debug\netcoreapp2.0\FMS.Utilities.pdb

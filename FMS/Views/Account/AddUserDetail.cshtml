@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Add User Detail";
     Layout = "_Layout";
+
+    var stateList = Model.StateList;
+    var countryList = Model.CountryList;
 }
 
 
@@ -135,7 +138,13 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Country: </label>
-                                    <input type="text" class="form-control" placeholder="Select Country" asp-for="Country" />
+                                    <select asp-for="Country" class="form-control">
+                                        <option value="">-- Select Country --</option>
+                                        @foreach (var country in countryList)
+                                        {
+                                            <option value="@country.Id">@country.Name</option>
+                                        }
+                                    </select>
                                 </div>
                             </div>
 
@@ -144,7 +153,13 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>State <span class="req">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Select State"  asp-for="State" />
+                                    <select asp-for="State" class="form-control">
+                                        <option value="">-- Select State --</option>
+                                        @foreach (var state in stateList)
+                                        {
+                                            <option value="@state.Id">@state.Name</option>
+                                        }
+                                    </select>
                                 </div>
                             </div>
                         </div>

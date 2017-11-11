@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Add Bank Detail";
     Layout = "_Layout";
+
+    var bankList = Model.BankList;
 }
 
 
@@ -28,8 +30,11 @@
                                     <label>Bank: </label>
                                     <select asp-for="Bank" class="form-control">
                                         <option value="">-- Select Bank --</option>
-                                        <option value="DiamondBank">Diamond Bank</option>
-                                        <option value="AccessBank">Access Bank</option>
+
+                                        @foreach (var bank in bankList)
+                                        {
+                                            <option value="@bank.Id">@bank.Name</option>
+                                        }
                                     </select>
                                 </div>
                             </div>

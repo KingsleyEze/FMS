@@ -24,7 +24,7 @@ namespace FMS.Core.Context
         public DbSet<AppUserRole> AppUserRoles { get; set; }
         public DbSet<AppUserFile> AppUserFiles { get; set; }
         public DbSet<Bank> Banks { get; set; }
-        public DbSet<Country> Countries { get; set; }
+        public DbSet<Country> Country { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<LGA> LGAs { get; set; }
         public DbSet<Staff> Staffs { get; set; }
