@@ -5091,6 +5091,16 @@
         "runtime": {
           "bin/placeholder/FMS.Core.dll": {}
         }
+      },
+      "FMS.Utilities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/FMS.Utilities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FMS.Utilities.dll": {}
+        }
       }
     }
   },
@@ -13203,12 +13213,18 @@
       "type": "project",
       "path": "../FMS.Core/FMS.Core.csproj",
       "msbuildProject": "../FMS.Core/FMS.Core.csproj"
+    },
+    "FMS.Utilities/1.0.0": {
+      "type": "project",
+      "path": "../FMS.Utilities/FMS.Utilities.csproj",
+      "msbuildProject": "../FMS.Utilities/FMS.Utilities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "AutoMapper >= 6.1.1",
       "FMS.Core >= 1.0.0",
+      "FMS.Utilities >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.AspNetCore.Session >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
@@ -13248,6 +13264,9 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
+            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj": {
+              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj"
+            },
             "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj": {
               "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj"
             }

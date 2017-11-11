@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
 namespace FMS.Core.Migrations
 {
-    public partial class AddUserEntities : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,38 +49,63 @@ namespace FMS.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Countries",
+                name: "BillPayables",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    Amount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BillNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Economic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Function = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fund = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GeoCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Organisation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PayerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillPayables", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BillReceivable",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    Amount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BillNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Economic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Function = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fund = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GeoCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Organisation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PayeeId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillReceivable", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Country",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true, defaultValue: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Countries", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppUserBanks",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
-                    AccountName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    BVN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BankBranchCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TIN = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserBanks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AppUserBanks_AppUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AppUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Country", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,20 +179,91 @@ namespace FMS.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "States",
+                name: "AppUserBanks",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
-                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AccountName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BVN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    TIN = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserBanks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppUserBanks_AppUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AppUserBanks_Banks_BankId",
+                        column: x => x.BankId,
+                        principalTable: "Banks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PublicHoliday",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PublicHoliday", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PublicHoliday_Country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Country",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "States",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CountryId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_States", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_States_Countries_CountryId",
+                        name: "FK_States_Country_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "Countries",
+                        principalTable: "Country",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "City",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_City_States_StateId",
+                        column: x => x.StateId,
+                        principalTable: "States",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -177,7 +274,7 @@ namespace FMS.Core.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    StateId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -200,13 +297,13 @@ namespace FMS.Core.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CountryId = table.Column<int>(type: "int", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OfficePhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    StateId = table.Column<int>(type: "int", nullable: true),
                     Website = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -219,9 +316,9 @@ namespace FMS.Core.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Suppliers_Countries_CountryId",
+                        name: "FK_Suppliers_Country_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "Countries",
+                        principalTable: "Country",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -240,7 +337,7 @@ namespace FMS.Core.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CountryId = table.Column<int>(type: "int", nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FileId = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -250,7 +347,7 @@ namespace FMS.Core.Migrations
                     MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PostalAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    StateId = table.Column<int>(type: "int", nullable: true),
                     Website = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -263,9 +360,9 @@ namespace FMS.Core.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AppUserProfiles_Countries_CountryId",
+                        name: "FK_AppUserProfiles_Country_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "Countries",
+                        principalTable: "Country",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -286,6 +383,11 @@ namespace FMS.Core.Migrations
                 name: "IX_AppUserBanks_AppUserId",
                 table: "AppUserBanks",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppUserBanks_BankId",
+                table: "AppUserBanks",
+                column: "BankId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserFiles_AppUserId",
@@ -323,9 +425,19 @@ namespace FMS.Core.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_City_StateId",
+                table: "City",
+                column: "StateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LGAs_StateId",
                 table: "LGAs",
                 column: "StateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PublicHoliday_CountryId",
+                table: "PublicHoliday",
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Staffs_AppUserId",
@@ -368,13 +480,25 @@ namespace FMS.Core.Migrations
                 name: "AppUserRoles");
 
             migrationBuilder.DropTable(
-                name: "Banks");
+                name: "BillPayables");
+
+            migrationBuilder.DropTable(
+                name: "BillReceivable");
+
+            migrationBuilder.DropTable(
+                name: "City");
+
+            migrationBuilder.DropTable(
+                name: "PublicHoliday");
 
             migrationBuilder.DropTable(
                 name: "Staffs");
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
+
+            migrationBuilder.DropTable(
+                name: "Banks");
 
             migrationBuilder.DropTable(
                 name: "LGAs");
@@ -389,7 +513,7 @@ namespace FMS.Core.Migrations
                 name: "States");
 
             migrationBuilder.DropTable(
-                name: "Countries");
+                name: "Country");
         }
     }
 }

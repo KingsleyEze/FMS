@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FMS.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,5 +13,6 @@ namespace FMS.Models.Account
         public string AccountNumber { get; set; }
         public string BVN { get; set; }
         public string TIN { get; set; }
+        public IList<Bank> BankList { get; set; }
     }
 }

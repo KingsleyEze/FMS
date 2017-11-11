@@ -10,18 +10,46 @@ using FMS.Core.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using FMS.Core;
+using FMS.Utilities.StringKeys;
+using FMS.Infrastructure.Helpers;
 
 namespace FMS
 {
-    public class Startup
+    public partial class Startup
     {
         IConfigurationRoot Configuration;
 
+        private readonly Dictionary<string, List<Exception>> _exceptions;
+
         public Startup(IHostingEnvironment env)
         {
-            Configuration = new ConfigurationBuilder()
-            .SetBasePath(env.ContentRootPath)
-            .AddJsonFile("appsettings.json").Build();
+            _exceptions = new Dictionary<string, List<Exception>>
+                           {
+                             { ExceptionKeys.ExceptionsOnStartup, new List<Exception>() },
+                             { ExceptionKeys.ExceptionsOnConfigureServices, new List<Exception>() },
+                           };
+
+            try
+            {
+                var builder = new ConfigurationBuilder()
+                               .SetBasePath(env.ContentRootPath)
+                               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                               .AddEnvironmentVariables();
+                Configuration = builder.Build();
+
+                //_mapperConfiguration = new MapperConfiguration(cfg =>
+                //{
+                //    cfg.AddProfile(new AutoMapperProfileConfiguration());
+                //});
+            }
+            catch (Exception ex)
+            {
+                _exceptions[ExceptionKeys.ExceptionsOnStartup].Add(ex);
+            }
+
+            //Configuration = new ConfigurationBuilder()
+            //.SetBasePath(env.ContentRootPath)
+            //.AddJsonFile("appsettings.json").Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -32,14 +60,18 @@ namespace FMS
             {
 
                 services.AddDbContext<DataContext>(((options) =>
-                                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])), ServiceLifetime.Transient);
+                                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])), 
+                                ServiceLifetime.Transient);
                 services.AddFMSCoreServices();
                 services.AddMvc();
                 services.AddDistributedMemoryCache();
                 services.AddSession();
 
             }
-            catch(Exception ex) { }
+            catch(Exception ex) {
+
+                _exceptions[ExceptionKeys.ExceptionsOnConfigureServices].Add(ex);
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +82,8 @@ namespace FMS
                 app.UseDeveloperExceptionPage();
             }
 
+
+            app.InitializeDatabaseAsync().Wait();
             app.UseSession();
             app.UseStatusCodePages();
             app.UseStaticFiles();
@@ -59,6 +93,7 @@ namespace FMS
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

@@ -25,6 +25,7 @@
         "dependencies": {
           "AutoMapper": "6.1.1",
           "FMS.Core": "1.0.0",
+          "FMS.Utilities": "1.0.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.AspNetCore.Session": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0",
@@ -4120,6 +4121,14 @@
           "FMS.Core.dll": {}
         }
       },
+      "FMS.Utilities/1.0.0": {
+        "runtime": {
+          "FMS.Utilities.dll": {}
+        },
+        "compile": {
+          "FMS.Utilities.dll": {}
+        }
+      },
       "Microsoft.NETCore.App/2.0.0": {
         "dependencies": {
           "Microsoft.NETCore.DotNetHostPolicy": "2.0.0",
@@ -6448,6 +6457,11 @@
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
     },
     "FMS.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FMS.Utilities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
