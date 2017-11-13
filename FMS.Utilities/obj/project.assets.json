@@ -664,7 +664,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kingsley-pc\\.nuget\\packages\\": {},
+    "C:\\Users\\Kingsley-Tech\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -673,17 +673,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj",
+      "projectUniqueName": "C:\\_\\_Qube\\_qnox\\_codelab_\\_tune\\_minion\\fms\\FMS.Utilities\\FMS.Utilities.csproj",
       "projectName": "FMS.Utilities",
-      "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj",
-      "packagesPath": "C:\\Users\\Kingsley-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\obj\\",
+      "projectPath": "C:\\_\\_Qube\\_qnox\\_codelab_\\_tune\\_minion\\fms\\FMS.Utilities\\FMS.Utilities.csproj",
+      "packagesPath": "C:\\Users\\Kingsley-Tech\\.nuget\\packages\\",
+      "outputPath": "C:\\_\\_Qube\\_qnox\\_codelab_\\_tune\\_minion\\fms\\FMS.Utilities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kingsley-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kingsley-Tech\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -691,7 +691,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://www.myget.org/F/aspnet-contrib/api/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {
