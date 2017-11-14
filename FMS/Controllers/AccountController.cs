@@ -30,7 +30,9 @@ namespace FMS.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var viewModel = _unitOfWork.AppUserProfilesRepository.Items.ToList();
+
+            return View(viewModel);
         }
 
         //AppUser Detail
@@ -69,9 +71,11 @@ namespace FMS.Controllers
         [HttpGet]
         public IActionResult AddBankDetail()
         {
-            var viewModel = new BankDetailView();
-
-            viewModel.BankList = _unitOfWork.BanksRepository.Items.ToList();
+            var viewModel = new BankDetailView
+            {
+                BankList = _unitOfWork.BanksRepository.Items.ToList(),
+            };
+            
 
             return View(viewModel);
         }
@@ -131,8 +135,12 @@ namespace FMS.Controllers
             if (UserType.SUPPLIER != userDetail.UserType)
                     return RedirectToAction("Confirmation");
 
-            var viewModel = new SupplierDetailView();
-
+            var viewModel = new SupplierDetailView
+            {
+                CountryList = _unitOfWork.CountriesRepository.Items.ToList(),
+                StateList = _unitOfWork.StatesRepository.Items.ToList()
+            };
+            
             return View(viewModel);
         }
 
@@ -187,12 +195,12 @@ namespace FMS.Controllers
                 AppUser = appUser,
             };
 
-                _unitOfWork.AppUserProfilesRepository.Insert(appUserProfile);
+            _unitOfWork.AppUserProfilesRepository.Insert(appUserProfile);
 
 
 
             //Bank Detail
-            if(bankDetail != null)
+            if (bankDetail != null)
             {
 
                 var appUserBank = new AppUserBank
@@ -200,7 +208,7 @@ namespace FMS.Controllers
                     AccountName = bankDetail.AccountName,
                     AccountNumber = bankDetail.AccountNumber,
                     BVN = bankDetail.BVN,
-                    TIN =bankDetail.TIN,
+                    TIN = bankDetail.TIN,
                     AppUser = appUser,
                 };
 
@@ -208,7 +216,7 @@ namespace FMS.Controllers
             }
 
             //Staff Detail
-            if(staffDetail != null)
+            if (staffDetail != null)
             {
 
                 var staff = new Staff
@@ -226,7 +234,7 @@ namespace FMS.Controllers
             }
 
             //Supplier Detail
-            if(supplierDetail != null)
+            if (supplierDetail != null)
             {
 
                 var supplier = new Supplier
@@ -250,6 +258,7 @@ namespace FMS.Controllers
 
 
             return View(accountModel);
+
         }
 
     }
