@@ -35,7 +35,7 @@
                             <hr class="d-md-none">
                             <label for="date">Date</label><br />
                             <div class="input-group  required">
-                                <input type="text" class="form-control" placeholder="Date" data-provide="datepicker" />
+                                <input type="text" class="form-control" name="date" placeholder="Date" data-provide="datepicker" data-autoclose="true"/>
                                 <span class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </span>
@@ -50,8 +50,8 @@
                         <div class="col-md-4">
                             <hr class="d-md-none">
                             <div class="form-group">
-                                <label>Payer <span class="req">*</span></label>
-                                <select class="form-control">
+                                <label>Payee <span class="req">*</span></label>
+                                <select class="form-control" name="payee">
                                     <option value="">-- Select One --</option>
                                     <option value="Ezeora Nnanna">Ezeora Nnanna</option>
                                     <option value="Okeke Ifeanyi">Okeke Ifeanyi</option>
@@ -66,7 +66,7 @@
                                 <label>Amount <span class="req">*</span></label>
 
 
-                                <input type="text" class="form-control" placeholder="Enter Amount" />
+                                <input type="text" name="amount" class="form-control" placeholder="Enter Amount" />
 
                             </div>
                         </div>

@@ -31,27 +31,28 @@ namespace FMS.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchPaymentResult(string date = null, string payer = null, string amount = null)
+        public IActionResult SearchPaymentResult(string date, string payer, string amount)
         {
             var viewModel = new SearchPaymentView();
 
-            var repo = _unitOfWork.BillPayablesRepository.Items;
+            //var repo = _unitOfWork.BillPayablesRepository.Items;
 
-            if (date != null)
-                repo.Where(b => b.TransactionDate.Contains(date));
-            if (payer != null)
-                repo.Where(b => b.PayerId.Contains(payer));
-            if (amount != null)
-                repo.Where(b => b.Amount.Contains(amount));
+            var result = from s in _unitOfWork.BillPayablesRepository.Items
+                            where (date == null || s.TransactionDate == date)
+                                    //&& (payer == null || s.PayerId == payer)
+                                    //&& (amount == null || s.PayerId == amount)
+                            select s;
 
-            viewModel.SearchResult = repo.ToList();
+            
+            
+            viewModel.SearchResult = result.ToList();
 
             return View(viewModel);
         }
         public IActionResult PaymentDetail(string billNumber)
         {
 
-            var payment = _unitOfWork.BillPayablesRepository.Items.Where(b => b.BillNumber == billNumber).FirstOrDefault();
+            var payment = _unitOfWork.BillPayablesRepository.Items.FirstOrDefault(b => b.BillNumber == billNumber);
 
             return View(payment);
         }
