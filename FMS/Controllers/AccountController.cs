@@ -35,8 +35,57 @@ namespace FMS.Controllers
             return View(viewModel);
         }
 
-        //AppUser Detail
-        [HttpGet]
+        public IActionResult AddStaff()
+        {
+            var viewModel = new UserDetailView();
+
+            var accountModel = new AccountDetailView();
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            viewModel.UserType = UserType.STAFF;
+
+            viewModel.CountryList = _unitOfWork.CountriesRepository.Items.ToList();
+
+            viewModel.StateList = _unitOfWork.StatesRepository.Items.ToList();
+
+            return View("AddUserDetail", viewModel);
+        }
+
+        public IActionResult AddCustomer()
+        {
+            var viewModel = new UserDetailView();
+
+            var accountModel = new AccountDetailView();
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            viewModel.UserType = UserType.CUSTOMER;
+
+            viewModel.CountryList = _unitOfWork.CountriesRepository.Items.ToList();
+
+            viewModel.StateList = _unitOfWork.StatesRepository.Items.ToList();
+
+            return View("AddUserDetail", viewModel);
+        }
+
+        public IActionResult AddSupplier()
+        {
+            var viewModel = new UserDetailView();
+
+            var accountModel = new AccountDetailView();
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            viewModel.UserType = UserType.SUPPLIER;
+
+            viewModel.CountryList = _unitOfWork.CountriesRepository.Items.ToList();
+
+            viewModel.StateList = _unitOfWork.StatesRepository.Items.ToList();
+
+            return View("AddUserDetail", viewModel);
+        }
+
         public IActionResult AddUserDetail()
         {
             var viewModel = new UserDetailView();
@@ -51,6 +100,7 @@ namespace FMS.Controllers
 
             return View(viewModel);
         }
+        
 
         [HttpPost]
         public IActionResult SaveUserDetail(UserDetailView viewModel)
