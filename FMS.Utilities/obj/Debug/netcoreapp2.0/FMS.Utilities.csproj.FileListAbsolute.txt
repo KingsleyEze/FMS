@@ -7,3 +7,12 @@ C:\xcore\_http\www\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreap
 C:\xcore\_http\www\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.AssemblyInfo.cs
 C:\xcore\_http\www\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.dll
 C:\xcore\_http\www\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.pdb
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\bin\Debug\netcoreapp2.0\FMS.Utilities.deps.json
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\bin\Debug\netcoreapp2.0\FMS.Utilities.dll
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\bin\Debug\netcoreapp2.0\FMS.Utilities.pdb
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.csprojResolveAssemblyReference.cache
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.csproj.CoreCompileInputs.cache
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.AssemblyInfoInputs.cache
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.AssemblyInfo.cs
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.dll
+C:\_\_Qube\_qnox\_codelab_\_tune\_minion\fms\FMS.Utilities\obj\Debug\netcoreapp2.0\FMS.Utilities.pdb

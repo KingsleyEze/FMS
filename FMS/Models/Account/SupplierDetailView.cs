@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FMS.Core.Model;
 
 namespace FMS.Models.Account
 {
@@ -19,5 +20,7 @@ namespace FMS.Models.Account
         public string Email { get; set; }
         public string Website { get; set; }
         public string Notes { get; set; }
+        public IList<Country> CountryList { get; set; }
+        public IList<State> StateList { get; set; }
     }
 }

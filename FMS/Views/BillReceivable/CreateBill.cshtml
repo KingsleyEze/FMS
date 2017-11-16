@@ -179,7 +179,7 @@
                                         <label>Amount <span class="req">*</span></label>
 
 
-                                        <input type="text" class="form-control" placeholder="Enter Amount" asp-for="Amount" required />
+                                        <input type="text" class="form-control amount" placeholder="Enter Amount" asp-for="Amount" required />
 
                                     </div>
                                 </div>
@@ -207,6 +207,16 @@
 
 
         </div>
-    </div><!--/.main-content -->
+</div><!--/.main-content -->
+
+@section scripts
+{
+    <script>
+        $(document).on('keyup', '.amount', function() {
+            var x = $(this).val();
+            $(this).val(x.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        });
+    </script>
+}
 
 
