@@ -19,4 +19,8 @@
     <Folder Include="Model\Base\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FMS.Utilities\FMS.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>

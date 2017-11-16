@@ -32,18 +32,12 @@ namespace FMS.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchReceiptResult(string date = null, string payee = null, string amount = null)
+        public IActionResult SearchReceiptResult(string startDate, string endDate, string payer, string amount)
         {
             var viewModel = new SearchReceiptView();
 
             var repo = _unitOfWork.BillReceivablesRepository.Items;
-
-            if(date != null)
-                repo.Where(b => b.TransactionDate.Contains(date));
-            if (payee != null)
-                repo.Where(b => b.PayeeId.Contains(payee));
-            if (amount != null)
-                repo.Where(b => b.Amount.Contains(amount));
+            
 
             viewModel.SearchResult = repo.ToList();
 
@@ -53,7 +47,7 @@ namespace FMS.Controllers
         public IActionResult ReceiptDetail(string billNumber)
         {
 
-            var receipt = _unitOfWork.BillReceivablesRepository.Items.Where(b => b.BillNumber == billNumber).FirstOrDefault();
+            var receipt = _unitOfWork.BillReceivablesRepository.Items.FirstOrDefault(b => b.BillNumber == billNumber);
 
             return View(receipt);
         }

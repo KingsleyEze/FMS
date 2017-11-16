@@ -33,9 +33,20 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-4">
                             <hr class="d-md-none">
-                            <label for="date">Date</label><br />
+                            <label for="date">Start Date</label><br />
                             <div class="input-group  required">
-                                <input type="text" class="form-control" name="date" placeholder="Date" data-provide="datepicker" data-autoclose="true"/>
+                                <input type="text" name="startDate" class="form-control" placeholder="Date" data-provide="datepicker" data-autoclose="true"/>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <hr class="d-md-none">
+                            <label for="date">End Date</label><br />
+                            <div class="input-group  required">
+                                <input type="text" name="endDate" class="form-control" placeholder="Date" data-provide="datepicker" data-autoclose="true" />
                                 <span class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </span>
@@ -50,7 +61,7 @@
                         <div class="col-md-4">
                             <hr class="d-md-none">
                             <div class="form-group">
-                                <label>Payee <span class="req">*</span></label>
+                                <label>Bill To</label>
                                 <select class="form-control" name="payee">
                                     <option value="">-- Select One --</option>
                                     <option value="Ezeora Nnanna">Ezeora Nnanna</option>
@@ -63,7 +74,7 @@
                         <div class="col-md-4">
                             <hr class="d-md-none">
                             <div class="form-group">
-                                <label>Amount <span class="req">*</span></label>
+                                <label>Amount</label>
 
 
                                 <input type="text" name="amount" class="form-control" placeholder="Enter Amount" />
@@ -93,11 +104,11 @@
                         <table class="table table-responsive">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Bill Number</th>
-                                    <th>Payee</th>
-                                    <th>Description</th>
                                     <th>Transaction Date</th>
+                                    <th>Bill Number</th>
+                                    <th>Bill To</th>
+                                    <th>Amount</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -105,11 +116,11 @@
                                 @foreach (var line in receivableList)
                                 {
                                     <tr>
-                                        <th scope="row">#</th>
+                                        <td>@line.TransactionDate</td>
                                         <td>@line.BillNumber</td>
                                         <td>@line.PayeeId</td>
+                                        <td>@line.Amount</td>
                                         <td>@line.Description</td>
-                                        <td>@line.TransactionDate</td>
                                         <td>
                                             <button  id="@line.BillNumber" class="btn btn-w-md btn-bold btn-warning addReceiptBillNumber">Add</button>
                                         </td>

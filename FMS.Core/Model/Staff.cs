@@ -11,6 +11,7 @@ namespace FMS.Core.Model
         [Key]
         public Guid Id { get; set; }
         public AppUser AppUser { get; set; }
+        public int Code { get; set; }
         public string Title { get; set; }
         public string Rank { get; set; }
         public string GradeLevel { get; set; }

@@ -29,9 +29,10 @@ namespace FMS.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult SearchBill()
         {
-            return View();
+             return View();
         }
 
 

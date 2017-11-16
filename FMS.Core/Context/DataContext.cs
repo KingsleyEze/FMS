@@ -31,6 +31,8 @@ namespace FMS.Core.Context
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<BillPayable> BillPayables { get; set; }
         public DbSet<BillReceivable> BillReceivable { get; set; }
+        public DbSet<Journal> Journal { get; set; }
+        public DbSet<JournalLineItem> JournalLineItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

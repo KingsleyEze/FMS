@@ -4106,6 +4106,7 @@
       "FMS.Core/1.0.0": {
         "dependencies": {
           "AutoMapper": "6.1.1",
+          "FMS.Utilities": "1.0.0",
           "Microsoft.AspNetCore.Identity": "2.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",

@@ -31,14 +31,14 @@ namespace FMS.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchPaymentResult(string date, string payer, string amount)
+        public IActionResult SearchPaymentResult(string startDate, string endDate, string payer, string amount)
         {
             var viewModel = new SearchPaymentView();
 
             //var repo = _unitOfWork.BillPayablesRepository.Items;
 
             var result = from s in _unitOfWork.BillPayablesRepository.Items
-                            where (date == null || s.TransactionDate == date)
+                            where (startDate == null || s.TransactionDate == startDate)
                                     //&& (payer == null || s.PayerId == payer)
                                     //&& (amount == null || s.PayerId == amount)
                             select s;

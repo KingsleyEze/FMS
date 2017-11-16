@@ -1769,6 +1769,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
+      },
+      "FMS.Utilities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/FMS.Utilities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FMS.Utilities.dll": {}
+        }
       }
     }
   },
@@ -5943,11 +5953,17 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "FMS.Utilities/1.0.0": {
+      "type": "project",
+      "path": "../FMS.Utilities/FMS.Utilities.csproj",
+      "msbuildProject": "../FMS.Utilities/FMS.Utilities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "AutoMapper >= 6.1.1",
+      "FMS.Utilities >= 1.0.0",
       "Microsoft.AspNetCore.Identity >= 2.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 2.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.0",
@@ -5990,7 +6006,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj": {
+              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

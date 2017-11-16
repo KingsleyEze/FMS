@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="main-content">
+    <div class="row">
+
+
+        <!--
+        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+        | Basic controls
+        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+        !-->
+        <div class="col-12">
+            <div class="card">
+                <h4 class="card-title">Add Jounrnal - Step Two</h4>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+                </div>
+                <div class="card-body">
+
+                    
+                    <form asp-action="SaveStepTwo" asp-controller="Journal">
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <label for="date">Amount</label><br />
+                                <div class="input-group  required">
+                                    <input type="text" name="amount" class="form-control" placeholder="Enter Amount" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-money"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <label for="date">Journal Type</label>
+                                <select class="form-control" name="payer">
+                                    <option value="">-- Select Type --</option>
+                                    <option value="0">DEBIT</option>
+                                    <option value="1">CREDIT</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <br class="clearfix" />
+                        <div class="row">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+
+                                <button type="button" class="btn btn-primary pull-right">ADD</button>
+                            </div>
+                        </div>
+
+                        <br class="clearfix" />
+                        <br class="clearfix" />
+                        <br class="clearfix" />
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+
+                                <table class="table table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>Amount</th>
+                                            <th>Journal Type</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+
+                                <button type="submit" class="btn btn-warning pull-right">Submit Journal</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div><!--/.main-content -->
