@@ -10,6 +10,7 @@ namespace FMS.Core.Model
     {
         [Key]
         public Guid Id { get; set; }
+        public string TransactionDate { get; set; }
         public int Code { get; set; }
         public string Description { get; set; }
         public string Economic { get; set; }

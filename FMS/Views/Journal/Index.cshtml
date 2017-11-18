@@ -1,8 +1,62 @@
-﻿
+﻿@model List<FMS.Core.Model.Journal>
 @{
     ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
 
-<h2>Index</h2>
+<!--
+          |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+          | Responsive tables
+          |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+          !-->
+<div class="col-12">
+    <div class="card">
+        <h4 class="card-title">
+            <strong>Journals</strong>
+        </h4>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <a href="/Journal/StepOne" class="btn btn-info">Add Journal</a>
+                </div>
+                <br class="clearfix" />
+                <br class="clearfix" />
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>Economic</th>
+                                <th>Fund</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var line in Model)
+                            {
+                                <tr>
+                                    <td>@line.TransactionDate</td>
+                                    <td>@line.Code</td>
+                                    <td>@line.Description</td>
+                                    <td>@line.Economic</td>
+                                    <td>@line.Fund</td>
+                                    <td><a href="" class="btn btn-w-md btn-bold btn-warning">VIEW</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 

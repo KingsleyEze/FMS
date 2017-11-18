@@ -26,7 +26,9 @@ namespace FMS.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var viewModel = _unitOfWork.JournalsRepository.Items.ToList();
+
+            return View(viewModel);
         }
         
 
@@ -76,6 +78,7 @@ namespace FMS.Controllers
             var journal = new Journal
             {
                 Code = ++count,
+                TransactionDate = journalModel.StepOne.Date,
                 Description = journalModel.StepOne.Description,
                 Economic = journalModel.StepOne.Economic,
                 Fund = journalModel.StepOne.Fund,
