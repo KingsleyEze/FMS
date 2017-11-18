@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FMS.Core.Abstract;
+using FMS.Core.Model;
 using FMS.Models.Receipt;
 using FMS.Models.Payment;
 
@@ -51,11 +52,43 @@ namespace FMS.Controllers
         }
         public IActionResult PaymentDetail(string billNumber)
         {
+            var payable = _unitOfWork.BillPayablesRepository
+                                .Items.FirstOrDefault(b => b.BillNumber == billNumber);
+            var payments = _unitOfWork.PaymentsRepository
+                                .Items.Where(p => p.BillPayable.Id == payable.Id).ToList();
+            
+            var viewModel = new AddPaymentView
+            {
+                Payable = payable,
+                BillNumber = billNumber,
+                Payments = payments,
+            };
 
-            var payment = _unitOfWork.BillPayablesRepository.Items.FirstOrDefault(b => b.BillNumber == billNumber);
-
-            return View(payment);
+            return View(viewModel);
         }
-        
+
+
+
+        [HttpPost]
+        public IActionResult AddPayment(AddPaymentView viewModel)
+        {
+            var payable = _unitOfWork.BillPayablesRepository
+                .Items.FirstOrDefault(b => b.BillNumber == viewModel.BillNumber);
+
+            var payment = new Payment
+            {
+                TransactionDate = DateTime.Now.ToString("dd/MM/yyyy"),
+                Amount = viewModel.Amount,
+                Description = viewModel.Description,
+                BillPayable = payable,
+            };
+
+            _unitOfWork.PaymentsRepository.Insert(payment);
+
+            _unitOfWork.SaveChanges();
+
+            return RedirectToAction("PaymentDetail",new {billNumber = viewModel.BillNumber });
+        }
+
     }
 }

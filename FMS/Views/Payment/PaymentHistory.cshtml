@@ -1,0 +1,55 @@
+﻿@model List<FMS.Core.Model.Payment>
+@{
+    ViewData["Title"] = "Payment History";
+    Layout = "_Layout";
+}
+
+
+<div class="col-12">
+    <div class="card">
+        <h4 class="card-title"><strong>Payment History</strong></h4>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2"></div>
+
+                <div class="col-md-6">
+
+                </div>
+                <br class="clearfix" />
+                <br class="clearfix" />
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Amout</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var line in Model)
+                            {
+                                <tr>
+                                    <th scope="row">#</th>
+                                    <td>@line.TransactionDate</td>
+                                    <td>@line.Amount</td>
+                                    <td>@line.Description</td>
+                                    <td><a href="/Payment/PaymentDetail?paymentId=@line.Id" class="btn btn-w-md btn-bold btn-warning">VIEW</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

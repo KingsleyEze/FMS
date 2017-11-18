@@ -26,6 +26,8 @@ namespace FMS.Core.Context
             BillReceivable.ConfigureFluent(builder);
             Journal.ConfigureFluent(builder);
             JournalLineItem.ConfigureFluent(builder);
+            Payment.ConfigureFluent(builder);
+            Receipt.ConfigureFluent(builder);
         }
     }
 }

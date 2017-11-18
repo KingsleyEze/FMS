@@ -33,6 +33,8 @@ namespace FMS.Core.Context
         public DbSet<BillReceivable> BillReceivable { get; set; }
         public DbSet<Journal> Journal { get; set; }
         public DbSet<JournalLineItem> JournalLineItem { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
