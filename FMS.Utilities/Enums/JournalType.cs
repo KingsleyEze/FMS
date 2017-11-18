@@ -7,7 +7,7 @@ namespace FMS.Utilities.Enums
 {
     public enum JournalType
     {
-        DEBIT,
-        CREDIT
+        Debit,
+        Credit
     }
 }

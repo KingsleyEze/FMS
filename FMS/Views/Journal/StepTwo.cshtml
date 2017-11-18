@@ -1,4 +1,5 @@
-﻿@*
+﻿@model FMS.Models.Journal.JournalView.StepTwoView
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -23,15 +24,17 @@
                 <div class="card-body">
 
                     
-                    <form asp-action="SaveStepTwo" asp-controller="Journal">
+                    <form asp-action="SaveStepTwo" asp-controller="Journal" id="journalForm">
+                        
+                        <input type="hidden" asp-for="JournalLineItems"/>
 
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-4">
                                 <hr class="d-md-none">
-                                <label for="date">Amount</label><br />
+                                <label for="amount">Amount</label><br/>
                                 <div class="input-group  required">
-                                    <input type="text" name="amount" class="form-control" placeholder="Enter Amount" />
+                                    <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount"/>
                                     <span class="input-group-addon">
                                         <i class="fa fa-money"></i>
                                     </span>
@@ -40,8 +43,8 @@
 
                             <div class="col-md-4">
                                 <hr class="d-md-none">
-                                <label for="date">Journal Type</label>
-                                <select class="form-control" name="payer">
+                                <label for="type">Journal Type</label>
+                                <select class="form-control" name="type" id="journalType">
                                     <option value="">-- Select Type --</option>
                                     <option value="0">DEBIT</option>
                                     <option value="1">CREDIT</option>
@@ -49,33 +52,52 @@
                             </div>
 
                         </div>
-                        <br class="clearfix" />
+                        <br class="clearfix"/>
+
                         <div class="row">
 
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
 
-                                <button type="button" class="btn btn-primary pull-right">ADD</button>
+                                <span class="badge badge-success badge-bold">TOTAL CREDIT (<span id="totalCedit">0</span>)</span>
+                                <span class="badge badge-warning badge-bold">TOTAL DEBIT (<span id="totalDebit">0</span>)</span>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+
+                                <button type="button" id="addLineItem" class="btn btn-primary pull-right">ADD</button>
                             </div>
                         </div>
 
-                        <br class="clearfix" />
-                        <br class="clearfix" />
-                        <br class="clearfix" />
+                        <br class="clearfix"/>
+                        <br class="clearfix"/>
+                        <br class="clearfix"/>
 
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
 
-                                <table class="table table-responsive">
+                                <table class="table table-responsive" id="journalTable">
                                     <thead>
-                                        <tr>
-                                            <th>Amount</th>
-                                            <th>Journal Type</th>
-                                            <th>Action</th>
-                                        </tr>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Amount</th>
+                                        <th>Journal Type</th>
+                                        <th>Action</th>
+                                    </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -85,7 +107,7 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
 
-                                <button type="submit" class="btn btn-warning pull-right">Submit Journal</button>
+                                <button type="submit" id="submitBtn" class="btn btn-warning pull-right">Submit Journal</button>
                             </div>
                         </div>
 
@@ -102,3 +124,180 @@
 
     </div>
 </div><!--/.main-content -->
+
+
+@section scripts
+    {
+    <script>
+
+        app.ready(function () {
+            
+
+            var lineItems = [];
+
+            var journalTable = $('#journalTable');
+
+            // Add a row to the table
+            var appendItem = function (item) {
+                if (item !== null) {
+
+                    var id = lineItems.indexOf(item);
+
+                    item['serialNo'] = parseInt(id + 1);
+
+                    var tr = '<tr><td>' + item['serialNo']
+                        + ' </td><td>' + item['amount']
+                        + ' </td><td>' + item['type']
+                        + '</td><td class="text-center"><button data-id="'
+                        + id + '" class="btn btn-danger btn-xs deleteItem"><i class="fa fa-times-circle"></i></button></td></tr>';
+
+                    // append row to table in view
+                    journalTable.find('tbody').append(tr);
+                }
+            }
+
+            // Populate table rows with array of items
+            var populateTable = function() {
+
+                // Hide table and empty rows
+                journalTable.hide();
+                $(journalTable).find('tbody').empty();
+
+                // fetch items hidden field
+                var itemsInput = $("input[name='JournalLineItems']");
+                var submitBtn = $('#submitBtn');
+
+                // Disable submit
+                submitBtn.prop('disabled', true);
+
+                // if the items field is not empty, populate the table
+                if (lineItems.length > 0) {
+                    // Insert item json array into hidden field
+                    itemsInput.val(JSON.stringify(lineItems));
+
+                    // Populate Table
+                    $.each(lineItems, function (index, value) {
+                        appendItem(value);
+                    });
+
+                    // Show Items Table
+                    journalTable.show();
+
+                    submitBtn.prop('disabled', false);
+                }
+            }
+
+            // Delete item
+            $('#journalTable').on('click', '.deleteItem', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var item = lineItems[id];
+                lineItems.splice(id, 1);
+
+                populateTable();
+
+
+                calculateJournal(item["amount"], item["type"], "SUBTRACT");
+                //updateTotal();
+            });
+
+
+            // initialize items functions
+            var buildTable = function () {
+
+                // Populate items table
+                populateTable();
+            }
+
+
+            
+            //Add Journal
+            $("#addLineItem").on("click", function () {
+
+                var item = {'amount':0, 'type':''};
+                
+                var amount = $("#amount").val();
+
+                var type = $("#journalType").val() === '0' ? 'DEBIT' : 'CREDIT';
+
+                //item["amount"] = amount;
+                //item["type"] = type;
+
+                item.amount = amount;
+                item.type = type;
+
+                lineItems.push(item);
+                
+                $("input[name='JournalLineItems']").val(JSON.stringify(lineItems));
+                
+                buildTable();
+
+                calculateJournal(amount, type, "ADD");
+
+            });
+
+            function calculateJournal(amount, type, operation) {
+
+                var currentAmount, total;
+
+                var creditSpan = $('#totalCedit'); var debitSpan = $('#totalDebit');
+
+                switch(type) {
+                    case 'CREDIT':
+
+                        currentAmount = creditSpan.html();
+                        if (operation === "ADD")
+                            total = parseInt(currentAmount) + parseInt(amount);
+                        else if ((operation === "SUBTRACT"))
+                            total = parseInt(currentAmount) - parseInt(amount);
+                        else
+                            total = 0;
+
+                            creditSpan.html(total);
+                        break;
+                    case 'DEBIT':
+
+                        currentAmount = debitSpan.html();
+                        if (operation === "ADD")
+                            total = parseInt(currentAmount) + parseInt(amount);
+                        else if ((operation === "SUBTRACT"))
+                            total = parseInt(currentAmount) - parseInt(amount);
+                        else
+                            total = 0;
+
+                            debitSpan.html(total);
+                        break;
+                }
+            }
+
+            function validateJournal() {
+
+                var creditSpan = $('#totalCedit'); var debitSpan = $('#totalDebit');
+
+                var totalCredit = parseInt(creditSpan.html());
+                var totalDebit = parseInt(debitSpan.html());
+
+                if (totalCredit === totalDebit) {
+                    return true;
+                }
+
+                alert("Total Credit must be equal to Total Debit");
+
+                return false;
+
+            }
+
+            $("#journalForm").submit(function(e) {
+
+                var status = validateJournal();
+
+                if (!status)
+                    e.preventDefault(e);
+            });
+
+            buildTable();
+
+        });
+
+    </script>
+}

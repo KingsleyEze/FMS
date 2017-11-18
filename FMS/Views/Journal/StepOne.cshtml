@@ -1,4 +1,5 @@
-﻿@*
+﻿@model FMS.Models.Journal.JournalView.StepOneView
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -30,7 +31,7 @@
                                     <div class="form-group">
                                         <label>Date: </label><br />
                                         <div class="input-group  required">
-                                            <input type="text" class="form-control date" placeholder="Date"   readonly/>
+                                            <input type="text" class="form-control date" placeholder="Date" asp-for="Date"  readonly/>
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </span>
@@ -46,7 +47,7 @@
                                     <hr class="d-md-none">
                                     <div class="form-group">
                                         <label>Description <span class="req">*</span></label>
-                                        <textarea type="text" class="form-control" maxlenght="140" rows="6" required></textarea>
+                                        <textarea type="text" class="form-control" maxlenght="140" rows="6" asp-for="Description" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +60,7 @@
                                     <hr class="d-md-none">
                                     <div class="form-group">
                                         <label>Economic: </label>
-                                        <select class="form-control" required>
+                                        <select class="form-control" asp-for="Economic" required>
                                             <option value="">-- Select Economic --</option>
                                             <option value="CONSTRUCTION/PROVISION OF MILITARY BARACKS">CONSTRUCTION/PROVISION OF MILITARY BARACKS</option>
                                             <option value="CONSTRUCTION/PROVISION OF DEFENCE EQUIPMENTS">CONSTRUCTION/PROVISION OF DEFENCE EQUIPMENTS</option>
@@ -72,7 +73,7 @@
                                     <hr class="d-md-none">
                                     <div class="form-group">
                                         <label>Fund <span class="req">*</span></label>
-                                        <select class="form-control" required>
+                                        <select class="form-control" asp-for="Fund" required>
                                             <option value="">-- Select Fund  --</option>
                                             <option value="FAAC DIRECT ALLOCATION">FAAC DIRECT ALLOCATION</option>
                                             <option value="MAIN ENVELOP - BUDGETARY ALLOCATION">MAIN ENVELOP - BUDGETARY ALLOCATION</option>
@@ -101,3 +102,5 @@
 
     </div>
 </div><!--/.main-content -->
+
+

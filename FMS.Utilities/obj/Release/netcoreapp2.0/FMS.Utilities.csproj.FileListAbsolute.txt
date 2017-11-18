@@ -1,0 +1,9 @@
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\bin\Release\netcoreapp2.0\FMS.Utilities.deps.json
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\bin\Release\netcoreapp2.0\FMS.Utilities.dll
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\bin\Release\netcoreapp2.0\FMS.Utilities.pdb
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.csprojResolveAssemblyReference.cache
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.csproj.CoreCompileInputs.cache
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.AssemblyInfoInputs.cache
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.AssemblyInfo.cs
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.dll
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.pdb

@@ -21,6 +21,8 @@ namespace FMS.Core.Abstract
         IRepository<LGA> LGAsRepository { get; }
         IRepository<BillPayable> BillPayablesRepository { get; }
         IRepository<BillReceivable> BillReceivablesRepository { get; }
+        IRepository<Journal> JournalsRepository { get; }
+        IRepository<JournalLineItem> JournalLineItemsRepository { get; }
 
 
         bool IsDisposed { get; }
