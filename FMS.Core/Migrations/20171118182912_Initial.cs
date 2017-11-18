@@ -109,6 +109,22 @@ namespace FMS.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Journal",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Economic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fund = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Journal", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppUserFiles",
                 columns: table => new
                 {
@@ -157,6 +173,7 @@ namespace FMS.Core.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
                     AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Code = table.Column<int>(type: "int", nullable: false),
                     DateOfCurrentAppoint = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateOfFirstAppoint = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -208,6 +225,48 @@ namespace FMS.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    Amount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    BillPayableId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payments_BillPayables_BillPayableId",
+                        column: x => x.BillPayableId,
+                        principalTable: "BillPayables",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Receipts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    Amount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    BillPayableId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Receipts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Receipts_BillReceivable_BillPayableId",
+                        column: x => x.BillPayableId,
+                        principalTable: "BillReceivable",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PublicHoliday",
                 columns: table => new
                 {
@@ -244,6 +303,26 @@ namespace FMS.Core.Migrations
                         name: "FK_States_Country_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Country",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JournalLineItem",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    Amount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    JournalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Type = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JournalLineItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JournalLineItem_Journal_JournalId",
+                        column: x => x.JournalId,
+                        principalTable: "Journal",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -430,14 +509,29 @@ namespace FMS.Core.Migrations
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_JournalLineItem_JournalId",
+                table: "JournalLineItem",
+                column: "JournalId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LGAs_StateId",
                 table: "LGAs",
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Payments_BillPayableId",
+                table: "Payments",
+                column: "BillPayableId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PublicHoliday_CountryId",
                 table: "PublicHoliday",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Receipts_BillPayableId",
+                table: "Receipts",
+                column: "BillPayableId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Staffs_AppUserId",
@@ -480,16 +574,19 @@ namespace FMS.Core.Migrations
                 name: "AppUserRoles");
 
             migrationBuilder.DropTable(
-                name: "BillPayables");
-
-            migrationBuilder.DropTable(
-                name: "BillReceivable");
-
-            migrationBuilder.DropTable(
                 name: "City");
 
             migrationBuilder.DropTable(
+                name: "JournalLineItem");
+
+            migrationBuilder.DropTable(
+                name: "Payments");
+
+            migrationBuilder.DropTable(
                 name: "PublicHoliday");
+
+            migrationBuilder.DropTable(
+                name: "Receipts");
 
             migrationBuilder.DropTable(
                 name: "Staffs");
@@ -505,6 +602,15 @@ namespace FMS.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "AppRoles");
+
+            migrationBuilder.DropTable(
+                name: "Journal");
+
+            migrationBuilder.DropTable(
+                name: "BillPayables");
+
+            migrationBuilder.DropTable(
+                name: "BillReceivable");
 
             migrationBuilder.DropTable(
                 name: "AppUsers");

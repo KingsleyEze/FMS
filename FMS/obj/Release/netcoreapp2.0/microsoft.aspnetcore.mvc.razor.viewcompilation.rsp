@@ -25,6 +25,7 @@ C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS
 --file=C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\Views\Journal\StepTwo.cshtml
 --file=C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\Views\Payment\CreatePayment.cshtml
 --file=C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\Views\Payment\PaymentDetail.cshtml
+--file=C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\Views\Payment\PaymentHistory.cshtml
 --file=C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\Views\Payment\PaymentList.cshtml
 --file=C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\Views\Payment\SearchPayment.cshtml
 --file=C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\Views\Payment\SearchPaymentResult.cshtml

@@ -12,8 +12,8 @@ using System;
 namespace FMS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20171118101604_AddDateToJournal")]
-    partial class AddDateToJournal
+    [Migration("20171118182912_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -336,6 +336,27 @@ namespace FMS.Core.Migrations
                     b.ToTable("LGAs");
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.Payment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<Guid?>("BillPayableId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("TransactionDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillPayableId");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("FMS.Core.Model.PublicHoliday", b =>
                 {
                     b.Property<Guid>("Id")
@@ -354,6 +375,27 @@ namespace FMS.Core.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("PublicHoliday");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.Receipt", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<Guid?>("BillPayableId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("TransactionDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillPayableId");
+
+                    b.ToTable("Receipts");
                 });
 
             modelBuilder.Entity("FMS.Core.Model.Staff", b =>
@@ -531,11 +573,27 @@ namespace FMS.Core.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.Payment", b =>
+                {
+                    b.HasOne("FMS.Core.Model.BillPayable", "BillPayable")
+                        .WithMany()
+                        .HasForeignKey("BillPayableId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("FMS.Core.Model.PublicHoliday", b =>
                 {
                     b.HasOne("FMS.Core.Model.Country", "Country")
                         .WithMany("PublicHolidays")
                         .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.Receipt", b =>
+                {
+                    b.HasOne("FMS.Core.Model.BillReceivable", "BillPayable")
+                        .WithMany()
+                        .HasForeignKey("BillPayableId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
