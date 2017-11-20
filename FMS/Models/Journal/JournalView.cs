@@ -16,6 +16,7 @@ namespace FMS.Models.Journal
         public class  StepOneView
         {
             public string Date { get; set; }
+            public string Amount { get; set; }
             public string Description { get; set; }
             public string Economic { get; set; }
             public string Fund { get; set; }
@@ -24,6 +25,8 @@ namespace FMS.Models.Journal
         public class StepTwoView
         {
             public string JournalLineItems { get; set; }
+            public string DebitLineItem { get; set; }
+            public StepOneView StepOne { get; set; }
         }
 
         [JsonObject(MemberSerialization.OptIn)]

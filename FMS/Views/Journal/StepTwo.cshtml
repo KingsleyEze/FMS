@@ -3,6 +3,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    var stepOne = Model.StepOne;
 }
 
 
@@ -23,10 +24,37 @@
                 </div>
                 <div class="card-body">
 
+                    <div class="row">
+                        
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4"><p><strong>Date:</strong> @stepOne.Date</p></div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6"><p><strong>Economic:</strong> @stepOne.Economic</p></div>
+                                <div class="col-md-6"><p><strong>Fund:</strong> @stepOne.Fund</p></div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p><strong>Descripton:</strong> <br/> @stepOne.Description</p>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
                     
+                    <hr/>
+                    
+                    <h6 class="alert alert-info">Account To Credit</h6><hr />
+
                     <form asp-action="SaveStepTwo" asp-controller="Journal" id="journalForm">
                         
-                        <input type="hidden" asp-for="JournalLineItems"/>
+                        <input type="hidden" asp-for="JournalLineItems" />
+                        <input type="hidden" asp-for="DebitLineItem"/>
 
                         <div class="row">
                             <div class="col-md-2"></div>
@@ -47,7 +75,7 @@
                                 <select class="form-control" name="type" id="journalType">
                                     <option value="">-- Select Type --</option>
                                     <option value="0">DEBIT</option>
-                                    <option value="1">CREDIT</option>
+                                    <option value="1" selected="selected">CREDIT</option>
                                 </select>
                             </div>
 
@@ -137,6 +165,8 @@
 
             var journalTable = $('#journalTable');
 
+            intializeJounal();
+
             // Add a row to the table
             var appendItem = function (item) {
                 if (item !== null) {
@@ -209,6 +239,29 @@
                 populateTable();
             }
 
+            //Create Debit
+            function intializeJounal() {
+
+                var item = { 'amount': 0, 'type': '' };
+
+                var debitItem = JSON.parse($("input[name='DebitLineItem']").val()) ;
+
+                var amount = debitItem["amount"];
+
+                var type = debitItem["type"].toString() === '0' ? 'DEBIT' : 'CREDIT';
+                
+                item.amount = amount;
+
+                item.type = type;
+
+                lineItems.push(item);
+
+                $("input[name='JournalLineItems']").val(JSON.stringify(lineItems));
+
+                //populateTable();
+
+                calculateJournal(amount, type, "ADD");
+            }
 
             
             //Add Journal
@@ -219,9 +272,7 @@
                 var amount = $("#amount").val();
 
                 var type = $("#journalType").val() === '0' ? 'DEBIT' : 'CREDIT';
-
-                //item["amount"] = amount;
-                //item["type"] = type;
+                
 
                 item.amount = amount;
                 item.type = type;

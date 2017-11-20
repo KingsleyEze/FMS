@@ -6,3 +6,4 @@ C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcore
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.AssemblyInfo.cs
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.dll
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.pdb
+C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Utilities\obj\Release\netcoreapp2.0\FMS.Utilities.csprojResolveAssemblyReference.cache

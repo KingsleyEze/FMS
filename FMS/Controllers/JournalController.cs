@@ -60,6 +60,22 @@ namespace FMS.Controllers
         {
             var viewModel = new JournalView.StepTwoView();
 
+            //Todo: Refactor... bad design
+            var journalModel = HttpContext.Session
+                .GetObjectFromJson<JournalView>("JournalView");
+
+            var item = new JournalView.JournalListItem
+            {
+                Amount = Convert.ToDecimal(journalModel.StepOne.Amount),
+                Type = JournalType.Debit,
+            };
+            
+            string serializeObject = JsonConvert.SerializeObject(item);
+
+            viewModel.StepOne = journalModel.StepOne;
+
+            viewModel.DebitLineItem = serializeObject;
+
             return View(viewModel);
         }
 
