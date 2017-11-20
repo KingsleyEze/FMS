@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using FMS.Core.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FMS.Core.Context
 {
-    public partial class DataContext : DbContext
+    public partial class DataContext : IdentityDbContext<AppUser>
     {
         //private readonly IHttpContextAccessor _contextAccessor;
 

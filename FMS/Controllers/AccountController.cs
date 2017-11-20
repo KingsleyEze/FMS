@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Http;
 using FMS.Models.Constants;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
+using FMS.Models;
+using Microsoft.AspNetCore.Identity;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,18 +23,57 @@ namespace FMS.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public AccountController(IUnitOfWork unitOfWork)
+        private readonly UserManager<AppUser> _userManager;
+
+        public AccountController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
 
         [HttpGet]
         public IActionResult Index()
         {
-            var viewModel = _unitOfWork.AppUserProfilesRepository.Items.ToList();
+            return View(_userManager.Users);
+        }
 
-            return View(viewModel);
+        public IActionResult AddAppUser()
+        {
+            return View(new AppUserView());
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SaveAppUser(AppUserView viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = new AppUser
+                {
+                    FirstName = viewModel.FirstName,
+                    LastName = viewModel.LastName,
+                    UserName = viewModel.UserName,
+                    Email = viewModel.Email,
+                    PhoneNumber = viewModel.PhoneNumber,
+                    UserType = UserType.STAFF.ToString()
+                };
+
+                IdentityResult result
+                    = await _userManager.CreateAsync(user, viewModel.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View("AddAppUser", viewModel);
         }
 
         public IActionResult AddStaff()
@@ -223,8 +264,8 @@ namespace FMS.Controllers
             //AppUser Detail
             var appUser = new AppUser
             {
-                Username = userDetail.EmailAddress,
-                Password = "password",
+                //Username = userDetail.EmailAddress,
+                //Password = "password",
                 UserType = userDetail.UserType.ToString(),
                 IsActive = true,
             };

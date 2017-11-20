@@ -10,8 +10,10 @@ using FMS.Core.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using FMS.Core;
+using FMS.Core.Model;
 using FMS.Utilities.StringKeys;
 using FMS.Infrastructure.Helpers;
+using Microsoft.AspNetCore.Identity;
 
 namespace FMS
 {
@@ -62,10 +64,15 @@ namespace FMS
                 services.AddDbContext<DataContext>(((options) =>
                                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])), 
                                 ServiceLifetime.Transient);
+
+                services.AddIdentity<AppUser, IdentityRole>()
+                                .AddEntityFrameworkStores<DataContext>();
+
                 services.AddFMSCoreServices();
                 services.AddMvc();
                 services.AddDistributedMemoryCache();
                 services.AddSession();
+                
 
             }
             catch(Exception ex) {
@@ -87,6 +94,7 @@ namespace FMS
             app.UseSession();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseIdentity();
             app.UseMvc(routes => 
             {
                 routes.MapRoute(

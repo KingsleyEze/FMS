@@ -29,7 +29,7 @@
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Date: </label><br />
+                                        <label>Date <span class="req">*</span>: </label><br />
                                         <div class="input-group  required">
                                             <input type="text" class="form-control date" placeholder="Date" asp-for="Date"  readonly/>
                                             <span class="input-group-addon">
@@ -53,13 +53,15 @@
                             </div>
                             <br class="clearfix" />
 
+                            <br class="clearfix" /><br class="clearfix" />
 
+                            <h6 class="alert alert-info">Account To Debit</h6><hr />
                             <div class="row">
 
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Economic: </label>
+                                        <label>Economic<span class="req">*</span>: </label>
                                         <select class="form-control" asp-for="Economic" required>
                                             <option value="">-- Select Economic --</option>
                                             <option value="CONSTRUCTION/PROVISION OF MILITARY BARACKS">CONSTRUCTION/PROVISION OF MILITARY BARACKS</option>
@@ -72,7 +74,7 @@
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Fund <span class="req">*</span></label>
+                                        <label>Fund <span class="req">*</span>:</label>
                                         <select class="form-control" asp-for="Fund" required>
                                             <option value="">-- Select Fund  --</option>
                                             <option value="FAAC DIRECT ALLOCATION">FAAC DIRECT ALLOCATION</option>

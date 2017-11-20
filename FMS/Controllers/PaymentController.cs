@@ -52,6 +52,9 @@ namespace FMS.Controllers
         }
         public IActionResult PaymentDetail(string billNumber)
         {
+            if (String.IsNullOrEmpty(billNumber))
+                return RedirectToAction("SearchPayment");
+
             var payable = _unitOfWork.BillPayablesRepository
                                 .Items.FirstOrDefault(b => b.BillNumber == billNumber);
             var payments = _unitOfWork.PaymentsRepository

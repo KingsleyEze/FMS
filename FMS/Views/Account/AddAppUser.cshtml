@@ -1,0 +1,85 @@
+﻿@model AppUserView
+@{
+    ViewData["Title"] = "AddAppUser";
+    Layout = "_Layout";
+}
+
+
+<div class="col-12">
+    <div class="card">
+        <h4 class="card-title"><strong>Account</strong></h4>
+
+        <div class="card-body">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <form method="post" asp-action="SaveAppUser" asp-controller="Account">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-light fw-400">Account Information</h5>
+                        <br>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="text-dark">First name <span class="req">*</span></label>
+                                <input class="form-control" type="text" asp-for="FirstName">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="text-dark">Last name <span class="req">*</span></label>
+                                <input class="form-control" type="text" asp-for="LastName">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-dark">Phone Number <span class="req">*</span></label>
+                            <input class="form-control" type="text" asp-for="PhoneNumber">
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <label class="text-dark">Email Address <span class="req">*</span></label>
+                            <input class="form-control" type="text" asp-for="Email">
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <h5 class="text-light fw-400">Login Detail</h5>
+                        <br>
+
+                        <div class="form-group">
+                            <label class="text-dark">Username <span class="req">*</span></label>
+                            <input class="form-control" type="text" asp-for="UserName">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-dark">New password <span class="req">*</span></label>
+                            <input class="form-control" type="password" asp-for="Password">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-dark">Confirm new password <span class="req">*</span></label>
+                            <input class="form-control" type="password" asp-for="ConfirmPassword">
+                        </div>
+
+                        <br>
+                        <h5 class="text-light fw-400">&nbsp;</h5>
+                        <br>
+
+
+
+                        <button type="submit" class="btn btn-block btn-primary">Create Account</button>
+
+                        <br>
+                        <h5 class="text-light fw-400">&nbsp;</h5>
+                        <br>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+

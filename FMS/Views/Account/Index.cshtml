@@ -1,4 +1,4 @@
-﻿@model List<FMS.Core.Model.AppUserProfile>
+﻿@model IEnumerable<AppUser>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -15,14 +15,11 @@
         <h4 class="card-title"><strong>App Users</strong></h4>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-2"></div>
 
-                <div class="col-md-6">
+                <div class="col-md-12">
 
+                    <a href="/Account/AddAppUser" class="btn btn-info">Add User</a>
                 </div>
-                <br class="clearfix" />
-                <br class="clearfix" />
-                <br class="clearfix" />
                 <br class="clearfix" />
                 <br class="clearfix" />
             </div>
@@ -38,7 +35,7 @@
                                 <th>Name</th>
                                 <th>Phone Number</th>
                                 <th>Email Address</th>
-                                @*<th>User Type</th>*@
+                                <th>User Type</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,9 +45,9 @@
                                 <tr>
                                     <th scope="row">#</th>
                                     <td>@line.FirstName @line.LastName</td>
-                                    <td>@line.Phone</td>
-                                    <td>@line.EmailAddress</td>
-                                    @*<td>@line.AppUser.UserType</td>*@
+                                    <td>@line.PhoneNumber</td>
+                                    <td>@line.Email</td>
+                                    <td>@line.UserType</td>
                                     <td>...</td>
                                 </tr>
                             }

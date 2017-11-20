@@ -10,8 +10,7 @@ namespace FMS.Core.Context
     {
         public static void ConfigureAppModel(this ModelBuilder builder)
         {
-            AppRole.ConfigureFluent(builder);
-            AppUser.ConfigureFluent(builder);
+        
             AppUserProfile.ConfigureFluent(builder);
             AppUserBank.ConfigureFluent(builder);
             AppUserRole.ConfigureFluent(builder);
