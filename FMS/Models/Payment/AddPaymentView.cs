@@ -8,7 +8,7 @@ namespace FMS.Models.Payment
     public class AddPaymentView
     {
         public string TransactionDate { get; set; }
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
         public string Description { get; set; }
         public Core.Model.BillPayable Payable { get; set; }
         public string BillNumber { get; set; }

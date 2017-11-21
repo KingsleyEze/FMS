@@ -21,7 +21,7 @@ namespace FMS.Core.Model
         public string Function { get; set; }
         public string Quantity { get; set; }
         public string Rate { get; set; }
-        public string Amount { get; set; }
+        public decimal Amount { get; set; }
         public string TransactionDate { get; set; }
 
         public static void ConfigureFluent(ModelBuilder builder)

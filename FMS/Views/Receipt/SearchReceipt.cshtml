@@ -14,6 +14,14 @@
 </header><!--/.header -->
 
 <div class="main-content">
+    @if (TempData["SearchNotFound"] != null)
+    {
+
+        <div class="alert alert-danger">
+             @TempData["SearchNotFound"].ToString() 
+        </div>
+    }
+
     <div class="row">
 
 
@@ -32,7 +40,7 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-4">
                                 <hr class="d-md-none">
-                                <label for="date">Start Date</label><br />
+                                <label for="date">Start Date</label><br/>
                                 <div class="input-group  required">
                                     <input type="text" name="startDate" class="form-control" placeholder="Date" data-provide="datepicker" data-autoclose="true"/>
                                     <span class="input-group-addon">
@@ -43,9 +51,9 @@
 
                             <div class="col-md-4">
                                 <hr class="d-md-none">
-                                <label for="date">End Date</label><br />
+                                <label for="date">End Date</label><br/>
                                 <div class="input-group  required">
-                                    <input type="text" name="endDate" class="form-control" placeholder="Date" data-provide="datepicker" data-autoclose="true" />
+                                    <input type="text" name="endDate" class="form-control" placeholder="Date" data-provide="datepicker" data-autoclose="true"/>
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
@@ -53,7 +61,7 @@
                             </div>
 
                         </div>
-                        <br class="clearfix" />
+                        <br class="clearfix"/>
                         <div class="row">
 
                             <div class="col-md-2"></div>
@@ -74,11 +82,11 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Amount</label>
-                                    <input type="text" name="amount" class="form-control" placeholder="Enter Amount"  />
+                                    <input type="text" name="amount" class="form-control" placeholder="Enter Amount"/>
                                 </div>
                             </div>
                         </div>
-                        <br class="clearfix" />
+                        <br class="clearfix"/>
                         <div class="row">
 
                             <div class="col-md-2"></div>
@@ -89,11 +97,11 @@
                         </div>
 
                     </form>
-                    <br class="clearfix" />
-                    <br class="clearfix" />
-                    <br class="clearfix" />
-                    <br class="clearfix" />
-                    <br class="clearfix" />
+                    <br class="clearfix"/>
+                    <br class="clearfix"/>
+                    <br class="clearfix"/>
+                    <br class="clearfix"/>
+                    <br class="clearfix"/>
                 </div>
             </div>
         </div>

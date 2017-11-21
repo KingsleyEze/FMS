@@ -27,22 +27,29 @@
                     <div class="row">
                         
                         <div class="col-md-8">
+                            
                             <div class="row">
-                                <div class="col-md-4"><p><strong>Date:</strong> @stepOne.Date</p></div>
+                                <div class="col-md-4">
+                                    <p><strong>Date:</strong> @stepOne.Date</p>
+                                </div>
                             </div>
                             <div class="row">
 
-                                <div class="col-md-6"><p><strong>Economic:</strong> @stepOne.Economic</p></div>
-                                <div class="col-md-6"><p><strong>Fund:</strong> @stepOne.Fund</p></div>
+                                <div class="col-md-6">
+                                    <p><strong>Economic:</strong> @stepOne.Economic</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Fund:</strong> @stepOne.Fund</p>
+                                </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <p><strong>Descripton:</strong> <br/> @stepOne.Description</p>
                                 </div>
                             </div>
-                            
-                            
+
+
                         </div>
                     </div>
                     
@@ -127,7 +134,6 @@
                                     <thead>
                                     <tr>
                                         <th>Date</th>
-                                        <th>JournalId</th>
                                         <th>Economic</th>
                                         <th>Fund</th>
                                         <th>Debit</th>
@@ -138,7 +144,6 @@
                                     <tbody>
                                         
                                     <tr>
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -194,7 +199,16 @@
     {
     <script>
 
+//        window.addEventListener("beforeunload", function(e){
+//
+//            if (confirm("Do you really want to leave this page? you will lose all your data.")) {
+//                return true;
+//            }
+//        }, false);
+
         app.ready(function () {
+
+           
 
             function today() {
 
@@ -227,18 +241,18 @@
                     var id = lineItems.indexOf(item);
 
                     item['date'] = today();
-                    item['serialNo'] = parseInt(id + 1);
+                    //item['serialNo'] = parseInt(id + 1);
                     item['debit'] = item['type'] === 'DEBIT' ? item['amount'] : '-';
                     item['credit'] = item['type'] === 'CREDIT' ? item['amount'] : '-';
 
                     var tr = '<tr><td>' + item['date']
-                           + '</td><td>' + item['serialNo']
-                           + '</td><td>' + item['economic']
-                           + '</td><td>' + item['fund']
-                           + '</td><td>' + item['debit']
-                           + '</td><td>' + item['credit']
-                           + '</td><td class="text-center"><button data-id="'
-                           + id + '" class="btn btn-danger btn-xs deleteItem"><i class="fa fa-times-circle"></i></button></td></tr>';
+                        //+ '</td><td>' + item['serialNo']
+                        + '</td><td>' + item['economic']
+                        + '</td><td>' + item['fund']
+                        + '</td><td>' + item['debit']
+                        + '</td><td>' + item['credit']
+                        + '</td><td class="text-center"><button data-id="'
+                        + id + '" class="btn btn-danger btn-xs deleteItem"><i class="fa fa-times-circle"></i></button></td></tr>';
 
                     // append row to table in view
                     journalTable.find('tbody').append(tr);
@@ -372,30 +386,30 @@
                 var creditSpan = $('#totalCedit'); var debitSpan = $('#totalDebit');
 
                 switch(type) {
-                    case 'CREDIT':
+                case 'CREDIT':
 
-                        currentAmount = creditSpan.html();
-                        if (operation === "ADD")
-                            total = parseInt(currentAmount) + parseInt(amount);
-                        else if ((operation === "SUBTRACT"))
-                            total = parseInt(currentAmount) - parseInt(amount);
-                        else
-                            total = 0;
+                    currentAmount = creditSpan.html();
+                    if (operation === "ADD")
+                        total = parseInt(currentAmount) + parseInt(amount);
+                    else if ((operation === "SUBTRACT"))
+                        total = parseInt(currentAmount) - parseInt(amount);
+                    else
+                        total = 0;
 
-                            creditSpan.html(total);
-                        break;
-                    case 'DEBIT':
+                    creditSpan.html(total);
+                    break;
+                case 'DEBIT':
 
-                        currentAmount = debitSpan.html();
-                        if (operation === "ADD")
-                            total = parseInt(currentAmount) + parseInt(amount);
-                        else if ((operation === "SUBTRACT"))
-                            total = parseInt(currentAmount) - parseInt(amount);
-                        else
-                            total = 0;
+                    currentAmount = debitSpan.html();
+                    if (operation === "ADD")
+                        total = parseInt(currentAmount) + parseInt(amount);
+                    else if ((operation === "SUBTRACT"))
+                        total = parseInt(currentAmount) - parseInt(amount);
+                    else
+                        total = 0;
 
-                            debitSpan.html(total);
-                        break;
+                    debitSpan.html(total);
+                    break;
                 }
             }
 
@@ -425,6 +439,24 @@
             });
 
             buildTable();
+
+            //Prevent User From Leaving Page
+            $(window).bind('beforeunload', function () {
+
+                var creditSpan = $('#totalCedit'); var debitSpan = $('#totalDebit');
+
+                var totalCredit = parseInt(creditSpan.html());
+
+                var totalDebit = parseInt(debitSpan.html());
+
+                if (lineItems.length > 1) {
+
+                    if (totalCredit !== totalDebit) {
+
+                        return 'Are you sure you want to leave?';
+                    }
+                }
+            });
 
         });
 

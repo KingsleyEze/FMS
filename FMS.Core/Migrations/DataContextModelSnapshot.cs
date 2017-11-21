@@ -212,7 +212,7 @@ namespace FMS.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
 
-                    b.Property<string>("Amount");
+                    b.Property<decimal>("Amount");
 
                     b.Property<string>("BillNumber");
 
@@ -247,7 +247,7 @@ namespace FMS.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
 
-                    b.Property<string>("Amount");
+                    b.Property<decimal>("Amount");
 
                     b.Property<string>("BillNumber");
 

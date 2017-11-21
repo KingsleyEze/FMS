@@ -55,10 +55,17 @@ namespace FMS.Controllers
         public IActionResult PaymentDetail(string billNumber)
         {
             if (String.IsNullOrEmpty(billNumber))
-                return RedirectToAction("SearchPayment");
+                    return RedirectToAction("SearchPayment");
 
             var payable = _unitOfWork.BillPayablesRepository
                                 .Items.FirstOrDefault(b => b.BillNumber == billNumber);
+
+            if (payable == null)
+            {
+                TempData["SearchNotFound"] = $"Bill Number {billNumber} was not found!";
+                return RedirectToAction("SearchPayment");
+            }
+
             var payments = _unitOfWork.PaymentsRepository
                                 .Items.Where(p => p.BillPayable.Id == payable.Id).ToList();
             
@@ -80,10 +87,30 @@ namespace FMS.Controllers
             var payable = _unitOfWork.BillPayablesRepository
                 .Items.FirstOrDefault(b => b.BillNumber == viewModel.BillNumber);
 
+            var paymentMadeList = _unitOfWork.PaymentsRepository.Items.Where(x => x.BillPayable.Id == payable.Id).ToList();
+
+            decimal totalPayment = 0;
+
+
+            foreach (var made in paymentMadeList)
+            {
+                totalPayment += made.Amount;
+            }
+
+            totalPayment += Convert.ToDecimal(viewModel.Amount);
+
+            decimal amountBilled = payable.Amount;
+
+            if (totalPayment > amountBilled)
+            {
+                TempData["PaymentError"] = "Amount paid is greater than the amount bill";
+                return RedirectToAction("PaymentDetail", new { billNumber = viewModel.BillNumber });
+            }
+
             var payment = new Payment
             {
                 TransactionDate = DateTime.Now.ToString("dd/MM/yyyy"),
-                Amount = viewModel.Amount,
+                Amount = Convert.ToDecimal(viewModel.Amount),
                 Description = viewModel.Description,
                 BillPayable = payable,
             };

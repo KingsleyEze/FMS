@@ -119,7 +119,7 @@
                                         <td>@line.TransactionDate</td>
                                         <td>@line.BillNumber</td>
                                         <td>@line.PayeeId</td>
-                                        <td>@line.Amount</td>
+                                        <td>@line.Amount.ToString("#,##0.##")</td>
                                         <td>@line.Description</td>
                                         <td>
                                             <button  id="@line.BillNumber" class="btn btn-w-md btn-bold btn-warning addReceiptBillNumber">Add</button>

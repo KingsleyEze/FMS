@@ -13,8 +13,8 @@ using System;
 namespace FMS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20171120151854_AddEconomicAndFundToJournalListItem")]
-    partial class AddEconomicAndFundToJournalListItem
+    [Migration("20171121161522_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -213,7 +213,7 @@ namespace FMS.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
 
-                    b.Property<string>("Amount");
+                    b.Property<decimal>("Amount");
 
                     b.Property<string>("BillNumber");
 
@@ -248,7 +248,7 @@ namespace FMS.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
 
-                    b.Property<string>("Amount");
+                    b.Property<decimal>("Amount");
 
                     b.Property<string>("BillNumber");
 

@@ -72,7 +72,7 @@ namespace FMS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
-                    Amount = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(nullable: false),
                     BillNumber = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Economic = table.Column<string>(nullable: true),
@@ -95,7 +95,7 @@ namespace FMS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
-                    Amount = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(nullable: false),
                     BillNumber = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Economic = table.Column<string>(nullable: true),
@@ -438,6 +438,8 @@ namespace FMS.Core.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
                     Amount = table.Column<decimal>(nullable: false),
+                    Economic = table.Column<string>(nullable: true),
+                    Fund = table.Column<string>(nullable: true),
                     JournalId = table.Column<Guid>(nullable: true),
                     Type = table.Column<int>(nullable: false)
                 },

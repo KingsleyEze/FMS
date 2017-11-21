@@ -41,7 +41,7 @@ namespace FMS.Controllers
 
         public IActionResult SaveBill(CreateReceivableView viewModel)
         {
-           
+            int counter = _unitOfWork.BillReceivablesRepository.Items.ToList().Count;
 
             var receivable = new BillReceivable()
             {
@@ -55,19 +55,21 @@ namespace FMS.Controllers
                 Function = viewModel.Function,
                 Quantity = viewModel.Quantity,
                 Rate = viewModel.Rate,
-                Amount = viewModel.Amount,
+                Amount = decimal.Parse(viewModel.Amount),
                 TransactionDate = viewModel.TransactionDate
             };
 
-            Random random = new Random();
-            int randomNumber = random.Next(0, 10000);
+            //Random random = new Random();
+            //int randomNumber = random.Next(0, 10000);
 
-            receivable.BillNumber = Convert.ToString(randomNumber);
+            int billNumber = ++counter;
+
+            receivable.BillNumber = Convert.ToString(billNumber);
 
             _unitOfWork.BillReceivablesRepository.Insert(receivable);
             _unitOfWork.SaveChanges();
 
-            TempData["billNumber"] = randomNumber;
+            TempData["billNumber"] = billNumber;
 
             return RedirectToAction("CreateBill");
         }

@@ -53,6 +53,12 @@ namespace FMS.Controllers
 
             var receipt = _unitOfWork.BillReceivablesRepository.Items.FirstOrDefault(b => b.BillNumber == billNumber);
 
+            if (receipt == null)
+            {
+                TempData["SearchNotFound"] = $"Bill Number {billNumber} was not found!";
+                return RedirectToAction("SearchReceipt");
+            }
+
             return View(receipt);
         }
 
