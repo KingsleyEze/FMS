@@ -11,12 +11,14 @@ using FMS.Models.Constants;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
 using FMS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FMS.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         //User Types: AppUser, Customer, Staff, Supplier
@@ -25,10 +27,13 @@ namespace FMS.Controllers
 
         private readonly UserManager<AppUser> _userManager;
 
-        public AccountController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager)
+        private SignInManager<AppUser> _signInManager;
+
+        public AccountController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
@@ -36,6 +41,44 @@ namespace FMS.Controllers
         public IActionResult Index()
         {
             return View(_userManager.Users);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View(new LoginView());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginView viewModel,string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = await _userManager.FindByNameAsync(viewModel.UserName);
+                if (user != null)
+                {
+                    await _signInManager.SignOutAsync();
+                    Microsoft.AspNetCore.Identity.SignInResult result =
+                        await _signInManager.PasswordSignInAsync(
+                            user, viewModel.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        return Redirect(returnUrl ?? "/");
+                    }
+                }
+                ModelState.AddModelError(nameof(LoginView.UserName),
+                    "Invalid user or password");
+            }
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> LogOff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(AccountController.Login));
         }
 
         public IActionResult AddAppUser()
@@ -351,6 +394,8 @@ namespace FMS.Controllers
             return View(accountModel);
 
         }
+
+
 
     }
 }

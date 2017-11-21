@@ -67,6 +67,7 @@ namespace FMS
 
                 services.AddIdentity<AppUser, IdentityRole>()
                                 .AddEntityFrameworkStores<DataContext>();
+                
 
                 services.AddFMSCoreServices();
                 services.AddMvc();
@@ -89,18 +90,25 @@ namespace FMS
                 app.UseDeveloperExceptionPage();
             }
 
-
-            app.InitializeDatabaseAsync().Wait();
-            app.UseSession();
-            app.UseStatusCodePages();
-            app.UseStaticFiles();
-            app.UseIdentity();
-            app.UseMvc(routes => 
+            try
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+
+                app.InitializeDatabaseAsync().Wait();
+                app.UseSession();
+                app.UseStatusCodePages();
+                app.UseStaticFiles();
+                app.UseIdentity();
+                app.UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);//_exceptions[ExceptionKeys.ExceptionsOnStartup].Add(ex);
+            }
 
         }
     }

@@ -7,11 +7,13 @@ using FMS.Core.Model;
 using FMS.Extensions;
 using FMS.Models.Journal;
 using FMS.Utilities.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace FMS.Controllers
 {
+    [Authorize]
     public class JournalController : Controller
     {
 
@@ -107,6 +109,8 @@ namespace FMS.Controllers
                 var journalListItem = new JournalLineItem
                 {
                     Journal = journal,
+                    Economic = line.Economic,
+                    Fund = line.Fund,
                     Amount = line.Amount,
                     Type = line.Type    
                 };

@@ -337,6 +337,10 @@ namespace FMS.Core.Migrations
 
                     b.Property<decimal>("Amount");
 
+                    b.Property<string>("Economic");
+
+                    b.Property<string>("Fund");
+
                     b.Property<Guid?>("JournalId");
 
                     b.Property<int>("Type");

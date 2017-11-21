@@ -32,6 +32,10 @@ namespace FMS.Models.Journal
         [JsonObject(MemberSerialization.OptIn)]
         public class JournalListItem
         {
+            [JsonProperty(PropertyName = "economic")]
+            public string Economic { get; set; }
+            [JsonProperty(PropertyName = "fund")]
+            public string Fund { get; set; }
             [JsonProperty(PropertyName = "amount")]
             public decimal Amount { get; set; }
             [JsonProperty(PropertyName = "type")]

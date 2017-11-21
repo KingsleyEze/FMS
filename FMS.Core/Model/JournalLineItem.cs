@@ -14,6 +14,8 @@ namespace FMS.Core.Model
         public Journal Journal { get; set; }
         public JournalType Type { get; set; }
         public decimal Amount { get; set; }
+        public string Economic { get; set; }
+        public string Fund { get; set; }
 
         public static void ConfigureFluent(ModelBuilder builder)
         {

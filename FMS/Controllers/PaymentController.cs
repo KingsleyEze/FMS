@@ -7,12 +7,14 @@ using FMS.Core.Abstract;
 using FMS.Core.Model;
 using FMS.Models.Receipt;
 using FMS.Models.Payment;
+using Microsoft.AspNetCore.Authorization;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FMS.Controllers
 {
+    [Authorize]
     public class PaymentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

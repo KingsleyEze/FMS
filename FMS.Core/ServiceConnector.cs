@@ -12,6 +12,7 @@ namespace FMS.Core
         public static void AddFMSCoreServices(this IServiceCollection services)
         {
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUserService, UserService>();
 
         }
     }

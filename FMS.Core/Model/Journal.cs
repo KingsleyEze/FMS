@@ -16,6 +16,7 @@ namespace FMS.Core.Model
         public string Economic { get; set; }
         public string Fund { get; set; }
 
+
         public static void ConfigureFluent(ModelBuilder builder)
         {
             builder.Entity<Journal>().Property(b => b.Id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWSEQUENTIALID()").Metadata.IsReadOnlyAfterSave = true;

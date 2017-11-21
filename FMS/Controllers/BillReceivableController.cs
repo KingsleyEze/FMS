@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using FMS.Models.BillReceivable;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FMS.Controllers
 {
+    [Authorize]
     public class BillReceivableController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

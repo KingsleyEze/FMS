@@ -8,11 +8,14 @@ using AutoMapper;
 using FMS.Core.Abstract;
 using FMS.Models.BillPayable;
 using FMS.Core.Model;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FMS.Controllers
-{
+{ 
+
+    [Authorize]
     public class BillPayableController : Controller
     {
         //private readonly IMapper _mapper;
