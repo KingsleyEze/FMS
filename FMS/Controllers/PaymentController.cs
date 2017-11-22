@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FMS.Core.Abstract;
 using FMS.Core.Model;
+using FMS.Extensions;
 using FMS.Models.Receipt;
 using FMS.Models.Payment;
 using Microsoft.AspNetCore.Authorization;
@@ -34,20 +36,21 @@ namespace FMS.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchPaymentResult(string startDate, string endDate, string payer, string amount)
+        public IActionResult SearchPaymentResult(string startDate, string endDate, string payer, decimal amount)
         {
             var viewModel = new SearchPaymentView();
 
-            //var repo = _unitOfWork.BillPayablesRepository.Items;
+            var result = _unitOfWork.BillPayablesRepository.Items
+                                .WhereIf(!String.IsNullOrEmpty(payer), p => p.PayerId == payer)
+                                .WhereIf(amount != 0, p => p.Amount == amount)
+                                .WhereIf(startDate != null, 
+                                    p => DateTime.ParseExact(p.TransactionDate, @"dd\/MM\/yyyy", null)
+                                      >= DateTime.ParseExact(startDate, @"dd\/MM\/yyyy", null))
+                                .WhereIf(endDate != null,
+                                    p => DateTime.ParseExact(p.TransactionDate, @"dd\/MM\/yyyy", null)
+                                         >= DateTime.ParseExact(endDate, @"dd\/MM\/yyyy", null))
+                                .ToList();
 
-            var result = from s in _unitOfWork.BillPayablesRepository.Items
-                            where (startDate == null || s.TransactionDate == startDate)
-                                    //&& (payer == null || s.PayerId == payer)
-                                    //&& (amount == null || s.PayerId == amount)
-                            select s;
-
-            
-            
             viewModel.SearchResult = result.ToList();
 
             return View(viewModel);
