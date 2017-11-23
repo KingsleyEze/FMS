@@ -10,33 +10,166 @@ using Microsoft.AspNetCore.Http;
 using FMS.Models.Constants;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
+using FMS.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FMS.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         //User Types: AppUser, Customer, Staff, Supplier
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public AccountController(IUnitOfWork unitOfWork)
+        private readonly UserManager<AppUser> _userManager;
+
+        private SignInManager<AppUser> _signInManager;
+
+        public AccountController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
         [HttpGet]
         public IActionResult Index()
         {
-            var viewModel = _unitOfWork.AppUserProfilesRepository.Items.ToList();
+            return View(_userManager.Users);
+        }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View(new LoginView());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginView viewModel,string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = await _userManager.FindByNameAsync(viewModel.UserName);
+                if (user != null)
+                {
+                    await _signInManager.SignOutAsync();
+                    Microsoft.AspNetCore.Identity.SignInResult result =
+                        await _signInManager.PasswordSignInAsync(
+                            user, viewModel.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        return Redirect(returnUrl ?? "/");
+                    }
+                }
+                ModelState.AddModelError(nameof(LoginView.UserName),
+                    "Invalid user or password");
+            }
             return View(viewModel);
         }
 
-        //AppUser Detail
-        [HttpGet]
+        public async Task<IActionResult> LogOff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(AccountController.Login));
+        }
+
+        public IActionResult AddAppUser()
+        {
+            return View(new AppUserView());
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SaveAppUser(AppUserView viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = new AppUser
+                {
+                    FirstName = viewModel.FirstName,
+                    LastName = viewModel.LastName,
+                    UserName = viewModel.UserName,
+                    Email = viewModel.Email,
+                    PhoneNumber = viewModel.PhoneNumber,
+                    UserType = UserType.STAFF.ToString()
+                };
+
+                IdentityResult result
+                    = await _userManager.CreateAsync(user, viewModel.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View("AddAppUser", viewModel);
+        }
+
+        public IActionResult AddStaff()
+        {
+            var viewModel = new UserDetailView();
+
+            var accountModel = new AccountDetailView();
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            viewModel.UserType = UserType.STAFF;
+
+            viewModel.CountryList = _unitOfWork.CountriesRepository.Items.ToList();
+
+            viewModel.StateList = _unitOfWork.StatesRepository.Items.ToList();
+
+            return View("AddUserDetail", viewModel);
+        }
+
+        public IActionResult AddCustomer()
+        {
+            var viewModel = new UserDetailView();
+
+            var accountModel = new AccountDetailView();
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            viewModel.UserType = UserType.CUSTOMER;
+
+            viewModel.CountryList = _unitOfWork.CountriesRepository.Items.ToList();
+
+            viewModel.StateList = _unitOfWork.StatesRepository.Items.ToList();
+
+            return View("AddUserDetail", viewModel);
+        }
+
+        public IActionResult AddSupplier()
+        {
+            var viewModel = new UserDetailView();
+
+            var accountModel = new AccountDetailView();
+
+            HttpContext.Session.SetObjectAsJson("AccountDetailView", accountModel);
+
+            viewModel.UserType = UserType.SUPPLIER;
+
+            viewModel.CountryList = _unitOfWork.CountriesRepository.Items.ToList();
+
+            viewModel.StateList = _unitOfWork.StatesRepository.Items.ToList();
+
+            return View("AddUserDetail", viewModel);
+        }
+
         public IActionResult AddUserDetail()
         {
             var viewModel = new UserDetailView();
@@ -51,6 +184,7 @@ namespace FMS.Controllers
 
             return View(viewModel);
         }
+        
 
         [HttpPost]
         public IActionResult SaveUserDetail(UserDetailView viewModel)
@@ -173,8 +307,8 @@ namespace FMS.Controllers
             //AppUser Detail
             var appUser = new AppUser
             {
-                Username = userDetail.EmailAddress,
-                Password = "password",
+                //Username = userDetail.EmailAddress,
+                //Password = "password",
                 UserType = userDetail.UserType.ToString(),
                 IsActive = true,
             };
@@ -260,6 +394,8 @@ namespace FMS.Controllers
             return View(accountModel);
 
         }
+
+
 
     }
 }

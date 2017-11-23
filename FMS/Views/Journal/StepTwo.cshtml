@@ -1,0 +1,464 @@
+﻿@model FMS.Models.Journal.JournalView.StepTwoView
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var stepOne = Model.StepOne;
+}
+
+
+<div class="main-content">
+    <div class="row">
+
+
+        <!--
+        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+        | Basic controls
+        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+        !-->
+        <div class="col-12">
+            <div class="card">
+                <h4 class="card-title">Add Jounrnal - Step Two</h4>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        
+                        <div class="col-md-8">
+                            
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><strong>Date:</strong> @stepOne.Date</p>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <p><strong>Economic:</strong> @stepOne.Economic</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Fund:</strong> @stepOne.Fund</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p><strong>Descripton:</strong> <br/> @stepOne.Description</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                    <hr/>
+                    
+                    <h6 class="alert alert-info">Account To Credit</h6><hr />
+
+                    <form asp-action="SaveStepTwo" asp-controller="Journal" id="journalForm">
+                        
+                        <input type="hidden" asp-for="JournalLineItems" />
+                        <input type="hidden" asp-for="DebitLineItem"/>
+                        <input type="hidden" name="journalType" id="journalType" value="1"/>
+                        
+                        <div class="row">
+                            
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Economic<span class="req">*</span>: </label>
+                                    <select class="form-control" id="economic" >
+                                        <option value="0">-- Select Economic --</option>
+                                        <option value="CONSTRUCTION/PROVISION OF MILITARY BARACKS">CONSTRUCTION/PROVISION OF MILITARY BARACKS</option>
+                                        <option value="CONSTRUCTION/PROVISION OF DEFENCE EQUIPMENTS">CONSTRUCTION/PROVISION OF DEFENCE EQUIPMENTS</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Fund <span class="req">*</span>:</label>
+                                    <select class="form-control" id="fund">
+                                        <option value="0">-- Select Fund  --</option>
+                                        <option value="FAAC DIRECT ALLOCATION">FAAC DIRECT ALLOCATION</option>
+                                        <option value="MAIN ENVELOP - BUDGETARY ALLOCATION">MAIN ENVELOP - BUDGETARY ALLOCATION</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <label for="amount">Amount <span class="req">*</span></label><br/>
+                                <div class="input-group  required">
+                                    <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount"/>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-money"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            @*<div class="col-md-4">
+                                <hr class="d-md-none">
+                                <label for="type">Journal Type</label>
+                                <select class="form-control" name="type" id="journalType">
+                                    <option value="">-- Select Type --</option>
+                                    <option value="0">DEBIT</option>
+                                    <option value="1" selected="selected">CREDIT</option>
+                                </select>
+                            </div>*@
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-8">
+
+                                <button type="button" id="addLineItem" class="btn btn-primary pull-right">ADD</button>
+                            </div>
+                        </div>
+
+                        <br class="clearfix"/>
+                        <br class="clearfix"/>
+                        <br class="clearfix"/>
+
+                        <div class="row">
+                            <div class="col-md-8">
+
+                                <table class="table table-responsive" id="journalTable">
+                                    <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Economic</th>
+                                        <th>Fund</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <br class="clearfix" />
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+
+                                <span class="badge badge-success badge-bold">TOTAL CREDIT (<span id="totalCedit">0</span>)</span>
+                                <span class="badge badge-warning badge-bold">TOTAL DEBIT (<span id="totalDebit">0</span>)</span>
+                            </div>
+                        </div>
+                        
+                        <br class="clearfix" />
+                        <br class="clearfix" />
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <a href="javascript: history.back();" class="btn btn-default">
+                                    Back
+                                </a>
+                                <button type="submit" id="submitBtn" class="btn btn-warning pull-right">Submit Journal</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div><!--/.main-content -->
+
+
+@section scripts
+    {
+    <script>
+
+//        window.addEventListener("beforeunload", function(e){
+//
+//            if (confirm("Do you really want to leave this page? you will lose all your data.")) {
+//                return true;
+//            }
+//        }, false);
+
+        app.ready(function () {
+
+           
+
+            function today() {
+
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0!
+
+                var yyyy = today.getFullYear();
+                if(dd<10){
+                    dd='0'+dd;
+                } 
+                if(mm<10){
+                    mm='0'+mm;
+                } 
+                var today = dd + '/' + mm + '/' + yyyy;
+
+                return today;
+            }
+
+            var lineItems = [];
+
+            var journalTable = $('#journalTable');
+
+            intializeJounal();
+
+            // Add a row to the table
+            var appendItem = function (item) {
+                if (item !== null) {
+
+                    var id = lineItems.indexOf(item);
+
+                    item['date'] = today();
+                    //item['serialNo'] = parseInt(id + 1);
+                    item['debit'] = item['type'] === 'DEBIT' ? item['amount'] : '-';
+                    item['credit'] = item['type'] === 'CREDIT' ? item['amount'] : '-';
+
+                    var tr = '<tr><td>' + item['date']
+                        //+ '</td><td>' + item['serialNo']
+                        + '</td><td>' + item['economic']
+                        + '</td><td>' + item['fund']
+                        + '</td><td>' + item['debit']
+                        + '</td><td>' + item['credit']
+                        + '</td><td class="text-center"><button data-id="'
+                        + id + '" class="btn btn-danger btn-xs deleteItem"><i class="fa fa-times-circle"></i></button></td></tr>';
+
+                    // append row to table in view
+                    journalTable.find('tbody').append(tr);
+                }
+            }
+
+            // Populate table rows with array of items
+            var populateTable = function() {
+
+                // Hide table and empty rows
+                journalTable.hide();
+                $(journalTable).find('tbody').empty();
+
+                // fetch items hidden field
+                var itemsInput = $("input[name='JournalLineItems']");
+                var submitBtn = $('#submitBtn');
+
+                // Disable submit
+                submitBtn.prop('disabled', true);
+
+                // if the items field is not empty, populate the table
+                if (lineItems.length > 0) {
+                    // Insert item json array into hidden field
+                    itemsInput.val(JSON.stringify(lineItems));
+
+                    // Populate Table
+                    $.each(lineItems, function (index, value) {
+                        appendItem(value);
+                    });
+
+                    // Show Items Table
+                    journalTable.show();
+
+                    submitBtn.prop('disabled', false);
+                }
+            }
+
+            // Delete item
+            $('#journalTable').on('click', '.deleteItem', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var item = lineItems[id];
+                lineItems.splice(id, 1);
+
+                populateTable();
+
+
+                calculateJournal(item["amount"], item["type"], "SUBTRACT");
+                //updateTotal();
+            });
+
+
+            // initialize items functions
+            var buildTable = function () {
+
+                // Populate items table
+                populateTable();
+            }
+
+            //Create Debit
+            function intializeJounal() {
+
+                var item = { 'amount': 0, 'type': '', 'economic': '', 'fund': '' };
+
+                var debitItem = JSON.parse($("input[name='DebitLineItem']").val()) ;
+
+                var amount = debitItem["amount"];
+
+                var type = debitItem["type"].toString() === '0' ? 'DEBIT' : 'CREDIT';
+
+                var economic = "@stepOne.Economic";
+
+                var fund = "@stepOne.Fund";
+
+                item.amount = amount;
+
+                item.type = type;
+
+                item.economic = economic;
+
+                item.fund = fund;
+                
+
+                lineItems.push(item);
+
+                $("input[name='JournalLineItems']").val(JSON.stringify(lineItems));
+
+                //populateTable();
+
+                calculateJournal(amount, type, "ADD");
+            }
+
+            
+            //Add Journal
+            $("#addLineItem").on("click", function () {
+
+                var item = {'amount':0, 'type':'', 'economic':'', 'fund':''};
+                
+                var amount = $("#amount").val();
+
+                var type = $("#journalType").val() === '0' ? 'DEBIT' : 'CREDIT';
+
+                var economic = $("#economic").val();
+
+                var fund = $("#fund").val();
+                
+
+                item.amount = amount;
+                item.type = type;
+                item.economic = economic;
+                item.fund = fund;
+
+                lineItems.push(item);
+                
+                $("input[name='JournalLineItems']").val(JSON.stringify(lineItems));
+                
+                buildTable();
+
+                calculateJournal(amount, type, "ADD");
+
+                $("#amount").val("");
+                $("#economic").val("0");
+                $("#fund").val("0");
+
+            });
+
+            function calculateJournal(amount, type, operation) {
+
+                var currentAmount, total;
+
+                var creditSpan = $('#totalCedit'); var debitSpan = $('#totalDebit');
+
+                switch(type) {
+                case 'CREDIT':
+
+                    currentAmount = creditSpan.html();
+                    if (operation === "ADD")
+                        total = parseInt(currentAmount) + parseInt(amount);
+                    else if ((operation === "SUBTRACT"))
+                        total = parseInt(currentAmount) - parseInt(amount);
+                    else
+                        total = 0;
+
+                    creditSpan.html(total);
+                    break;
+                case 'DEBIT':
+
+                    currentAmount = debitSpan.html();
+                    if (operation === "ADD")
+                        total = parseInt(currentAmount) + parseInt(amount);
+                    else if ((operation === "SUBTRACT"))
+                        total = parseInt(currentAmount) - parseInt(amount);
+                    else
+                        total = 0;
+
+                    debitSpan.html(total);
+                    break;
+                }
+            }
+
+            function validateJournal() {
+
+                var creditSpan = $('#totalCedit'); var debitSpan = $('#totalDebit');
+
+                var totalCredit = parseInt(creditSpan.html());
+                var totalDebit = parseInt(debitSpan.html());
+
+                if (totalCredit === totalDebit) {
+                    return true;
+                }
+
+                alert("Total Credit must be equal to Total Debit");
+
+                return false;
+
+            }
+
+            $("#journalForm").submit(function(e) {
+
+                var status = validateJournal();
+
+                if (!status)
+                    e.preventDefault(e);
+            });
+
+            buildTable();
+
+            //Prevent User From Leaving Page
+            $(window).bind('beforeunload', function () {
+
+                var creditSpan = $('#totalCedit'); var debitSpan = $('#totalDebit');
+
+                var totalCredit = parseInt(creditSpan.html());
+
+                var totalDebit = parseInt(debitSpan.html());
+
+                if (lineItems.length > 1) {
+
+                    if (totalCredit !== totalDebit) {
+
+                        return 'Are you sure you want to leave?';
+                    }
+                }
+            });
+
+        });
+
+    </script>
+}

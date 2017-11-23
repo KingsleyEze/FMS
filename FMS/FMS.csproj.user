@@ -11,9 +11,13 @@
     <WebStackScaffolding_ViewDialogWidth>1025</WebStackScaffolding_ViewDialogWidth>
     <ActiveDebugProfile>FMS</ActiveDebugProfile>
     <ShowAllFiles>false</ShowAllFiles>
-    <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_Layout.cshtml</WebStackScaffolding_LayoutPageFile>
+    <WebStackScaffolding_LayoutPageFile>_Layout</WebStackScaffolding_LayoutPageFile>
+    <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

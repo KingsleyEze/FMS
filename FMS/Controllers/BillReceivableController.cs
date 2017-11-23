@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using FMS.Models.BillReceivable;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FMS.Controllers
 {
+    [Authorize]
     public class BillReceivableController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -39,7 +41,7 @@ namespace FMS.Controllers
 
         public IActionResult SaveBill(CreateReceivableView viewModel)
         {
-           
+            int counter = _unitOfWork.BillReceivablesRepository.Items.ToList().Count;
 
             var receivable = new BillReceivable()
             {
@@ -53,19 +55,21 @@ namespace FMS.Controllers
                 Function = viewModel.Function,
                 Quantity = viewModel.Quantity,
                 Rate = viewModel.Rate,
-                Amount = viewModel.Amount,
+                Amount = decimal.Parse(viewModel.Amount),
                 TransactionDate = viewModel.TransactionDate
             };
 
-            Random random = new Random();
-            int randomNumber = random.Next(0, 10000);
+            //Random random = new Random();
+            //int randomNumber = random.Next(0, 10000);
 
-            receivable.BillNumber = Convert.ToString(randomNumber);
+            int billNumber = ++counter;
+
+            receivable.BillNumber = Convert.ToString(billNumber);
 
             _unitOfWork.BillReceivablesRepository.Insert(receivable);
             _unitOfWork.SaveChanges();
 
-            TempData["billNumber"] = randomNumber;
+            TempData["billNumber"] = billNumber;
 
             return RedirectToAction("CreateBill");
         }

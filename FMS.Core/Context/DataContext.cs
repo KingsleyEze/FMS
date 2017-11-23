@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using FMS.Core.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FMS.Core.Context
 {
-    public partial class DataContext : DbContext
+    public partial class DataContext : IdentityDbContext<AppUser>
     {
         //private readonly IHttpContextAccessor _contextAccessor;
 
@@ -31,6 +32,10 @@ namespace FMS.Core.Context
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<BillPayable> BillPayables { get; set; }
         public DbSet<BillReceivable> BillReceivable { get; set; }
+        public DbSet<Journal> Journal { get; set; }
+        public DbSet<JournalLineItem> JournalLineItem { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

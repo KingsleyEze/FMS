@@ -1,4 +1,4 @@
-﻿@model List<FMS.Core.Model.BillPayable>
+﻿@model List<FMS.Core.Model.Payment>
 @{
     ViewData["Title"] = "Payment List";
     Layout = "_Layout";
@@ -63,17 +63,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var line in Model)
-                            {
-                                <tr>
-                                    <th scope="row">#</th>
-                                    <td>@line.BillNumber</td>
-                                    <td>@line.PayerId</td>
-                                    <td>@line.Description</td>
-                                    <td>@line.TransactionDate</td>
-                                    <td><a href="/Payment/PaymentDetail?paymentId=@line.Id" class="btn btn-w-md btn-bold btn-warning">VIEW</a></td>
-                                </tr>
-                            }
                         </tbody>
                     </table>
                 </div>

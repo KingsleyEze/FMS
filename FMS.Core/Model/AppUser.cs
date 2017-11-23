@@ -4,23 +4,22 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace FMS.Core.Model
 {
-    public class AppUser
+    public class AppUser : IdentityUser
     {
-        [Key]
-        public Guid Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+
+        public AppUser(string username) : base(username){ IsActive = true; }
+        public AppUser() : base() { IsActive = true; }
         public string UserType { get; set; }
+        public string PicturePixUrl { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public bool IsActive { get; set; }
+        public override string ToString() => $"{FirstName} {LastName}";
 
-        public static void ConfigureFluent(ModelBuilder builder)
-        {
-            builder.Entity<AppUser>().Property(b => b.Id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWSEQUENTIALID()").Metadata.IsReadOnlyAfterSave = true;
-
-        }
 
     }
 }

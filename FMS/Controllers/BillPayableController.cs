@@ -8,11 +8,14 @@ using AutoMapper;
 using FMS.Core.Abstract;
 using FMS.Models.BillPayable;
 using FMS.Core.Model;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FMS.Controllers
-{
+{ 
+
+    [Authorize]
     public class BillPayableController : Controller
     {
         //private readonly IMapper _mapper;
@@ -29,9 +32,10 @@ namespace FMS.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult SearchBill()
         {
-            return View();
+             return View();
         }
 
 
@@ -48,6 +52,7 @@ namespace FMS.Controllers
         [HttpPost]
         public IActionResult SaveBill(CreatePayableView viewModel)
         {
+            int counter = _unitOfWork.BillPayablesRepository.Items.ToList().Count;
 
             var payable = new BillPayable()
                 {
@@ -61,19 +66,21 @@ namespace FMS.Controllers
                     Function = viewModel.Function,
                     Quantity = viewModel.Quantity,
                     Rate = viewModel.Rate,
-                    Amount = viewModel.Amount,
+                    Amount = decimal.Parse(viewModel.Amount),
                     TransactionDate = viewModel.TransactionDate
                 };
 
-            Random random = new Random();
-            int randomNumber = random.Next(0, 10000);
+            //Random random = new Random();
+            //int randomNumber = random.Next(0, 10000);
 
-            payable.BillNumber = Convert.ToString(randomNumber);
+            int billNumber = ++counter;
+
+            payable.BillNumber = Convert.ToString(billNumber);
 
             _unitOfWork.BillPayablesRepository.Insert(payable);
             _unitOfWork.SaveChanges();
 
-            TempData["billNumber"] = randomNumber;
+            TempData["billNumber"] = billNumber;
 
             return RedirectToAction("CreateBill");
         }

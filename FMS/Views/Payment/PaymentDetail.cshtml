@@ -1,23 +1,29 @@
-﻿@model  FMS.Core.Model.BillPayable
+﻿@model  FMS.Models.Payment.AddPaymentView
 @{
     ViewData["Title"] = "Payment Detail";
     Layout = "_Layout";
+
+    var payable = Model.Payable;
+    var paymentList = Model.Payments;
+
+    decimal totalPayment = 0;
 }
 
 
 
 <div class="main-content">
+    @if (TempData["PaymentError"] != null)
+    {
+
+        <div class="alert alert-danger">
+            @TempData["PaymentError"].ToString() 
+        </div>
+    }
     <div class="row">
 
-
-        <!--
-        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-        | Basic controls
-        |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-        !-->
-        <div class="col-12">
+        <div class="col-lg-6">
             <div class="card">
-                <h4 class="card-title">Payment Detail</h4>
+                <h4 class="card-title"><strong>Payment Detail</strong></h4>
                 <div class="card-body">
                     <form asp-action="SaveBill" asp-controller="BillPayable">
                         <div class="row">
@@ -28,9 +34,9 @@
 
                                     <div class="col-md-6">
                                         <hr class="d-md-none">
-                                        <label for="date">Date</label><br />
+                                        <label for="date">Date</label><br/>
                                         <div class="form-group">
-                                            <p class="form-control-plaintext">@Model.TransactionDate</p>
+                                            <p class="form-control-plaintext">@payable.TransactionDate</p>
                                         </div>
                                     </div>
 
@@ -38,16 +44,16 @@
                                     <div class="col-md-6">
                                         <hr class="d-md-none">
                                         <div class="form-group">
-                                            <label>Payer</label>
+                                            <label>Bill From</label>
 
-                                            <p class="form-control-plaintext">@Model.PayerId</p>
+                                            <p class="form-control-plaintext">@payable.PayerId</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <br class="clearfix" />
+                        <br class="clearfix"/>
 
                         <div class="row">
                             <div class="col-md-8">
@@ -55,12 +61,12 @@
                                 <div class="form-group">
                                     <label>Description</label>
 
-                                    <p class="form-control-plaintext">@Model.Description</p>
+                                    <p class="form-control-plaintext">@payable.Description</p>
                                 </div>
                             </div>
                         </div>
 
-                        <br class="clearfix" /><br class="clearfix" />
+                        <br class="clearfix"/><br class="clearfix"/>
                         <div class="row">
 
 
@@ -68,7 +74,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Organisation</label>
-                                    <p class="form-control-plaintext">@Model.Organisation</p>
+                                    <p class="form-control-plaintext">@payable.Organisation</p>
                                 </div>
                             </div>
 
@@ -76,7 +82,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Economic</label>
-                                    <p class="form-control-plaintext">@Model.Economic</p>
+                                    <p class="form-control-plaintext">@payable.Economic</p>
                                 </div>
                             </div>
 
@@ -89,7 +95,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Fund</label>
-                                    <p class="form-control-plaintext">@Model.Fund</p>
+                                    <p class="form-control-plaintext">@payable.Fund</p>
                                 </div>
                             </div>
 
@@ -98,7 +104,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Geo Code</label>
-                                    <p class="form-control-plaintext">@Model.GeoCode</p>
+                                    <p class="form-control-plaintext">@payable.GeoCode</p>
                                 </div>
                             </div>
 
@@ -109,7 +115,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Function</label>
-                                    <p class="form-control-plaintext">@Model.Fund</p>
+                                    <p class="form-control-plaintext">@payable.Fund</p>
                                 </div>
                             </div>
 
@@ -117,7 +123,7 @@
                                 <hr class="d-md-none">
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <p class="form-control-plaintext">@Model.Quantity</p>
+                                    <p class="form-control-plaintext">@payable.Quantity</p>
 
                                 </div>
                             </div>
@@ -132,7 +138,7 @@
                                 <div class="form-group">
                                     <label>Rate</label>
 
-                                    <p class="form-control-plaintext">@Model.Rate</p>
+                                    <p class="form-control-plaintext">@payable.Rate</p>
 
                                 </div>
                             </div>
@@ -143,12 +149,12 @@
                                     <label>Amount</label>
 
 
-                                    <p class="form-control-plaintext">@Model.Amount</p>
+                                    <p class="form-control-plaintext">@payable.Amount.ToString("#,##0.##")</p>
 
                                 </div>
                             </div>
                         </div>
-                        <br class="clearfix" />
+                        <br class="clearfix"/>
                         @*<div class="row">
 
                                 <div class="col-md-8">
@@ -159,14 +165,117 @@
                             </div>*@
 
                     </form>
-                    <br class="clearfix" /><br class="clearfix" /><br class="clearfix" /><br class="clearfix" />
+                    <br class="clearfix"/><br class="clearfix"/><br class="clearfix"/><br class="clearfix"/>
                 </div>
             </div>
         </div>
 
-
-
-
-
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-title">
+                    <div class="row">
+                        <div class="col-md-6"><h5>Payment History</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal-add-payment">Add Payment</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amout</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        @foreach (var line in paymentList)
+                        {
+                            <span style="display: none">@(totalPayment += Convert.ToDecimal(line.Amount))</span>
+                            <tr>
+                                <td>@line.TransactionDate</td>
+                                <td>@line.Amount.ToString("#,##0.##")</td>
+                                <td>@line.Description</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td><strong>Total:</strong></td>
+                            <td style="color: red;">@totalPayment.ToString("#,##0.##")</td>
+                            <td></td>
+                        </tr>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div><!--/.main-content -->
+
+
+<!--
+|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+| Modal :
+|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+!-->
+<div class="col-md-6 col-lg-4">
+
+    <div class="modal modal-center fade" id="modal-add-payment" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" asp-action="AddPayment" asp-controller="Payment">
+                    <input type="hidden" asp-for="BillNumber"/>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <br class="clearfix"/>
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <hr class="d-md-none">
+                                        <div class="form-group">
+                                            <label>Amount</label>
+                                            <input type="text" class="form-control" asp-for="Amount" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <hr class="d-md-none">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea type="text" class="form-control" asp-for="Description" rows="4" maxlenght="140" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <button type="button" class="btn btn-bold btn-warning btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-bold btn-success btn-primary pull-right">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-md-8">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

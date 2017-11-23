@@ -30,6 +30,10 @@ namespace FMS.Core.Concrete
         readonly Lazy<IRepository<LGA>> _lGAsRepository;
         readonly Lazy<IRepository<BillPayable>> _billPayablesRepository;
         readonly Lazy<IRepository<BillReceivable>> _billReceivablesRepository;
+        readonly Lazy<IRepository<Journal>> _journalsRepository;
+        readonly Lazy<IRepository<JournalLineItem>> _journalLineItemsRepository;
+        readonly Lazy<IRepository<Payment>> _paymentsRepository;
+        readonly Lazy<IRepository<Receipt>> _receiptsRepository;
 
         #endregion
 
@@ -52,7 +56,11 @@ namespace FMS.Core.Concrete
             _lGAsRepository = new Lazy<IRepository<LGA>>(() => new Repository<LGA>(context));
             _billPayablesRepository = new Lazy<IRepository<BillPayable>>(() => new Repository<BillPayable>(context));
             _billReceivablesRepository = new Lazy<IRepository<BillReceivable>>(() => new Repository<BillReceivable>(context));
-            
+            _journalsRepository = new Lazy<IRepository<Journal>>(() => new Repository<Journal>(context));
+            _journalLineItemsRepository = new Lazy<IRepository<JournalLineItem>>(() => new Repository<JournalLineItem>(context));
+            _paymentsRepository = new Lazy<IRepository<Payment>>(() => new Repository<Payment>(context));
+            _receiptsRepository = new Lazy<IRepository<Receipt>>(() => new Repository<Receipt>(context));
+
             #endregion
         }
 
@@ -71,7 +79,11 @@ namespace FMS.Core.Concrete
         public IRepository<LGA> LGAsRepository => _lGAsRepository.Value;
         public IRepository<BillPayable> BillPayablesRepository => _billPayablesRepository.Value;
         public IRepository<BillReceivable> BillReceivablesRepository => _billReceivablesRepository.Value;
-        
+        public IRepository<Journal> JournalsRepository => _journalsRepository.Value;
+        public IRepository<JournalLineItem> JournalLineItemsRepository => _journalLineItemsRepository.Value;
+        public IRepository<Payment> PaymentsRepository => _paymentsRepository.Value;
+        public IRepository<Receipt> ReceiptsRepository => _receiptsRepository.Value;
+
 
         #endregion
         public bool IsDisposed => _disposed;

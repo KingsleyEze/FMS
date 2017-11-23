@@ -7,8 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using FMS.Core.Model;
+using FMS.Utilities.Helpers;
+using FMS.Utilities.StringKeys;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 
 namespace FMS.Core.Context
 {
@@ -22,6 +28,7 @@ namespace FMS.Core.Context
                 var unitOfWork = serviceScope.ServiceProvider.GetService<IUnitOfWork>();
 
                 await unitOfWork.DbInitAsync();
+                await CreateAdminUser(serviceProvider, unitOfWork);
                 await InsertInitialData(serviceProvider);
             }
         }
@@ -80,6 +87,35 @@ namespace FMS.Core.Context
             }
         }
 
+        static async Task CreateAdminUser(IServiceProvider serviceProvider, IUnitOfWork unitOfWork)
+        {
+            var env = serviceProvider.GetService<IHostingEnvironment>();
+            
+            var userManager = serviceProvider.GetService<UserManager<AppUser>>();
+
+            var defaultUser = DefaultUserKeys.DEFAULT_USER;
+            var defaultPass = DefaultUserKeys.DEFAULT_PASS;
+            
+            var user = await userManager.FindByNameAsync(defaultUser);
+         
+
+            if (user == null)
+            {
+                user = new AppUser
+                {
+                    FirstName = "Admin",
+                    LastName = "Super",
+                    UserName = defaultUser,
+                    Email = defaultUser,
+                    EmailConfirmed = true,
+                    UserType = "ADMIN"
+                };
+                var x = await userManager.CreateAsync(user, $"{defaultPass}");
+            }
+            
 
         }
+
+
+    }
 }

@@ -32,11 +32,37 @@
             border: 1px solid #aaa !important;
         }
 
-        form label, form input[placeholder] {
-            color: #555 !important;
+        form label, form input, textarea, select, p, table {
+            color: #000 !important;
             font-weight: bolder;
         }
 
+        .dashboard-links a {
+            margin-top: 24px;
+            margin-bottom: 24px;
+            padding: 12px;
+            display: block;
+            color: #464646;
+            background-color: #fcfcfc;
+            border: 1px solid #ccc;
+            height: 160px;
+            transition: all 0.3s ease-in;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.25); }
+        .dashboard-links a:hover {
+            text-decoration: none;
+            color: #fff !important;
+            border-color: #ccc;
+            background-color: #00bfff;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.75); }
+        .dashboard-links a:hover i {
+            color: #fff !important;
+            font-size: 56px; }
+        .dashboard-links a i {
+            color: #999;
+            padding-top: 20px;
+            margin-bottom: 12px;
+            font-size: 32px;
+            transition: all 0.3s ease-out 0.15s; }
     </style>
 </head>
 <body class="sidebar-folded" data-provide="pace">
@@ -55,7 +81,7 @@
         <header class="sidebar-header">
             <a class="logo-icon" href="index.html"><img src="/assets/img/logo-icon-light.png" alt="logo icon"></a>
             <span class="logo">
-                <a href="index.html"><img src="/assets/img/logo-light.png" alt="logo"></a>
+                <a href="/"><img src="/assets/img/logo-light.png" alt="logo"></a>
             </span>
             <span class="sidebar-toggle-fold"></span>
         </header>
@@ -139,11 +165,17 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a class="menu-link" href="/">
+                            <a class="menu-link" href="/Journal">
                                 <span class="dot"></span>
                                 <span class="title">Journals</span>
                             </a>
                         </li>
+@*                        <li class="menu-item">*@
+@*                            <a class="menu-link" href="/Reconcile/AddReconcile">*@
+@*                                <span class="dot"></span>*@
+@*                                <span class="title">Reconciliation</span>*@
+@*                            </a>*@
+@*                        </li>*@
                     </ul>
                 </li>
 
@@ -155,15 +187,43 @@
                     </a>
                     <ul class="menu-submenu">
                         <li class="menu-item">
-                            <a class="menu-link" href="/Account/AddUserDetail">
+                            <a class="menu-link" href="/Account/AddStaff">
                                 <span class="dot"></span>
-                                <span class="title">Add User</span>
+                                <span class="title">Add Staff</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="/Account/AddCustomer">
+                                <span class="dot"></span>
+                                <span class="title">Add Customer</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="/Account/AddSupplier">
+                                <span class="dot"></span>
+                                <span class="title">Add Supplier</span>
                             </a>
                         </li>
                         <li class="menu-item">
                             <a class="menu-link" href="/Account">
                                 <span class="dot"></span>
-                                <span class="title">User List</span>
+                                <span class="title">Manage User Account</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="menu-item">
+                    <a class="menu-link" href="#">
+                        <span class="icon fa fa-pie-chart"></span>
+                        <span class="title">Report Manager</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="menu-submenu">
+                        <li class="menu-item">
+                            <a class="menu-link" href="/Report">
+                                <span class="dot"></span>
+                                <span class="title">Generate Report</span>
                             </a>
                         </li>
                     </ul>
@@ -241,18 +301,7 @@
                 <li class="dropdown">
                     <span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="assets/img/avatar/1.jpg" alt="..."></span>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="page/profile.html"><i class="ti-user"></i> Profile</a>
-                        <a class="dropdown-item" href="page-app/mailbox.html">
-                            <div class="flexbox">
-                                <i class="ti-email"></i>
-                                <span class="flex-grow">Inbox</span>
-                                <span class="badge badge-pill badge-info">5</span>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#"><i class="ti-settings"></i> Settings</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="page-extra/user-lock-1.html"><i class="ti-lock"></i> Lock</a>
-                        <a class="dropdown-item" href="page-extra/user-login-3.html"><i class="ti-power-off"></i> Logout</a>
+                        <a class="dropdown-item" href="/Account/LogOff"><i class="ti-power-off"></i> Logout</a>
                     </div>
                 </li>
                 <!-- Notifications -->
@@ -385,18 +434,12 @@
         <footer class="site-footer">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="text-center text-md-left">Copyright © 2017 <a href="http://thetheme.io/theadmin">TheAdmin</a>. All rights reserved.</p>
+                    <p class="text-center text-md-left">Copyright © 2017 ABARS NIGERIA LTD. All rights reserved.</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
                         <li class="nav-item">
-                            <a class="nav-link" href="../help/articles.html">Documentation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../help/faq.html">FAQ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://themeforest.net/item/theadmin-responsive-bootstrap-4-admin-dashboard-webapp-template/20475359?license=regular&open_purchase_for_item_id=20475359&purchasable=source&ref=thethemeio">Purchase Now</a>
+                            encode via <a class="nav-link" href="http://ikingsley.com">techbros inc.</a>
                         </li>
                     </ul>
                 </div>
@@ -522,6 +565,7 @@
     <script>
         app.ready(function () {
 
+           
             // Scoll to the end of chat content
             $('#chat-content').scrollToEnd();
 

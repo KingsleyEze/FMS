@@ -9,6 +9,7 @@ namespace FMS.Models.Constants
     {
         CUSTOMER,
         STAFF,
-        SUPPLIER
+        SUPPLIER,
+        ADMIN
     }
 }
