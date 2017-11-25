@@ -7,6 +7,7 @@
     var paymentList = Model.Payments;
 
     decimal totalPayment = 0;
+    decimal outstandingAmount = 0;
 }
 
 
@@ -187,22 +188,23 @@
                         <tr>
                             <th>Date</th>
                             <th>Amout</th>
-                            <th>Description</th>
+                            <th>Balance</th>
                         </tr>
                         </thead>
                         @foreach (var line in paymentList)
                         {
                             <span style="display: none">@(totalPayment += Convert.ToDecimal(line.Amount))</span>
+                            <span style="display: none">@(outstandingAmount = @line.OutstandingAmount)</span>
                             <tr>
                                 <td>@line.TransactionDate</td>
                                 <td>@line.Amount.ToString("#,##0.##")</td>
-                                <td>@line.Description</td>
+                                <td>@line.OutstandingAmount</td>
                             </tr>
                         }
                         <tr>
                             <td><strong>Total:</strong></td>
-                            <td style="color: red;">@totalPayment.ToString("#,##0.##")</td>
-                            <td></td>
+                            <td style="color: green;">@totalPayment.ToString("#,##0.##")</td>
+                            <td style="color: red;">@outstandingAmount.ToString("#,##0.##")</td>
                         </tr>
                         <tbody>
                         </tbody>
@@ -261,7 +263,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
 
-                                        <button type="button" class="btn btn-bold btn-warning btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-bold btn-warning btn-secondary" data-dismiss="modal">Cancel</button>
                                         <button type="submit" class="btn btn-bold btn-success btn-primary pull-right">Submit</button>
                                     </div>
                                 </div>

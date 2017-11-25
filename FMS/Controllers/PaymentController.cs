@@ -110,12 +110,15 @@ namespace FMS.Controllers
                 return RedirectToAction("PaymentDetail", new { billNumber = viewModel.BillNumber });
             }
 
+            decimal outstandingAmount = amountBilled - totalPayment;
+
             var payment = new Payment
             {
                 TransactionDate = DateTime.Now.ToString("dd/MM/yyyy"),
                 Amount = Convert.ToDecimal(viewModel.Amount),
                 Description = viewModel.Description,
                 BillPayable = payable,
+                OutstandingAmount = outstandingAmount,
             };
 
             _unitOfWork.PaymentsRepository.Insert(payment);

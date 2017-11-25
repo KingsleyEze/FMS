@@ -97,22 +97,13 @@
                                 <hr class="d-md-none">
                                 <label for="amount">Amount <span class="req">*</span></label><br/>
                                 <div class="input-group  required">
-                                    <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount"/>
+                                    <input type="text" name="amount" id="amount" class="form-control amount" placeholder="Enter Amount"/>
                                     <span class="input-group-addon">
                                         <i class="fa fa-money"></i>
                                     </span>
                                 </div>
                             </div>
 
-                            @*<div class="col-md-4">
-                                <hr class="d-md-none">
-                                <label for="type">Journal Type</label>
-                                <select class="form-control" name="type" id="journalType">
-                                    <option value="">-- Select Type --</option>
-                                    <option value="0">DEBIT</option>
-                                    <option value="1" selected="selected">CREDIT</option>
-                                </select>
-                            </div>*@
 
                         </div>
                         <div class="row">
@@ -162,8 +153,8 @@
 
                             <div class="col-md-8">
 
-                                <span class="badge badge-success badge-bold">TOTAL CREDIT (<span id="totalCedit">0</span>)</span>
-                                <span class="badge badge-warning badge-bold">TOTAL DEBIT (<span id="totalDebit">0</span>)</span>
+                                <span class="pull-right" style="font-weight:bolder;"> TOTAL CREDIT (<span id="totalCedit">0</span>)</span>
+                                <span class="pull-right" style="font-weight:bolder;">TOTAL DEBIT (<span id="totalDebit">0</span>) </span>
                             </div>
                         </div>
                         
@@ -351,7 +342,7 @@
 
                 var item = {'amount':0, 'type':'', 'economic':'', 'fund':''};
                 
-                var amount = $("#amount").val();
+                var amount = $("#amount").val().replace(/[^\d\.]/g, '');
 
                 var type = $("#journalType").val() === '0' ? 'DEBIT' : 'CREDIT';
 

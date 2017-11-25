@@ -251,19 +251,23 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("BillNumber");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("Economic");
+                    b.Property<string>("Economic")
+                        .IsRequired();
 
                     b.Property<string>("Function");
 
-                    b.Property<string>("Fund");
+                    b.Property<string>("Fund")
+                        .IsRequired();
 
                     b.Property<string>("GeoCode");
 
                     b.Property<string>("Organisation");
 
-                    b.Property<string>("PayeeId");
+                    b.Property<string>("PayeeId")
+                        .IsRequired();
 
                     b.Property<string>("Quantity");
 
@@ -380,6 +384,8 @@ namespace FMS.Core.Migrations
                     b.Property<Guid?>("BillPayableId");
 
                     b.Property<string>("Description");
+
+                    b.Property<decimal>("OutstandingAmount");
 
                     b.Property<string>("TransactionDate");
 
