@@ -52,9 +52,11 @@ namespace FMS.Controllers
         [HttpPost]
         public IActionResult SaveBill(CreatePayableView viewModel)
         {
-            int counter = _unitOfWork.BillPayablesRepository.Items.ToList().Count;
+            if (ModelState.IsValid)
+            {
+                int counter = _unitOfWork.BillPayablesRepository.Items.ToList().Count;
 
-            var payable = new BillPayable()
+                var payable = new BillPayable()
                 {
                     Id = viewModel.Id,
                     PayerId = viewModel.PayerId,
@@ -70,19 +72,22 @@ namespace FMS.Controllers
                     TransactionDate = viewModel.TransactionDate
                 };
 
-            //Random random = new Random();
-            //int randomNumber = random.Next(0, 10000);
+                //Random random = new Random();
+                //int randomNumber = random.Next(0, 10000);
 
-            int billNumber = ++counter;
+                int billNumber = ++counter;
 
-            payable.BillNumber = Convert.ToString(billNumber);
+                payable.BillNumber = Convert.ToString(billNumber);
 
-            _unitOfWork.BillPayablesRepository.Insert(payable);
-            _unitOfWork.SaveChanges();
+                _unitOfWork.BillPayablesRepository.Insert(payable);
+                _unitOfWork.SaveChanges();
 
-            TempData["billNumber"] = billNumber;
+                TempData["billNumber"] = billNumber;
 
-            return RedirectToAction("CreateBill");
+                return RedirectToAction("CreateBill");
+            }
+
+            return View("CreateBill", viewModel);
         }
 
         public IActionResult ReviewBill()

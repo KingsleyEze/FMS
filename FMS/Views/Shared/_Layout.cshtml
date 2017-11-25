@@ -133,13 +133,13 @@
                         <li class="menu-item">
                             <a class="menu-link" href="/BillReceivable/CreateBill">
                                 <span class="dot"></span>
-                                <span class="title">Create Receivable</span>
+                                <span class="title">Receivables</span>
                             </a>
                         </li>
                         <li class="menu-item">
                             <a class="menu-link" href="/BillPayable/CreateBill">
                                 <span class="dot"></span>
-                                <span class="title">Create Payable</span>
+                                <span class="title">Payables</span>
                             </a>
                         </li>
                     </ul>
@@ -621,7 +621,25 @@
                 });
             // END RECEIPT MODAL CONTROLS
 
+
+                //Formate Currency
+                $(document).on('keyup', '.amount', function () {
+                    var x = $(this).val();
+                    $(this).val(x.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                });
+
         });
+
+        function maxLength(el) {
+            if (!('maxLength' in el)) {
+                var max = el.attributes.maxLength.value;
+                el.onkeypress = function () {
+                    if (this.value.length >= max) return false;
+                };
+            }
+        }
+
+        maxLength(document.getElementById("Description"));
     </script>
 
 

@@ -9,7 +9,7 @@
     {
 
         <div class="alert alert-success">
-            Your bill was created successfully. Your bill number is @TempData["BillNumber"]
+            Your bill was created successfully. Your bill number is BP @TempData["BillNumber"]
         </div>
     }
     <div class="main-content">
@@ -25,6 +25,7 @@
                 <div class="card">
                     <h4 class="card-title">Bill Payable - Create</h4>
                     <div class="card-body">
+                        <div asp-validation-summary="All" class="text-danger"></div>
                         <form asp-action="SaveBill" asp-controller="BillPayable" method="post">
                             <div class="row">
 
@@ -66,7 +67,7 @@
                                     <hr class="d-md-none">
                                     <div class="form-group">
                                         <label>Description <span class="req">*</span></label>
-                                        <textarea type="text" class="form-control" asp-for="Description" maxlenght="140" rows="6" required></textarea>
+                                        <textarea type="text" class="form-control" asp-for="Description" maxlenght="140" rows="6"  required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -210,9 +211,5 @@
 @section scripts
     {
     <script>
-        $(document).on('keyup', '.amount', function() {
-            var x = $(this).val();
-            $(this).val(x.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-        });
     </script>
 }

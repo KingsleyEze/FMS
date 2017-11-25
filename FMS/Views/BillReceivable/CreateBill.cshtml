@@ -7,7 +7,7 @@
 {
 
     <div class="alert alert-success">
-        Your bill was created successfully. Your bill number is @TempData["billNumber"].ToString() 
+        Your bill was created successfully. Your bill number is  BR @TempData["billNumber"].ToString() 
     </div>
 }
 
@@ -24,6 +24,7 @@
                 <div class="card">
                     <h4 class="card-title">Bill Receivable - Create</h4>
                     <div class="card-body">
+                        <div asp-validation-summary="All" class="text-danger"></div>
                         <form  asp-action="SaveBill" asp-controller="BillReceivable">
                             <div class="row">
 

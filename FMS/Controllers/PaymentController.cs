@@ -106,7 +106,7 @@ namespace FMS.Controllers
 
             if (totalPayment > amountBilled)
             {
-                TempData["PaymentError"] = "Amount paid is greater than the amount bill";
+                TempData["PaymentError"] = "Amount payable cannot be more than outstanding bill.";
                 return RedirectToAction("PaymentDetail", new { billNumber = viewModel.BillNumber });
             }
 

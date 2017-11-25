@@ -41,37 +41,42 @@ namespace FMS.Controllers
 
         public IActionResult SaveBill(CreateReceivableView viewModel)
         {
-            int counter = _unitOfWork.BillReceivablesRepository.Items.ToList().Count;
-
-            var receivable = new BillReceivable()
+            if (ModelState.IsValid)
             {
-                Id = viewModel.Id,
-                PayeeId = viewModel.PayeeId,
-                Description = viewModel.Description,
-                Organisation = viewModel.Organisation,
-                Economic = viewModel.Economic,
-                GeoCode = viewModel.GeoCode,
-                Fund = viewModel.Fund,
-                Function = viewModel.Function,
-                Quantity = viewModel.Quantity,
-                Rate = viewModel.Rate,
-                Amount = decimal.Parse(viewModel.Amount),
-                TransactionDate = viewModel.TransactionDate
-            };
+                int counter = _unitOfWork.BillReceivablesRepository.Items.ToList().Count;
 
-            //Random random = new Random();
-            //int randomNumber = random.Next(0, 10000);
+                var receivable = new BillReceivable()
+                {
+                    Id = viewModel.Id,
+                    PayeeId = viewModel.PayeeId,
+                    Description = viewModel.Description,
+                    Organisation = viewModel.Organisation,
+                    Economic = viewModel.Economic,
+                    GeoCode = viewModel.GeoCode,
+                    Fund = viewModel.Fund,
+                    Function = viewModel.Function,
+                    Quantity = viewModel.Quantity,
+                    Rate = viewModel.Rate,
+                    Amount = decimal.Parse(viewModel.Amount),
+                    TransactionDate = viewModel.TransactionDate
+                };
 
-            int billNumber = ++counter;
+                //Random random = new Random();
+                //int randomNumber = random.Next(0, 10000);
 
-            receivable.BillNumber = Convert.ToString(billNumber);
+                int billNumber = ++counter;
 
-            _unitOfWork.BillReceivablesRepository.Insert(receivable);
-            _unitOfWork.SaveChanges();
+                receivable.BillNumber = Convert.ToString(billNumber);
 
-            TempData["billNumber"] = billNumber;
+                _unitOfWork.BillReceivablesRepository.Insert(receivable);
+                _unitOfWork.SaveChanges();
 
-            return RedirectToAction("CreateBill");
+                TempData["billNumber"] = billNumber;
+
+                return RedirectToAction("CreateBill");
+            }
+
+            return View("CreateBill", viewModel);
         }
 
         public IActionResult ReviewBill()

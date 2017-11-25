@@ -9,3 +9,14 @@ C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Core\obj\Release\netcoreapp2.
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.AssemblyInfo.cs
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.dll
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.pdb
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\bin\Release\netcoreapp2.0\FMS.Core.deps.json
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\bin\Release\netcoreapp2.0\FMS.Core.dll
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\bin\Release\netcoreapp2.0\FMS.Core.pdb
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\bin\Release\netcoreapp2.0\FMS.Utilities.dll
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\bin\Release\netcoreapp2.0\FMS.Utilities.pdb
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.csprojResolveAssemblyReference.cache
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.csproj.CoreCompileInputs.cache
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.AssemblyInfoInputs.cache
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.AssemblyInfo.cs
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.dll
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS.Core\obj\Release\netcoreapp2.0\FMS.Core.pdb

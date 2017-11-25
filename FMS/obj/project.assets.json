@@ -13240,7 +13240,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kingsley-pc\\.nuget\\packages\\": {},
+    "C:\\Users\\Kingsley-Tech\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13249,17 +13249,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\FMS.csproj",
+      "projectUniqueName": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS\\FMS.csproj",
       "projectName": "FMS",
-      "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\FMS.csproj",
-      "packagesPath": "C:\\Users\\Kingsley-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\obj\\",
+      "projectPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS\\FMS.csproj",
+      "packagesPath": "C:\\Users\\Kingsley-Tech\\.nuget\\packages\\",
+      "outputPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kingsley-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kingsley-Tech\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13272,11 +13272,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj": {
-              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj"
+            "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Utilities\\FMS.Utilities.csproj": {
+              "projectPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Utilities\\FMS.Utilities.csproj"
             },
-            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj": {
-              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj"
+            "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Core\\FMS.Core.csproj": {
+              "projectPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Core\\FMS.Core.csproj"
             }
           }
         }
@@ -13300,7 +13300,7 @@
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0",
+            "version": "2.0",
             "autoReferenced": true
           },
           "AutoMapper": {
