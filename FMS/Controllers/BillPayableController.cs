@@ -84,7 +84,7 @@ namespace FMS.Controllers
 
                 TempData["billNumber"] = billNumber;
 
-                return RedirectToAction("CreateBill");
+                return RedirectToAction("Index");
             }
 
             return View("CreateBill", viewModel);

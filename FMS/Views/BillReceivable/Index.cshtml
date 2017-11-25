@@ -4,3 +4,63 @@
 @{
     Layout = "_Layout";
 }
+
+
+@if (TempData["billNumber"] != null)
+{
+
+    <div class="alert alert-success">
+        Your bill was created successfully. Your bill number is  BR @TempData["billNumber"].ToString()
+    </div>
+}
+
+<div class="main-content">
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+                <h4 class="card-title"><strong>Receivables</strong></h4>
+                <div class="card-body  dashboard-links">
+
+                    <div class="row">
+
+
+                        <div class="col-sm-3 text-center">
+                            <a href="/BillReceivable/CreateBill">
+                                <i class="fa fa-pencil-square-o"></i><br>
+                                <h5>Create Bill</h5>
+                            </a>
+                        </div>
+
+
+
+                        <div class="col-sm-3 text-center">
+                            <a href="">
+                                <i class="fa fa-tasks"></i><br>
+                                <h5>Pending Bills</h5>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-3 text-center">
+                            <a href="">
+                                <i class="fa fa-check-square-o"></i><br>
+                                <h5>Approved Bills</h5>
+                            </a>
+                        </div>
+
+
+                        <div class="col-sm-3 text-center">
+                            <a href="">
+                                <i class="fa fa-minus-square"></i><br>
+                                <h5>Rejected Bills</h5>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
