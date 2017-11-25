@@ -13,7 +13,7 @@ namespace FMS.Models.BillPayable
         public string PayerId { get; set; }
         public string BillNumber { get; set; }
         [MaxLength(140)]
-        [MinLength(1)]
+        [MinLength(10)]
         [Required]
         public string Description { get; set; }
         public string Organisation { get; set; }
