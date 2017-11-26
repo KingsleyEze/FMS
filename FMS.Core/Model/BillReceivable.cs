@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FMS.Utilities.Enums;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,23 +11,19 @@ namespace FMS.Core.Model
     {
         [Key]
         public Guid Id { get; set; }
-        [Required]
         public string PayeeId { get; set; }
         public string BillNumber { get; set; }
-        [Required]
         public string Description { get; set; }
         public string Organisation { get; set; }
-        [Required]
         public string Economic { get; set; }
-        [Required]
         public string Fund { get; set; }
         public string GeoCode { get; set; }
         public string Function { get; set; }
         public string Quantity { get; set; }
         public string Rate { get; set; }
-        [Required]
         public decimal Amount { get; set; }
         public string TransactionDate { get; set; }
+        public BillStatusType Status { get; set; }
 
         public static void ConfigureFluent(ModelBuilder builder)
         {

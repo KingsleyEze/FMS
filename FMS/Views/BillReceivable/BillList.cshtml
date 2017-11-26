@@ -1,0 +1,51 @@
+﻿@model List<FMS.Core.Model.BillReceivable>
+@{
+    ViewData["Title"] = "Bill List";
+    Layout = "_Layout";
+}
+
+<div class="col-12">
+    <div class="card">
+        <h4 class="card-title"><strong>Receivables</strong></h4>
+        <div class="card-body">
+
+            <br class="clearfix" />
+            <br class="clearfix" />
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Transaction Date</th>
+                                <th>Bill Number</th>
+                                <th>Bill To</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var line in Model)
+                            {
+                                <tr>
+                                    <td>@line.TransactionDate</td>
+                                    <td>@line.BillNumber</td>
+                                    <td>@line.PayeeId</td>
+                                    <td>@line.Amount.ToString("#,##0.##")</td>
+                                    <td>@line.Status.ToString()</td>
+                                    <td>
+                                        <a href="/BillReceivable/BillDetail?billId=@line.Id" class="btn btn-w-md btn-bold btn-warning">View</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -34,6 +34,8 @@ namespace FMS.Core.Concrete
         readonly Lazy<IRepository<JournalLineItem>> _journalLineItemsRepository;
         readonly Lazy<IRepository<Payment>> _paymentsRepository;
         readonly Lazy<IRepository<Receipt>> _receiptsRepository;
+        readonly Lazy<IRepository<PayableWorkFlow>> _payableWorkFlowsRepository;
+        readonly Lazy<IRepository<ReceivableWorkFlow>> _receivableWorkFlowsRepository;
 
         #endregion
 
@@ -60,6 +62,8 @@ namespace FMS.Core.Concrete
             _journalLineItemsRepository = new Lazy<IRepository<JournalLineItem>>(() => new Repository<JournalLineItem>(context));
             _paymentsRepository = new Lazy<IRepository<Payment>>(() => new Repository<Payment>(context));
             _receiptsRepository = new Lazy<IRepository<Receipt>>(() => new Repository<Receipt>(context));
+            _payableWorkFlowsRepository = new Lazy<IRepository<PayableWorkFlow>>(() => new Repository<PayableWorkFlow>(context));
+            _receivableWorkFlowsRepository = new Lazy<IRepository<ReceivableWorkFlow>>(() => new Repository<ReceivableWorkFlow>(context));
 
             #endregion
         }
@@ -83,6 +87,8 @@ namespace FMS.Core.Concrete
         public IRepository<JournalLineItem> JournalLineItemsRepository => _journalLineItemsRepository.Value;
         public IRepository<Payment> PaymentsRepository => _paymentsRepository.Value;
         public IRepository<Receipt> ReceiptsRepository => _receiptsRepository.Value;
+        public IRepository<PayableWorkFlow> PayableWorkFlowsRepository => _payableWorkFlowsRepository.Value;
+        public IRepository<ReceivableWorkFlow> ReceivableWorkFlowsRepository => _receivableWorkFlowsRepository.Value;
 
 
         #endregion

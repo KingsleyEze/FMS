@@ -7,6 +7,7 @@ using FMS.Models.BillReceivable;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
 using Microsoft.AspNetCore.Authorization;
+using FMS.Utilities.Helpers;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -58,7 +59,8 @@ namespace FMS.Controllers
                     Quantity = viewModel.Quantity,
                     Rate = viewModel.Rate,
                     Amount = decimal.Parse(viewModel.Amount),
-                    TransactionDate = viewModel.TransactionDate
+                    TransactionDate = viewModel.TransactionDate,
+                    Status = Utilities.Enums.BillStatusType.DRAFT,
                 };
 
                 //Random random = new Random();
@@ -79,20 +81,26 @@ namespace FMS.Controllers
             return View("CreateBill", viewModel);
         }
 
-        public IActionResult ReviewBill()
+        public IActionResult BillList(string billStatus)
         {
-            return View();
+            Utilities.Enums.BillStatusType type = BillStatusHelper.GetType(billStatus);
+
+            var viewModel = _unitOfWork.BillReceivablesRepository.Items.Where(x => x.Status == type).ToList();
+
+            return View(viewModel);
         }
 
-        public IActionResult ApproveBill()
+        public IActionResult BillDetail(string billId)
         {
-            return View();
+            Guid Id;
+            Guid.TryParse(billId, out Id);
+
+            var viewModel = _unitOfWork.BillReceivablesRepository
+                                    .Items.FirstOrDefault(p => p.Id == Id);
+
+            return View(viewModel);
         }
 
-        public IActionResult FinalizeBill()
-        {
-            return View();
-        }
 
     }
 }

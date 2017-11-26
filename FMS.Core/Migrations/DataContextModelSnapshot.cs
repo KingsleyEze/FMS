@@ -234,6 +234,8 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("Rate");
 
+                    b.Property<int>("Status");
+
                     b.Property<string>("TransactionDate");
 
                     b.HasKey("Id");
@@ -251,27 +253,25 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("BillNumber");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
-                    b.Property<string>("Economic")
-                        .IsRequired();
+                    b.Property<string>("Economic");
 
                     b.Property<string>("Function");
 
-                    b.Property<string>("Fund")
-                        .IsRequired();
+                    b.Property<string>("Fund");
 
                     b.Property<string>("GeoCode");
 
                     b.Property<string>("Organisation");
 
-                    b.Property<string>("PayeeId")
-                        .IsRequired();
+                    b.Property<string>("PayeeId");
 
                     b.Property<string>("Quantity");
 
                     b.Property<string>("Rate");
+
+                    b.Property<int>("Status");
 
                     b.Property<string>("TransactionDate");
 
@@ -373,6 +373,23 @@ namespace FMS.Core.Migrations
                     b.ToTable("LGAs");
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.PayableWorkFlow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<Guid?>("BillPayableId");
+
+                    b.Property<DateTime?>("Date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillPayableId");
+
+                    b.ToTable("PayableWorkFlows");
+                });
+
             modelBuilder.Entity("FMS.Core.Model.Payment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -435,6 +452,25 @@ namespace FMS.Core.Migrations
                     b.HasIndex("BillPayableId");
 
                     b.ToTable("Receipts");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.ReceivableWorkFlow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<Guid?>("BillReceivableId");
+
+                    b.Property<string>("Comment");
+
+                    b.Property<DateTime?>("Date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillReceivableId");
+
+                    b.ToTable("ReceivableWorkFlows");
                 });
 
             modelBuilder.Entity("FMS.Core.Model.Staff", b =>
@@ -736,6 +772,14 @@ namespace FMS.Core.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.PayableWorkFlow", b =>
+                {
+                    b.HasOne("FMS.Core.Model.BillPayable", "BillPayable")
+                        .WithMany()
+                        .HasForeignKey("BillPayableId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("FMS.Core.Model.Payment", b =>
                 {
                     b.HasOne("FMS.Core.Model.BillPayable", "BillPayable")
@@ -757,6 +801,14 @@ namespace FMS.Core.Migrations
                     b.HasOne("FMS.Core.Model.BillReceivable", "BillPayable")
                         .WithMany()
                         .HasForeignKey("BillPayableId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.ReceivableWorkFlow", b =>
+                {
+                    b.HasOne("FMS.Core.Model.BillReceivable", "BillReceivable")
+                        .WithMany()
+                        .HasForeignKey("BillReceivableId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
