@@ -10,12 +10,14 @@ C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\Account\Confirmation.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\Account\Index.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\Account\Login.cshtml
+--file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillPayable\BillDetail.cshtml
+--file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillPayable\BillList.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillPayable\CreateBill.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillPayable\Index.cshtml
---file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillPayable\ReviewBill.cshtml
+--file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillReceivable\BillDetail.cshtml
+--file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillReceivable\BillList.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillReceivable\CreateBill.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillReceivable\Index.cshtml
---file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\BillReceivable\ReviewBill.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\Budget\AmendBudget.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\Budget\CreateBudget.cshtml
 --file=C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\Views\Budget\Index.cshtml

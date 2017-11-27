@@ -1,11 +1,15 @@
-﻿<!DOCTYPE html>
+﻿
+@{ 
+    ViewData["Title"] = ViewData["Title"] != null ? ViewData["Title"] : "";
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="TheAdmin - Responsive Bootstrap 4 Admin, Dashboard &amp; WebApp Template">
     <meta name="keywords" content="dashboard, index, main">
-    <title>FMS v1.0</title>
+    <title>FMS v1.0 | @ViewData["Title"].ToString()</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i|Dosis:300,500" rel="stylesheet">
     <!-- Styles -->
@@ -131,13 +135,13 @@
                     </a>
                     <ul class="menu-submenu">
                         <li class="menu-item">
-                            <a class="menu-link" href="/BillReceivable/CreateBill">
+                            <a class="menu-link" href="/BillReceivable">
                                 <span class="dot"></span>
                                 <span class="title">Receivables</span>
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a class="menu-link" href="/BillPayable/CreateBill">
+                            <a class="menu-link" href="/BillPayable">
                                 <span class="dot"></span>
                                 <span class="title">Payables</span>
                             </a>
@@ -299,7 +303,7 @@
             <div class="topbar-divider"></div>
             <ul class="topbar-btns">
                 <li class="dropdown">
-                    <span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="assets/img/avatar/1.jpg" alt="..."></span>
+                    <span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="/assets/img/avatar/1.jpg" alt="..."></span>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="/Account/LogOff"><i class="ti-power-off"></i> Logout</a>
                     </div>

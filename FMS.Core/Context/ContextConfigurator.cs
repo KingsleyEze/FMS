@@ -28,6 +28,8 @@ namespace FMS.Core.Context
             JournalLineItem.ConfigureFluent(builder);
             Payment.ConfigureFluent(builder);
             Receipt.ConfigureFluent(builder);
+            PayableWorkFlow.ConfigureFluent(builder);
+            ReceivableWorkFlow.ConfigureFluent(builder);
         }
 
         public static void ConfigureAppIdentity(this ModelBuilder builder)

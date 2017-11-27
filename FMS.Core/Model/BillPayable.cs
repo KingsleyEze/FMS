@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FMS.Utilities.Enums;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace FMS.Core.Model
         public string Rate { get; set; }
         public decimal Amount { get; set; }
         public string TransactionDate { get; set; }
+        public BillStatusType Status { get; set; }
 
         public static void ConfigureFluent(ModelBuilder builder)
         {

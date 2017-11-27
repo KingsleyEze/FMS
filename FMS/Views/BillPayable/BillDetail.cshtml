@@ -1,0 +1,163 @@
+﻿@model  FMS.Core.Model.BillPayable
+
+@{
+    ViewData["Title"] = "BillDetails";
+    Layout = "_Layout";
+}
+
+<div class="main-content">
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+                <h4 class="card-title">Bill Payable Detail</h4>
+                <div class="card-body">
+                    <form asp-action="SaveBill" asp-controller="BillReceivable">
+                        <div class="row">
+
+                            <div class="col-md-8">
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <hr class="d-md-none">
+                                        <label for="date">Date</label><br />
+                                        <div class="form-group">
+                                            <p class="form-control-plaintext">@Model.TransactionDate</p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <hr class="d-md-none">
+                                        <div class="form-group">
+                                            <label>Bill To</label>
+
+                                            <p class="form-control-plaintext">@Model.PayerId</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br class="clearfix" />
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Description</label>
+
+                                    <p class="form-control-plaintext">@Model.Description</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br class="clearfix" /><br class="clearfix" />
+                        <div class="row">
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Organisation</label>
+                                    <p class="form-control-plaintext">@Model.Organisation</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Economic</label>
+                                    <p class="form-control-plaintext">@Model.Economic</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Fund</label>
+                                    <p class="form-control-plaintext">@Model.Fund</p>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Geo Code</label>
+                                    <p class="form-control-plaintext">@Model.GeoCode</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Function</label>
+                                    <p class="form-control-plaintext">@Model.Fund</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <p class="form-control-plaintext">@Model.Quantity</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Rate</label>
+
+                                    <p class="form-control-plaintext">@Model.Rate</p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <hr class="d-md-none">
+                                <div class="form-group">
+                                    <label>Amount</label>
+
+
+                                    <p class="form-control-plaintext">@Model.Amount.ToString("#,##0.##")</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br class="clearfix" />
+                        @*<div class="row">
+
+                                <div class="col-md-8">
+
+                                    <button type="submit" class="btn btn-w-md btn-bold btn-primary pull-right">Create</button>
+
+                                </div>
+                            </div>*@
+
+                    </form>
+                    <br class="clearfix" /><br class="clearfix" /><br class="clearfix" /><br class="clearfix" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div><!--/.main-content -->
+
+

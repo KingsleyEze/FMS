@@ -12,6 +12,7 @@ namespace FMS.Core.Model
         public Guid Id { get; set; }
         public BillPayable BillPayable { get; set; }
         public decimal Amount { get; set; }
+        public decimal OutstandingAmount { get; set; }
         public string Description { get; set; }
         public string TransactionDate { get; set; }
 
