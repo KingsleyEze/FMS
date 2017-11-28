@@ -6,11 +6,11 @@
 }
 
 
-@if (TempData["BillNumber"] != null)
+@if (TempData["AlertMessage"] != null)
 {
 
     <div class="alert alert-success">
-        Your bill was created successfully. Your bill number is BP @TempData["BillNumber"]
+        @TempData["AlertMessage"] 
     </div>
 }
 
@@ -37,7 +37,22 @@
                         <div class="col-sm-3 text-center">
                             <a href="/BillPayable/BillList?billStatus=DRAFT">
                                 <i class="fa fa-tasks"></i><br>
-                                <h5>Pending Bills</h5>
+                                <h5>Drafted Bills</h5>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-3 text-center">
+                            <a href="/BillPayable/BillList?billStatus=FORWARDED">
+                                <i class="fa fa-chevron-circle-right"></i><br>
+                                <h5>Forwarded Bills</h5>
+                            </a>
+                        </div>
+                        
+
+                        <div class="col-sm-3 text-center">
+                            <a href="/BillPayable/BillList?billStatus=REVIEWED">
+                                <i class="fa fa-tags"></i><br>
+                                <h5>Reviewed Bills</h5>
                             </a>
                         </div>
 
@@ -52,7 +67,15 @@
                         <div class="col-sm-3 text-center">
                             <a href="/BillPayable/BillList?billStatus=FORWARD_REJECTED">
                                 <i class="fa fa-minus-square"></i><br>
-                                <h5>Rejected Bills</h5>
+                                <h5>Rejected Forward Bills</h5>
+                            </a>
+                        </div>
+                        
+
+                        <div class="col-sm-3 text-center">
+                            <a href="/BillPayable/BillList?billStatus=REVIEW_REJECTED">
+                                <i class="fa fa-minus-square"></i><br>
+                                <h5>Rejected Review Bills</h5>
                             </a>
                         </div>
 

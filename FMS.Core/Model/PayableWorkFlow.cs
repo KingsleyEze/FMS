@@ -11,6 +11,7 @@ namespace FMS.Core.Model
         [Key]
         public Guid Id { get; set; }
         public BillPayable BillPayable { get; set; }
+        public string Comment { get; set; }
         public DateTime? Date { get; set; }
 
         public static void ConfigureFluent(ModelBuilder builder)

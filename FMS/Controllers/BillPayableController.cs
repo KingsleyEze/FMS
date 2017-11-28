@@ -8,6 +8,7 @@ using AutoMapper;
 using FMS.Core.Abstract;
 using FMS.Models.BillPayable;
 using FMS.Core.Model;
+using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using FMS.Utilities.Helpers;
 
@@ -84,7 +85,7 @@ namespace FMS.Controllers
                 _unitOfWork.BillPayablesRepository.Insert(payable);
                 _unitOfWork.SaveChanges();
 
-                TempData["billNumber"] = billNumber;
+                TempData["AlertMessage"] = $"Your bill was created successfully. Your bill number is BP {billNumber}";
 
                 return RedirectToAction("Index");
             }
@@ -94,7 +95,7 @@ namespace FMS.Controllers
 
         public IActionResult BillList(string billStatus)
         {
-            Utilities.Enums.BillStatusType type = BillStatusHelper.GetType(billStatus);
+            BillStatusType type = BillStatusHelper.GetType(billStatus);
 
             var viewModel = _unitOfWork.BillPayablesRepository.Items.Where(x => x.Status == type).ToList();
 
@@ -103,12 +104,46 @@ namespace FMS.Controllers
 
         public IActionResult BillDetail(string billId)
         {
-            Guid Id;
-            Guid.TryParse(billId, out Id);
-            var viewModel = _unitOfWork.BillPayablesRepository
-                                    .Items.FirstOrDefault(p => p.Id == Id);
+           
+            Guid.TryParse(billId, out var id);
+
+            var viewModel = new PayableDetailView
+            {
+                Payable = _unitOfWork.BillPayablesRepository
+                                        .Items.FirstOrDefault(p => p.Id == id)
+            };
             
             return View(viewModel);
+        }
+
+        public IActionResult ModifyStatus(PayableDetailView viewModel)
+        {
+
+            var payable = _unitOfWork.BillPayablesRepository
+                .Items.FirstOrDefault(p => p.Id == viewModel.Payable.Id);
+
+            payable.Status = viewModel.Type;
+
+            _unitOfWork.BillPayablesRepository.Update(payable);
+
+            if (viewModel.Type != BillStatusType.DRAFT)
+            {
+
+                var workflow = new PayableWorkFlow
+                {
+                    BillPayable = payable,
+                    Comment = viewModel.Comment,
+                    Date = DateTime.Now
+                };
+
+                _unitOfWork.PayableWorkFlowsRepository.Insert(workflow);
+            }
+
+            _unitOfWork.SaveChanges();
+
+            TempData["AlertMessage"] = $"Bill was {viewModel.Type.ToString().Replace("_", " ").ToLower()} successfully";
+
+            return RedirectToAction("Index");
         }
 
 

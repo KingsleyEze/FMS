@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using FMS.Models.BillReceivable;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
+using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using FMS.Utilities.Helpers;
 
@@ -60,7 +61,7 @@ namespace FMS.Controllers
                     Rate = viewModel.Rate,
                     Amount = decimal.Parse(viewModel.Amount),
                     TransactionDate = viewModel.TransactionDate,
-                    Status = Utilities.Enums.BillStatusType.DRAFT,
+                    Status = BillStatusType.DRAFT,
                 };
 
                 //Random random = new Random();
@@ -71,9 +72,10 @@ namespace FMS.Controllers
                 receivable.BillNumber = Convert.ToString(billNumber);
 
                 _unitOfWork.BillReceivablesRepository.Insert(receivable);
+
                 _unitOfWork.SaveChanges();
 
-                TempData["billNumber"] = billNumber;
+                TempData["AlertMessage"] = $"Your bill was created successfully. Your bill number is BP {billNumber}";
 
                 return RedirectToAction("Index");
             }
@@ -83,7 +85,7 @@ namespace FMS.Controllers
 
         public IActionResult BillList(string billStatus)
         {
-            Utilities.Enums.BillStatusType type = BillStatusHelper.GetType(billStatus);
+            BillStatusType type = BillStatusHelper.GetType(billStatus);
 
             var viewModel = _unitOfWork.BillReceivablesRepository.Items.Where(x => x.Status == type).ToList();
 
@@ -92,13 +94,46 @@ namespace FMS.Controllers
 
         public IActionResult BillDetail(string billId)
         {
-            Guid Id;
-            Guid.TryParse(billId, out Id);
+            Guid.TryParse(billId, out var id);
 
-            var viewModel = _unitOfWork.BillReceivablesRepository
-                                    .Items.FirstOrDefault(p => p.Id == Id);
+            var viewModel = new ReceivableDetailView
+            {
+                Receivable = _unitOfWork.BillReceivablesRepository
+                                            .Items.FirstOrDefault(p => p.Id == id)
+            };
 
             return View(viewModel);
+        }
+
+
+        public IActionResult ModifyStatus(ReceivableDetailView viewModel)
+        {
+
+            var receivable = _unitOfWork.BillReceivablesRepository
+                                    .Items.FirstOrDefault(p => p.Id == viewModel.Receivable.Id);
+
+            receivable.Status = viewModel.Type;
+            
+            _unitOfWork.BillReceivablesRepository.Update(receivable);
+
+            if (viewModel.Type != BillStatusType.DRAFT)
+            {
+
+                var workflow = new ReceivableWorkFlow
+                {
+                    BillReceivable = receivable,
+                    Comment = viewModel.Comment,
+                    Date = DateTime.Now
+                };
+
+                _unitOfWork.ReceivableWorkFlowsRepository.Insert(workflow);
+            }
+
+            _unitOfWork.SaveChanges();
+
+            TempData["AlertMessage"] = $"Bill was {viewModel.Type.ToString().Replace("_"," ").ToLower()} successfully";
+
+            return RedirectToAction("Index");
         }
 
 
