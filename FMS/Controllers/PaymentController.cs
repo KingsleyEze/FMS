@@ -9,6 +9,7 @@ using FMS.Core.Model;
 using FMS.Extensions;
 using FMS.Models.Receipt;
 using FMS.Models.Payment;
+using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 
 
@@ -41,6 +42,7 @@ namespace FMS.Controllers
             var viewModel = new SearchPaymentView();
 
             var result = _unitOfWork.BillPayablesRepository.Items
+                                .Where(p => p.Status == BillStatusType.APPROVED)
                                 .WhereIf(!String.IsNullOrEmpty(payer), p => p.PayerId == payer)
                                 .WhereIf(amount != 0, p => p.Amount == amount)
                                 .WhereIf(startDate != null, 

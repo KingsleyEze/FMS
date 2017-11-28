@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using FMS.Core.Abstract;
 using FMS.Extensions;
 using FMS.Models.Receipt;
+using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,7 @@ namespace FMS.Controllers
             var viewModel = new SearchReceiptView();
 
             var result = _unitOfWork.BillReceivablesRepository.Items
+                                .Where(p => p.Status == BillStatusType.APPROVED)
                                 .WhereIf(!String.IsNullOrEmpty(payer), p => p.PayeeId == payer)
                                 .WhereIf(amount != 0, p => p.Amount == amount)
                                 .WhereIf(startDate != null,
