@@ -30,6 +30,11 @@ namespace FMS.Core.Context
             Receipt.ConfigureFluent(builder);
             PayableWorkFlow.ConfigureFluent(builder);
             ReceivableWorkFlow.ConfigureFluent(builder);
+            AccountGroup.ConfigureFluent(builder);
+            AccountSubType.ConfigureFluent(builder);
+            LineItem.ConfigureFluent(builder);
+            BankAccount.ConfigureFluent(builder);
+
         }
 
         public static void ConfigureAppIdentity(this ModelBuilder builder)

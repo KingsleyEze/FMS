@@ -27,6 +27,11 @@ namespace FMS.Core.Abstract
         IRepository<Receipt> ReceiptsRepository { get; }
         IRepository<PayableWorkFlow> PayableWorkFlowsRepository { get; }
         IRepository<ReceivableWorkFlow> ReceivableWorkFlowsRepository { get; }
+        IRepository<AccountGroup> AccountGroupsRepository { get; }
+        IRepository<AccountSubType> AccountSubTypesRepository { get; }
+        IRepository<LineItem> LineItemsRepository { get; }
+        IRepository<BankAccount> BankAccountsRepository { get; }
+
 
 
         bool IsDisposed { get; }

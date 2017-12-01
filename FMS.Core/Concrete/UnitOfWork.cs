@@ -36,6 +36,10 @@ namespace FMS.Core.Concrete
         readonly Lazy<IRepository<Receipt>> _receiptsRepository;
         readonly Lazy<IRepository<PayableWorkFlow>> _payableWorkFlowsRepository;
         readonly Lazy<IRepository<ReceivableWorkFlow>> _receivableWorkFlowsRepository;
+        readonly Lazy<IRepository<AccountGroup>> _accountGroupsRepository;
+        readonly Lazy<IRepository<AccountSubType>> _accountSubTypesRepository;
+        readonly Lazy<IRepository<LineItem>> _lineItemsRepository;
+        readonly Lazy<IRepository<BankAccount>> _bankAccountsRepository;
 
         #endregion
 
@@ -64,6 +68,10 @@ namespace FMS.Core.Concrete
             _receiptsRepository = new Lazy<IRepository<Receipt>>(() => new Repository<Receipt>(context));
             _payableWorkFlowsRepository = new Lazy<IRepository<PayableWorkFlow>>(() => new Repository<PayableWorkFlow>(context));
             _receivableWorkFlowsRepository = new Lazy<IRepository<ReceivableWorkFlow>>(() => new Repository<ReceivableWorkFlow>(context));
+            _accountGroupsRepository = new Lazy<IRepository<AccountGroup>>(() => new Repository<AccountGroup>(context));
+            _accountSubTypesRepository = new Lazy<IRepository<AccountSubType>>(() => new Repository<AccountSubType>(context));
+            _lineItemsRepository = new Lazy<IRepository<LineItem>>(() => new Repository<LineItem>(context));
+            _bankAccountsRepository = new Lazy<IRepository<BankAccount>>(() => new Repository<BankAccount>(context));
 
             #endregion
         }
@@ -89,6 +97,10 @@ namespace FMS.Core.Concrete
         public IRepository<Receipt> ReceiptsRepository => _receiptsRepository.Value;
         public IRepository<PayableWorkFlow> PayableWorkFlowsRepository => _payableWorkFlowsRepository.Value;
         public IRepository<ReceivableWorkFlow> ReceivableWorkFlowsRepository => _receivableWorkFlowsRepository.Value;
+        public IRepository<AccountGroup> AccountGroupsRepository => _accountGroupsRepository.Value;
+        public IRepository<AccountSubType> AccountSubTypesRepository => _accountSubTypesRepository.Value;
+        public IRepository<LineItem> LineItemsRepository => _lineItemsRepository.Value;
+        public IRepository<BankAccount> BankAccountsRepository => _bankAccountsRepository.Value;
 
 
         #endregion
