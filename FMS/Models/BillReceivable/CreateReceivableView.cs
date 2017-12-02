@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using FMS.Core.Model;
 
 namespace FMS.Models.BillReceivable
 {
@@ -18,9 +19,9 @@ namespace FMS.Models.BillReceivable
         public string Description { get; set; }
         public string Organisation { get; set; }
         [Required]
-        public string Economic { get; set; }
+        public Guid Economic { get; set; }
         [Required]
-        public string Fund { get; set; }
+        public Guid Fund { get; set; }
         public string GeoCode { get; set; }
         public string Function { get; set; }
         public string Quantity { get; set; }
@@ -29,5 +30,8 @@ namespace FMS.Models.BillReceivable
         [RegularExpression("^[0-9]+(,[0-9]+)*$", ErrorMessage = "Amount must be numeric")]    
         public string Amount { get; set; }
         public string TransactionDate { get; set; }
+
+        public virtual IList<LineItem> LineItemList { get; set; }
+        public virtual IList<BankAccount> BankAccountList { get; set; }
     }
 }

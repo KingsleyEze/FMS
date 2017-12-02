@@ -8,9 +8,11 @@ using AutoMapper;
 using FMS.Core.Abstract;
 using FMS.Models.BillPayable;
 using FMS.Core.Model;
+using FMS.Extensions;
 using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using FMS.Utilities.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -48,6 +50,12 @@ namespace FMS.Controllers
 
             viewModel.TransactionDate = DateTime.Now.ToString("dd/MM/yyyy");
 
+            viewModel.LineItemList = _unitOfWork.LineItemsRepository.Items
+                                            .Where(x => x.AccountGroupType == AccountGroupType.Expenditure || x.AccountGroupType == AccountGroupType.Assets)
+                                            .ToList();
+
+            viewModel.BankAccountList = _unitOfWork.BankAccountsRepository.Items.ToList();
+
             return View(viewModel);
         }
 
@@ -57,22 +65,22 @@ namespace FMS.Controllers
             if (ModelState.IsValid)
             {
                 int counter = _unitOfWork.BillPayablesRepository.Items.ToList().Count;
-
+                
                 var payable = new BillPayable()
                 {
                     Id = viewModel.Id,
                     PayerId = viewModel.PayerId,
                     Description = viewModel.Description,
                     Organisation = viewModel.Organisation,
-                    Economic = viewModel.Economic,
+                    EconomicId  = viewModel.Economic,
                     GeoCode = viewModel.GeoCode,
-                    Fund = viewModel.Fund,
+                    FundId = viewModel.Fund,
                     Function = viewModel.Function,
                     Quantity = viewModel.Quantity,
                     Rate = viewModel.Rate,
                     Amount = decimal.Parse(viewModel.Amount),
                     TransactionDate = viewModel.TransactionDate,
-                    Status = Utilities.Enums.BillStatusType.DRAFT,
+                    Status = BillStatusType.DRAFT,
                 };
 
                 //Random random = new Random();
@@ -89,6 +97,11 @@ namespace FMS.Controllers
 
                 return RedirectToAction("Index");
             }
+
+            viewModel.LineItemList = _unitOfWork.LineItemsRepository.Items
+                                            .Where(x => x.AccountGroupType == AccountGroupType.Expenditure || x.AccountGroupType == AccountGroupType.Assets)
+                                            .ToList();
+            viewModel.BankAccountList = _unitOfWork.BankAccountsRepository.Items.ToList();
 
             return View("CreateBill", viewModel);
         }
@@ -110,7 +123,8 @@ namespace FMS.Controllers
             var viewModel = new PayableDetailView
             {
                 Payable = _unitOfWork.BillPayablesRepository
-                                        .Items.FirstOrDefault(p => p.Id == id)
+                                        .Items.Include(x => x.Economic).Include(x => x.Fund)
+                                        .FirstOrDefault(p => p.Id == id)
             };
             
             return View(viewModel);

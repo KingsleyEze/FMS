@@ -76,8 +76,10 @@
                                         <label>Economic <span class="req">*</span></label>
                                         <select class="form-control" asp-for="Economic" required>
                                             <option value="">-- Select Economic --</option>
-                                            <option value="CONSTRUCTION/PROVISION OF MILITARY BARACKS">CONSTRUCTION/PROVISION OF MILITARY BARACKS</option>
-                                            <option value="CONSTRUCTION/PROVISION OF DEFENCE EQUIPMENTS">CONSTRUCTION/PROVISION OF DEFENCE EQUIPMENTS</option>
+                                            @foreach (var economic in Model.LineItemList)
+                                            {
+                                                <option value="@economic.Id">@economic.Description</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
@@ -103,11 +105,13 @@
                                 <div class="col-md-4">
                                     <hr class="d-md-none">
                                     <div class="form-group">
-                                        <label>Fund <span class="req">*</span></label>
+                                        <label>Bank Account <span class="req">*</span></label>
                                         <select class="form-control" asp-for="Fund" required>
-                                            <option value="">-- Select Fund  --</option>
-                                            <option value="FAAC DIRECT ALLOCATION">FAAC DIRECT ALLOCATION</option>
-                                            <option value="MAIN ENVELOP - BUDGETARY ALLOCATION">MAIN ENVELOP - BUDGETARY ALLOCATION</option>
+                                            <option value="">-- Select Bank Account  --</option>
+                                            @foreach (var fund in Model.BankAccountList)
+                                            {
+                                                <option value="@fund.Id">@fund.Description</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>

@@ -62,7 +62,8 @@ namespace FMS.Controllers
             if (String.IsNullOrEmpty(billNumber))
                 return RedirectToAction("SearchReceipt");
 
-            var receipt = _unitOfWork.BillReceivablesRepository.Items.FirstOrDefault(b => b.BillNumber == billNumber);
+            var receipt = _unitOfWork.BillReceivablesRepository.Items
+                            .Include(x => x.Economic).Include(x => x.Fund).FirstOrDefault(b => b.BillNumber == billNumber);
 
             if (receipt == null)
             {

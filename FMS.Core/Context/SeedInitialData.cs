@@ -29,6 +29,7 @@ namespace FMS.Core.Context
 
                 await unitOfWork.DbInitAsync();
                 await CreateAdminUser(serviceProvider, unitOfWork);
+                await InitializeCOA(serviceProvider, unitOfWork);
                 await InsertInitialData(serviceProvider);
             }
         }
@@ -58,7 +59,9 @@ namespace FMS.Core.Context
 
         private static async Task AddOrUpdateAsync<TEntity>(
             IServiceProvider serviceProvider,
-            Func<TEntity, object> propertyToMatch, Func<TEntity, object> idProperty, IEnumerable<TEntity> entities)
+            Func<TEntity, object> propertyToMatch, 
+            Func<TEntity, object> idProperty, 
+            IEnumerable<TEntity> entities)
             where TEntity : class
         {
             List<TEntity> existingData;
@@ -114,6 +117,80 @@ namespace FMS.Core.Context
             }
             
 
+        }
+
+        static async Task InitializeCOA(IServiceProvider serviceProvider, IUnitOfWork unitOfWork)
+        {
+            var accountGroups = DataToSeed.GetData.AccountGroupList();
+            var accountSubTypes = DataToSeed.GetData.AccountSubTypeList();
+            var lineItems = DataToSeed.GetData.LineItemList();
+            var bankAccounts = DataToSeed.GetData.BankAccountList();
+
+            
+
+            if (!unitOfWork.AccountGroupsRepository.Items.ToList().Any())
+            {
+                foreach (var accountGroupModel in accountGroups)
+                {
+                    var accountGroup = new AccountGroup
+                    {
+                        Code = accountGroupModel.Code,
+                        Description = accountGroupModel.Description,
+                    };
+
+                    unitOfWork.AccountGroupsRepository.Insert(accountGroup);
+
+                    if (!unitOfWork.AccountSubTypesRepository.Items.ToList().Any())
+                    {
+
+                        var accountSubTypeMatchList = accountSubTypes.Where(x => x.Type == accountGroupModel.Type);
+
+                        foreach (var accountSubTypeModel in accountSubTypeMatchList)
+                        {
+                            var accountSubType = new AccountSubType
+                            {
+                                Code = accountSubTypeModel.Code,
+                                Description = accountSubTypeModel.Description,
+                            };
+
+                            accountSubType.AccountGroup = accountGroup;
+
+                            unitOfWork.AccountSubTypesRepository.Insert(accountSubType);
+                            
+                            if (!unitOfWork.LineItemsRepository.Items.Any())
+                            {
+                                var lineItemMatchList = lineItems.Where(x => x.Code.StartsWith(accountSubType.Code));
+
+                                foreach (var lineItemModel in lineItemMatchList)
+                                {
+
+                                    //var found = unitOfWork.LineItemsRepository.Items.FirstOrDefault(x => x.Code == lineItemModel.Code);
+
+                                    //if (found)
+                                    //{
+                                        var lineItem = new LineItem
+                                        {
+                                            Code = lineItemModel.Code.Trim(),
+                                            Description = lineItemModel.Description.Trim(),
+                                            AccountGroupType = accountGroupModel.Type,
+                                        };
+
+                                        lineItem.AccountSubType = accountSubType;
+
+                                        unitOfWork.LineItemsRepository.Insert(lineItem);
+                                    //}
+                                }
+                            }
+
+                        }
+                    }
+                   
+                }
+
+                unitOfWork.BankAccountsRepository.Insert(bankAccounts);
+
+                await unitOfWork.SaveChangesAsync();
+            }
         }
 
 
