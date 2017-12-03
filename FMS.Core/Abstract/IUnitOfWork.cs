@@ -31,6 +31,8 @@ namespace FMS.Core.Abstract
         IRepository<AccountSubType> AccountSubTypesRepository { get; }
         IRepository<LineItem> LineItemsRepository { get; }
         IRepository<BankAccount> BankAccountsRepository { get; }
+        IRepository<Budget> BudgetsRepository { get; }
+        IRepository<BudgetAmendHistory> BudgetAmendHistoriesRepository { get; }
 
 
 

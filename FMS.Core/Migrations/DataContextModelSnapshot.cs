@@ -343,6 +343,50 @@ namespace FMS.Core.Migrations
                     b.ToTable("BillReceivable");
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.Budget", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<string>("Description");
+
+                    b.Property<Guid>("EconomicId");
+
+                    b.Property<Guid>("FundId");
+
+                    b.Property<string>("TransactionDate");
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EconomicId");
+
+                    b.HasIndex("FundId");
+
+                    b.ToTable("Budgets");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.BudgetAmendHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<Guid?>("BudgetId");
+
+                    b.Property<string>("TransactionDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BudgetId");
+
+                    b.ToTable("BudgetAmendHistories");
+                });
+
             modelBuilder.Entity("FMS.Core.Model.City", b =>
                 {
                     b.Property<int>("Id")
@@ -873,6 +917,27 @@ namespace FMS.Core.Migrations
                     b.HasOne("FMS.Core.Model.BankAccount", "Fund")
                         .WithMany()
                         .HasForeignKey("FundId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.Budget", b =>
+                {
+                    b.HasOne("FMS.Core.Model.LineItem", "Economic")
+                        .WithMany()
+                        .HasForeignKey("EconomicId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("FMS.Core.Model.BankAccount", "Fund")
+                        .WithMany()
+                        .HasForeignKey("FundId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.BudgetAmendHistory", b =>
+                {
+                    b.HasOne("FMS.Core.Model.Budget", "Budget")
+                        .WithMany()
+                        .HasForeignKey("BudgetId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

@@ -13,8 +13,8 @@ namespace FMS.Models.BillPayable
         [Required]
         public string PayerId { get; set; }
         public string BillNumber { get; set; }
-        [MaxLength(140)]
-        [MinLength(10)]
+        [MaxLength(140,ErrorMessage = "Description character can not exceed 140 characters")]
+        [MinLength(10, ErrorMessage = "Description character should not be less than 10 characters")]
         [Required]
         public string Description { get; set; }
         public string Organisation { get; set; }

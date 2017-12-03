@@ -42,6 +42,8 @@ namespace FMS.Core.Context
         public DbSet<AccountSubType> AccountSubTypes { get; set; }
         public DbSet<LineItem> LineItems { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<Budget> Budgets { get; set; }
+        public DbSet<BudgetAmendHistory> BudgetAmendHistories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
