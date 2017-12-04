@@ -11,6 +11,7 @@ using FMS.Models.Receipt;
 using FMS.Models.Payment;
 using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -62,8 +63,8 @@ namespace FMS.Controllers
             if (String.IsNullOrEmpty(billNumber))
                     return RedirectToAction("SearchPayment");
 
-            var payable = _unitOfWork.BillPayablesRepository
-                                .Items.FirstOrDefault(b => b.BillNumber == billNumber);
+            var payable = _unitOfWork.BillPayablesRepository.Items
+                    .Include(x => x.Economic).Include(x => x.Fund).FirstOrDefault(b => b.BillNumber == billNumber);
 
             if (payable == null)
             {

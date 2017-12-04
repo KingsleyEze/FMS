@@ -38,6 +38,12 @@ namespace FMS.Core.Context
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<PayableWorkFlow> PayableWorkFlows { get; set; }
         public DbSet<ReceivableWorkFlow> ReceivableWorkFlows { get; set; }
+        public DbSet<AccountGroup> AccountGroups { get; set; }
+        public DbSet<AccountSubType> AccountSubTypes { get; set; }
+        public DbSet<LineItem> LineItems { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<Budget> Budgets { get; set; }
+        public DbSet<BudgetAmendHistory> BudgetAmendHistories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

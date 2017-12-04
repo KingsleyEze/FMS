@@ -15,8 +15,10 @@ namespace FMS.Core.Model
         public string BillNumber { get; set; }
         public string Description { get; set; }
         public string Organisation { get; set; }
-        public string Economic { get; set; }
-        public string Fund { get; set; }
+        public virtual LineItem Economic { get; set; }
+        public Guid EconomicId { get; set; }
+        public virtual BankAccount Fund { get; set; }
+        public Guid FundId { get; set; }
         public string GeoCode { get; set; }
         public string Function { get; set; }
         public string Quantity { get; set; }

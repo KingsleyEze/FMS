@@ -22,6 +22,40 @@ namespace FMS.Core.Migrations
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("FMS.Core.Model.AccountGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccountGroups");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.AccountSubType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<Guid?>("AccountGroupId");
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountGroupId");
+
+                    b.ToTable("AccountSubTypes");
+                });
+
             modelBuilder.Entity("FMS.Core.Model.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -206,6 +240,27 @@ namespace FMS.Core.Migrations
                     b.ToTable("Banks");
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.BankAccount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<string>("AccountNumber");
+
+                    b.Property<Guid?>("BankId");
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankId");
+
+                    b.ToTable("BankAccounts");
+                });
+
             modelBuilder.Entity("FMS.Core.Model.BillPayable", b =>
                 {
                     b.Property<Guid>("Id")
@@ -218,11 +273,11 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Economic");
+                    b.Property<Guid>("EconomicId");
 
                     b.Property<string>("Function");
 
-                    b.Property<string>("Fund");
+                    b.Property<Guid>("FundId");
 
                     b.Property<string>("GeoCode");
 
@@ -240,6 +295,10 @@ namespace FMS.Core.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EconomicId");
+
+                    b.HasIndex("FundId");
+
                     b.ToTable("BillPayables");
                 });
 
@@ -255,11 +314,11 @@ namespace FMS.Core.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Economic");
+                    b.Property<Guid>("EconomicId");
 
                     b.Property<string>("Function");
 
-                    b.Property<string>("Fund");
+                    b.Property<Guid>("FundId");
 
                     b.Property<string>("GeoCode");
 
@@ -277,7 +336,55 @@ namespace FMS.Core.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EconomicId");
+
+                    b.HasIndex("FundId");
+
                     b.ToTable("BillReceivable");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.Budget", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<string>("Description");
+
+                    b.Property<Guid>("EconomicId");
+
+                    b.Property<Guid>("FundId");
+
+                    b.Property<string>("TransactionDate");
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EconomicId");
+
+                    b.HasIndex("FundId");
+
+                    b.ToTable("Budgets");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.BudgetAmendHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<Guid?>("BudgetId");
+
+                    b.Property<string>("TransactionDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BudgetId");
+
+                    b.ToTable("BudgetAmendHistories");
                 });
 
             modelBuilder.Entity("FMS.Core.Model.City", b =>
@@ -371,6 +478,27 @@ namespace FMS.Core.Migrations
                     b.HasIndex("StateId");
 
                     b.ToTable("LGAs");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.LineItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<int>("AccountGroupType");
+
+                    b.Property<Guid>("AccountSubTypeId");
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountSubTypeId");
+
+                    b.ToTable("LineItems");
                 });
 
             modelBuilder.Entity("FMS.Core.Model.PayableWorkFlow", b =>
@@ -693,6 +821,14 @@ namespace FMS.Core.Migrations
                     b.HasDiscriminator().HasValue("AppRole");
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.AccountSubType", b =>
+                {
+                    b.HasOne("FMS.Core.Model.AccountGroup", "AccountGroup")
+                        .WithMany()
+                        .HasForeignKey("AccountGroupId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("FMS.Core.Model.AppUserBank", b =>
                 {
                     b.HasOne("FMS.Core.Model.AppUser", "AppUser")
@@ -750,6 +886,61 @@ namespace FMS.Core.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.BankAccount", b =>
+                {
+                    b.HasOne("FMS.Core.Model.Bank", "Bank")
+                        .WithMany()
+                        .HasForeignKey("BankId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.BillPayable", b =>
+                {
+                    b.HasOne("FMS.Core.Model.LineItem", "Economic")
+                        .WithMany()
+                        .HasForeignKey("EconomicId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("FMS.Core.Model.BankAccount", "Fund")
+                        .WithMany()
+                        .HasForeignKey("FundId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.BillReceivable", b =>
+                {
+                    b.HasOne("FMS.Core.Model.LineItem", "Economic")
+                        .WithMany()
+                        .HasForeignKey("EconomicId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("FMS.Core.Model.BankAccount", "Fund")
+                        .WithMany()
+                        .HasForeignKey("FundId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.Budget", b =>
+                {
+                    b.HasOne("FMS.Core.Model.LineItem", "Economic")
+                        .WithMany()
+                        .HasForeignKey("EconomicId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("FMS.Core.Model.BankAccount", "Fund")
+                        .WithMany()
+                        .HasForeignKey("FundId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.BudgetAmendHistory", b =>
+                {
+                    b.HasOne("FMS.Core.Model.Budget", "Budget")
+                        .WithMany()
+                        .HasForeignKey("BudgetId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("FMS.Core.Model.City", b =>
                 {
                     b.HasOne("FMS.Core.Model.State", "State")
@@ -771,6 +962,14 @@ namespace FMS.Core.Migrations
                     b.HasOne("FMS.Core.Model.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.LineItem", b =>
+                {
+                    b.HasOne("FMS.Core.Model.AccountSubType", "AccountSubType")
+                        .WithMany()
+                        .HasForeignKey("AccountSubTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
