@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using ExcelDataReader;
 using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -31,7 +32,10 @@ namespace FMS.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            var viewModel = _unitOfWork.BudgetsRepository.Items
+                                    .Include(m => m.Economic).ToList();
+
+            return View(viewModel);
         }
 
 
@@ -138,7 +142,8 @@ namespace FMS.Controllers
                         _unitOfWork.SaveChanges();
                     }
                 }
-                
+
+                TempData["AlertMessage"] = $"Your budget was uploaded successfully.";
             }
 
             return RedirectToAction("Index");
@@ -146,7 +151,7 @@ namespace FMS.Controllers
 
         public IActionResult AmendBudget()
         {
-            return View();
+            return RedirectToAction("Index");
         }
 
     }

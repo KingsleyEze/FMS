@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "2e45b633750631cb59ab95dadc7b4d234962cc76"
+    "signature": "069e17fc87b21ba8d267b056352e8db26d93b42a"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,8 @@
       "FMS/1.0.0": {
         "dependencies": {
           "AutoMapper": "6.1.1",
+          "ExcelDataReader": "3.3.0",
+          "ExcelDataReader.DataSet": "3.3.0",
           "FMS.Core": "1.0.0",
           "FMS.Utilities": "1.0.0",
           "Microsoft.AspNetCore.All": "2.0.0",
@@ -65,6 +67,25 @@
         },
         "compile": {
           "lib/netstandard1.3/AutoMapper.dll": {}
+        }
+      },
+      "ExcelDataReader/3.3.0": {
+        "runtime": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {}
+        }
+      },
+      "ExcelDataReader.DataSet/3.3.0": {
+        "dependencies": {
+          "ExcelDataReader": "3.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/ExcelDataReader.DataSet.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/ExcelDataReader.DataSet.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -4321,6 +4342,20 @@
       "sha512": "sha512-A+6PAblvzmkXPS20nFBQJvlNSW5oEdyfN5+cxT/Du35fTNyuP5pNDXT64KT/jBgxt7CPduOM0Y7oLnNe0E5IXg==",
       "path": "automapper/6.1.1",
       "hashPath": "automapper.6.1.1.nupkg.sha512"
+    },
+    "ExcelDataReader/3.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gkVhyDYempBVuAvRC1AoDqhSd0hcLIk2U5XgkA/4oUdKSbLjloQRrKrFQIStHutrEc79RS2V+fngJIzNW190DA==",
+      "path": "exceldatareader/3.3.0",
+      "hashPath": "exceldatareader.3.3.0.nupkg.sha512"
+    },
+    "ExcelDataReader.DataSet/3.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WSLg6YEj15smvJB1DT3dDkgry3fsN83zL/zbn/cAx5g4uBiIffU8FNbRVuRbMk8wXTXL/lDUV3RodolyM1zgUg==",
+      "path": "exceldatareader.dataset/3.3.0",
+      "hashPath": "exceldatareader.dataset.3.3.0.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",
