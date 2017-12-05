@@ -1,15 +1,61 @@
-﻿
+﻿@model FMS.Models.Budget.LoadBudget
 @{
-    Layout = "_Layout"; 
+    ViewData["Title"] = "Load Budget";
+    Layout = "_Layout";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>CreateBudget</title>
-</head>
-<body>
-</body>
-</html>
+<div class="main-content">
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+                <h4 class="card-title">Budget - Load Budget</h4>
+                <div class="card-body">
+                    <br class="clearfix" />
+                    <br class="clearfix" />
+
+                        <form asp-action="SaveLoadBudget" asp-controller="Budget" method="post" enctype="multipart/form-data">
+
+                            <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <hr class="d-md-none">
+                                    <div class="form-group">
+                                        <label>Upload File <span class="req">*</span></label>
+
+                                        <div class="input-group file-group">
+                                            <input type="text" class="form-control file-value" placeholder="Choose file..." readonly="">
+                                            <input type="file" multiple=""  asp-for="File">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-bold file-browser" type="button"><i class="fa fa-upload"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br class="clearfix" />
+                            <div class="row">
+
+                                <div class="col-md-4">
+
+                                    <button type="submit" class="btn btn-w-md btn-bold btn-primary pull-right">Upload File</button>
+
+                                </div>
+                            </div>
+                          
+                        </form>
+                    <br class="clearfix" />
+                    <br class="clearfix"/>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div><!--/.main-content -->
