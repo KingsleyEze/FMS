@@ -425,7 +425,8 @@ namespace FMS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
-                    AccountSubTypeId = table.Column<Guid>(nullable: true),
+                    AccountGroupType = table.Column<int>(nullable: false),
+                    AccountSubTypeId = table.Column<Guid>(nullable: false),
                     Code = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
@@ -529,9 +530,9 @@ namespace FMS.Core.Migrations
                     Amount = table.Column<decimal>(nullable: false),
                     BillNumber = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    EconomicId = table.Column<Guid>(nullable: true),
+                    EconomicId = table.Column<Guid>(nullable: false),
                     Function = table.Column<string>(nullable: true),
-                    FundId = table.Column<Guid>(nullable: true),
+                    FundId = table.Column<Guid>(nullable: false),
                     GeoCode = table.Column<string>(nullable: true),
                     Organisation = table.Column<string>(nullable: true),
                     PayerId = table.Column<string>(nullable: true),
@@ -565,9 +566,9 @@ namespace FMS.Core.Migrations
                     Amount = table.Column<decimal>(nullable: false),
                     BillNumber = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    EconomicId = table.Column<Guid>(nullable: true),
+                    EconomicId = table.Column<Guid>(nullable: false),
                     Function = table.Column<string>(nullable: true),
-                    FundId = table.Column<Guid>(nullable: true),
+                    FundId = table.Column<Guid>(nullable: false),
                     GeoCode = table.Column<string>(nullable: true),
                     Organisation = table.Column<string>(nullable: true),
                     PayeeId = table.Column<string>(nullable: true),
@@ -589,6 +590,28 @@ namespace FMS.Core.Migrations
                         name: "FK_BillReceivable_BankAccounts_FundId",
                         column: x => x.FundId,
                         principalTable: "BankAccounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Budgets",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    EconomicId = table.Column<Guid>(nullable: false),
+                    TransactionDate = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Budgets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Budgets_LineItems_EconomicId",
+                        column: x => x.EconomicId,
+                        principalTable: "LineItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -726,6 +749,26 @@ namespace FMS.Core.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BudgetAmendHistories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
+                    BudgetId = table.Column<Guid>(nullable: true),
+                    TransactionDate = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BudgetAmendHistories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BudgetAmendHistories_Budgets_BudgetId",
+                        column: x => x.BudgetId,
+                        principalTable: "Budgets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AccountSubTypes_AccountGroupId",
                 table: "AccountSubTypes",
@@ -841,6 +884,16 @@ namespace FMS.Core.Migrations
                 column: "FundId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BudgetAmendHistories_BudgetId",
+                table: "BudgetAmendHistories",
+                column: "BudgetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Budgets_EconomicId",
+                table: "Budgets",
+                column: "EconomicId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_City_StateId",
                 table: "City",
                 column: "StateId");
@@ -941,6 +994,9 @@ namespace FMS.Core.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BudgetAmendHistories");
+
+            migrationBuilder.DropTable(
                 name: "City");
 
             migrationBuilder.DropTable(
@@ -972,6 +1028,9 @@ namespace FMS.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Budgets");
 
             migrationBuilder.DropTable(
                 name: "Journal");

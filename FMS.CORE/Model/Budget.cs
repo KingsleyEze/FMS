@@ -14,8 +14,6 @@ namespace FMS.Core.Model
         public string Description { get; set; }
         public virtual LineItem Economic { get; set; }
         public Guid EconomicId { get; set; }
-        public virtual BankAccount Fund { get; set; }
-        public Guid FundId { get; set; }
         public decimal Amount { get; set; }
         public string TransactionDate { get; set; }
         public BudgetStatusType Type { get; set; }

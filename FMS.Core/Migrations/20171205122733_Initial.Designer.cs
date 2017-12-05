@@ -13,8 +13,8 @@ using System;
 namespace FMS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20171203121452_addedbudgeandhistories")]
-    partial class addedbudgeandhistories
+    [Migration("20171205122733_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -355,8 +355,6 @@ namespace FMS.Core.Migrations
 
                     b.Property<Guid>("EconomicId");
 
-                    b.Property<Guid>("FundId");
-
                     b.Property<string>("TransactionDate");
 
                     b.Property<int>("Type");
@@ -364,8 +362,6 @@ namespace FMS.Core.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EconomicId");
-
-                    b.HasIndex("FundId");
 
                     b.ToTable("Budgets");
                 });
@@ -926,11 +922,6 @@ namespace FMS.Core.Migrations
                     b.HasOne("FMS.Core.Model.LineItem", "Economic")
                         .WithMany()
                         .HasForeignKey("EconomicId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("FMS.Core.Model.BankAccount", "Fund")
-                        .WithMany()
-                        .HasForeignKey("FundId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

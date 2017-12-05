@@ -5,15 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using FMS.Core.Model;
 
-namespace FMS.Models
+namespace FMS.Models.Budget
 {
     public class CreateBudgetView
     {
         public string TransactionDate { get; set; }
         [Required]
         public Guid Economic { get; set; }
-        [Required]
-        public Guid Fund { get; set; }
         [Required]
         [RegularExpression("^[0-9]+(,[0-9]+)*$", ErrorMessage = "Amount must be numeric")]
         public string Amount { get; set; }
@@ -23,6 +21,5 @@ namespace FMS.Models
         public string Description { get; set; }
 
         public virtual IList<LineItem> LineItemList { get; set; }
-        public virtual IList<BankAccount> BankAccountList { get; set; }
     }
 }

@@ -31,6 +31,27 @@
           "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
+      "ExcelDataReader/3.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {}
+        }
+      },
+      "ExcelDataReader.DataSet/3.3.0": {
+        "type": "package",
+        "dependencies": {
+          "ExcelDataReader": "3.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/ExcelDataReader.DataSet.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ExcelDataReader.DataSet.dll": {}
+        }
+      },
       "Libuv/1.10.0": {
         "type": "package",
         "dependencies": {
@@ -5125,6 +5146,38 @@
         "lib/netstandard1.1/AutoMapper.xml",
         "lib/netstandard1.3/AutoMapper.dll",
         "lib/netstandard1.3/AutoMapper.xml"
+      ]
+    },
+    "ExcelDataReader/3.3.0": {
+      "sha512": "gkVhyDYempBVuAvRC1AoDqhSd0hcLIk2U5XgkA/4oUdKSbLjloQRrKrFQIStHutrEc79RS2V+fngJIzNW190DA==",
+      "type": "package",
+      "path": "exceldatareader/3.3.0",
+      "files": [
+        "exceldatareader.3.3.0.nupkg.sha512",
+        "exceldatareader.nuspec",
+        "lib/net20/ExcelDataReader.dll",
+        "lib/net20/ExcelDataReader.xml",
+        "lib/net45/ExcelDataReader.dll",
+        "lib/net45/ExcelDataReader.xml",
+        "lib/netstandard1.3/ExcelDataReader.dll",
+        "lib/netstandard1.3/ExcelDataReader.xml",
+        "lib/netstandard2.0/ExcelDataReader.dll",
+        "lib/netstandard2.0/ExcelDataReader.xml"
+      ]
+    },
+    "ExcelDataReader.DataSet/3.3.0": {
+      "sha512": "WSLg6YEj15smvJB1DT3dDkgry3fsN83zL/zbn/cAx5g4uBiIffU8FNbRVuRbMk8wXTXL/lDUV3RodolyM1zgUg==",
+      "type": "package",
+      "path": "exceldatareader.dataset/3.3.0",
+      "files": [
+        "exceldatareader.dataset.3.3.0.nupkg.sha512",
+        "exceldatareader.dataset.nuspec",
+        "lib/net20/ExcelDataReader.DataSet.dll",
+        "lib/net20/ExcelDataReader.DataSet.xml",
+        "lib/net45/ExcelDataReader.DataSet.dll",
+        "lib/net45/ExcelDataReader.DataSet.xml",
+        "lib/netstandard2.0/ExcelDataReader.DataSet.dll",
+        "lib/netstandard2.0/ExcelDataReader.DataSet.xml"
       ]
     },
     "Libuv/1.10.0": {
@@ -13230,6 +13283,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "AutoMapper >= 6.1.1",
+      "ExcelDataReader >= 3.3.0",
+      "ExcelDataReader.DataSet >= 3.3.0",
       "FMS.Core >= 1.0.0",
       "FMS.Utilities >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.0",
@@ -13240,7 +13295,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kingsley-pc\\.nuget\\packages\\": {},
+    "C:\\Users\\Kingsley-Tech\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13249,17 +13304,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\FMS.csproj",
+      "projectUniqueName": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS\\FMS.csproj",
       "projectName": "FMS",
-      "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\FMS.csproj",
-      "packagesPath": "C:\\Users\\Kingsley-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS\\obj\\",
+      "projectPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS\\FMS.csproj",
+      "packagesPath": "C:\\Users\\Kingsley-Tech\\.nuget\\packages\\",
+      "outputPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kingsley-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kingsley-Tech\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13272,11 +13327,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj": {
-              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Utilities\\FMS.Utilities.csproj"
+            "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Utilities\\FMS.Utilities.csproj": {
+              "projectPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Utilities\\FMS.Utilities.csproj"
             },
-            "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj": {
-              "projectPath": "C:\\xcore\\_http\\www\\_codelab_\\_tune\\_minion\\FMS\\FMS.Core\\FMS.Core.csproj"
+            "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Core\\FMS.Core.csproj": {
+              "projectPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Core\\FMS.Core.csproj"
             }
           }
         }
@@ -13298,9 +13353,13 @@
             "target": "Package",
             "version": "2.0.0"
           },
+          "ExcelDataReader": {
+            "target": "Package",
+            "version": "3.3.0"
+          },
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0",
+            "version": "2.0",
             "autoReferenced": true
           },
           "AutoMapper": {
@@ -13314,6 +13373,10 @@
           "Microsoft.AspNetCore.Session": {
             "target": "Package",
             "version": "2.0.0"
+          },
+          "ExcelDataReader.DataSet": {
+            "target": "Package",
+            "version": "3.3.0"
           }
         },
         "imports": [
