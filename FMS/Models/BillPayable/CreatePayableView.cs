@@ -27,7 +27,8 @@ namespace FMS.Models.BillPayable
         public string Quantity { get; set; }
         public string Rate { get; set; }
         [Required]
-        [RegularExpression("^[0-9]+(,[0-9]+)*$", ErrorMessage = "Amount must be numeric")]
+        //[RegularExpression("^[0-9]+(,[0-9]+)*$", ErrorMessage = "Amount must be numeric")]
+        [RegularExpression("^\\$?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{1,2})?$", ErrorMessage = "Amount must be numeric with comma")]
         public string Amount { get; set; }
         public string TransactionDate { get; set; }
 
