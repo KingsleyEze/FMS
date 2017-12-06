@@ -182,8 +182,8 @@ namespace FMS.Controllers
                 TransactionDate = budget.TransactionDate,
                 Description = budget.Description,
                 Economic = budget.EconomicId,
-                Amount = budget.Amount.ToString(),
-                PreviousAmount = budget.Amount.ToString(),
+                Amount = budget.Amount.ToString("#,##0.##"),
+                PreviousAmount = budget.Amount.ToString("#,##0.##"),
             };
 
             viewModel.LineItemList = _unitOfWork.LineItemsRepository.Items.ToList();

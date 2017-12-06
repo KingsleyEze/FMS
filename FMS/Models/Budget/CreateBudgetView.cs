@@ -14,7 +14,7 @@ namespace FMS.Models.Budget
         [Required]
         public Guid Economic { get; set; }
         [Required]
-        [RegularExpression("^[0-9]+(,[0-9]+)*$", ErrorMessage = "Amount must be numeric")]
+        [RegularExpression("^\\$?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{1,2})?$", ErrorMessage = "Amount must be numeric with comma")]
         public string Amount { get; set; }
         [MaxLength(140, ErrorMessage = "Description character can not exceed 140 characters")]
         [MinLength(10, ErrorMessage = "Description character should not be less than 10 characters")]
