@@ -16,6 +16,9 @@
                 <div class="card-body">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <form asp-action="SaveBudget" asp-controller="Budget">
+                        
+                        <input type="hidden" asp-for="Id"/>
+                        <input type="hidden" asp-for="PreviousAmount"/>
                         <div class="row">
 
                             <div class="col-md-8">
@@ -24,9 +27,9 @@
 
                                     <div class="col-md-6">
                                         <hr class="d-md-none">
-                                        <label for="date">Date</label><br />
+                                        <label for="date">Date</label><br/>
                                         <div class="input-group  required">
-                                            <input type="text" class="form-control date" placeholder="Date" asp-for="TransactionDate" readonly />
+                                            <input type="text" class="form-control date" placeholder="Date" asp-for="TransactionDate" readonly/>
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </span>
@@ -38,7 +41,7 @@
                             </div>
                         </div>
 
-                        <br class="clearfix" />
+                        <br class="clearfix"/>
 
                         <div class="row">
                             <div class="col-md-8">
@@ -50,8 +53,8 @@
                             </div>
                         </div>
 
-                        <br class="clearfix" /><br class="clearfix" />
-                        <h5 class="alert alert-info">Classification</h5><hr />
+                        <br class="clearfix"/><br class="clearfix"/>
+                        <h5 class="alert alert-info">Classification</h5><hr/>
                         <div class="row">
 
                             <div class="col-md-4">
@@ -92,8 +95,8 @@
 
     </div>*@
 
-                        <br class="clearfix" /><br class="clearfix" />
-                        <h5 class="alert alert-info">Details</h5><hr />
+                        <br class="clearfix"/><br class="clearfix"/>
+                        <h5 class="alert alert-info">Details</h5><hr/>
 
 
                         <div class="row">
@@ -105,19 +108,19 @@
                                     <label>Amount <span class="req">*</span></label>
 
 
-                                    <input type="text" class="form-control amount" placeholder="Enter Amount" asp-for="Amount" required />
+                                    <input type="text" class="form-control amount" placeholder="Enter Amount" asp-for="Amount" required/>
 
                                 </div>
                             </div>
                         </div>
 
 
-                        <br class="clearfix" />
+                        <br class="clearfix"/>
                         <div class="row">
 
                             <div class="col-md-8">
 
-                                <button type="submit" class="btn btn-w-md btn-bold btn-primary pull-right">Create</button>
+                                <button type="submit" class="btn btn-w-md btn-bold btn-primary pull-right">Save</button>
 
                             </div>
                         </div>

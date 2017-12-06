@@ -9,6 +9,7 @@ namespace FMS.Models.Budget
 {
     public class CreateBudgetView
     {
+        public Guid Id { get; set; }
         public string TransactionDate { get; set; }
         [Required]
         public Guid Economic { get; set; }
@@ -19,6 +20,8 @@ namespace FMS.Models.Budget
         [MinLength(10, ErrorMessage = "Description character should not be less than 10 characters")]
         [Required]
         public string Description { get; set; }
+
+        public string PreviousAmount { get; set; }
 
         public virtual IList<LineItem> LineItemList { get; set; }
     }

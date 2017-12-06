@@ -65,15 +65,36 @@ namespace FMS.Controllers
                     Type = BudgetStatusType.DRAFT,
                 };
 
-                _unitOfWork.BudgetsRepository.Insert(budget);
+                if (viewModel.Id != Guid.Empty)
+                {
+                    budget.Id = viewModel.Id;
+                    _unitOfWork.BudgetsRepository.Update(budget);
+
+                    var history = new BudgetAmendHistory
+                    {
+                        Budget = budget,
+                        Amount = decimal.Parse(viewModel.PreviousAmount),
+                        TransactionDate = DateTime.Now.ToString("dd/MM/yyyy")
+                    };
+
+                    _unitOfWork.BudgetAmendHistoriesRepository.Insert(history);
+                }
+                else
+                {
+
+                    _unitOfWork.BudgetsRepository.Insert(budget);
+                }
+
 
                 _unitOfWork.SaveChanges();
 
 
-                TempData["AlertMessage"] = $"Your budget was created successfully.";
+                TempData["AlertMessage"] = $"Your budget was saved successfully.";
 
                 return RedirectToAction("Index");
             }
+
+            viewModel.LineItemList = _unitOfWork.LineItemsRepository.Items.ToList();
 
             return View("CreateBudget", viewModel);
         }
@@ -149,9 +170,25 @@ namespace FMS.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult AmendBudget()
+        public IActionResult AmendBudget(string budgetId)
         {
-            return RedirectToAction("Index");
+            Guid.TryParse(budgetId, out var id);
+
+            var budget = _unitOfWork.BudgetsRepository.Items.FirstOrDefault(x => x.Id == id);
+
+            var viewModel = new CreateBudgetView
+            {
+                Id = budget.Id,
+                TransactionDate = budget.TransactionDate,
+                Description = budget.Description,
+                Economic = budget.EconomicId,
+                Amount = budget.Amount.ToString(),
+                PreviousAmount = budget.Amount.ToString(),
+            };
+
+            viewModel.LineItemList = _unitOfWork.LineItemsRepository.Items.ToList();
+
+            return View("CreateBudget", viewModel);
         }
 
     }
