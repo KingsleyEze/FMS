@@ -56,6 +56,21 @@ namespace FMS.Core.Migrations
                     b.ToTable("AccountSubTypes");
                 });
 
+            modelBuilder.Entity("FMS.Core.Model.AppData", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<int>("Key");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppData");
+                });
+
             modelBuilder.Entity("FMS.Core.Model.AppUser", b =>
                 {
                     b.Property<string>("Id")

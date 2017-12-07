@@ -42,6 +42,7 @@ namespace FMS.Core.Concrete
         readonly Lazy<IRepository<BankAccount>> _bankAccountsRepository;
         readonly Lazy<IRepository<Budget>> _budgetsRepository;
         readonly Lazy<IRepository<BudgetAmendHistory>> _budgetAmendHistoriesRepository;
+        readonly Lazy<IRepository<AppData>> _appDatasRepository;
 
         #endregion
 
@@ -76,6 +77,7 @@ namespace FMS.Core.Concrete
             _bankAccountsRepository = new Lazy<IRepository<BankAccount>>(() => new Repository<BankAccount>(context));
             _budgetsRepository = new Lazy<IRepository<Budget>>(() => new Repository<Budget>(context));
             _budgetAmendHistoriesRepository = new Lazy<IRepository<BudgetAmendHistory>>(() => new Repository<BudgetAmendHistory>(context));
+            _appDatasRepository = new Lazy<IRepository<AppData>>(() => new Repository<AppData>(context));
 
             #endregion
         }
@@ -107,6 +109,7 @@ namespace FMS.Core.Concrete
         public IRepository<BankAccount> BankAccountsRepository => _bankAccountsRepository.Value;
         public IRepository<Budget> BudgetsRepository => _budgetsRepository.Value;
         public IRepository<BudgetAmendHistory> BudgetAmendHistoriesRepository => _budgetAmendHistoriesRepository.Value;
+        public IRepository<AppData> AppDatasRepository => _appDatasRepository.Value;
 
 
         #endregion

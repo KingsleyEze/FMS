@@ -44,6 +44,7 @@ namespace FMS.Core.Context
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<BudgetAmendHistory> BudgetAmendHistories { get; set; }
+        public DbSet<AppData> AppData { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

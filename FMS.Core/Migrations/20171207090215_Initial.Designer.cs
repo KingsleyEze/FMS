@@ -13,7 +13,7 @@ using System;
 namespace FMS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20171205122733_Initial")]
+    [Migration("20171207090215_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,21 @@ namespace FMS.Core.Migrations
                     b.HasIndex("AccountGroupId");
 
                     b.ToTable("AccountSubTypes");
+                });
+
+            modelBuilder.Entity("FMS.Core.Model.AppData", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<int>("Key");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppData");
                 });
 
             modelBuilder.Entity("FMS.Core.Model.AppUser", b =>

@@ -23,6 +23,19 @@ namespace FMS.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppData",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    Key = table.Column<int>(nullable: false),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppData", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -966,6 +979,9 @@ namespace FMS.Core.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AppData");
+
             migrationBuilder.DropTable(
                 name: "AppUserBanks");
 
