@@ -33,6 +33,7 @@ namespace FMS.Core.Abstract
         IRepository<BankAccount> BankAccountsRepository { get; }
         IRepository<Budget> BudgetsRepository { get; }
         IRepository<BudgetAmendHistory> BudgetAmendHistoriesRepository { get; }
+        IRepository<AppData> AppDatasRepository { get; }
 
 
 
