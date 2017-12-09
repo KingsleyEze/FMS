@@ -34,6 +34,7 @@ namespace FMS.Core.Context
             AccountSubType.ConfigureFluent(builder);
             LineItem.ConfigureFluent(builder);
             BankAccount.ConfigureFluent(builder);
+            AppData.ConfigureFluent(builder);
 
         }
 
