@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FMS.Models.BillReceivable;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
+using FMS.Core.ViewModel.BillReceivable;
+using FMS.Services.Managers.Abstract;
 using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using FMS.Utilities.Helpers;
@@ -19,12 +20,20 @@ namespace FMS.Controllers
     public class BillReceivableController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IReceivableManager _receivableManager;
+        private readonly ILineItemManager _itemManager;
+        private readonly IBankAccountManager _bankAccountManager;
 
-        public BillReceivableController(IUnitOfWork unitOfWork)
+        public BillReceivableController(IUnitOfWork unitOfWork, IReceivableManager receivableManager, 
+                            ILineItemManager itemManager, IBankAccountManager bankAccountManager)
         {
             _unitOfWork = unitOfWork;
+            _receivableManager = receivableManager;
+            _itemManager = itemManager;
+            _bankAccountManager = bankAccountManager;
         }
-        // GET: /<controller>/
+
+        
         public IActionResult Index()
         {
             return View();
@@ -33,15 +42,13 @@ namespace FMS.Controllers
         public IActionResult CreateBill()
         {
 
-           // ViewBag["billNumber"] = TempData["billNumber"] ?? null;
-
             var viewModel = new CreateReceivableView();
 
             viewModel.TransactionDate = DateTime.Now.ToString("dd/MM/yyyy");
 
-            viewModel.LineItemList = _unitOfWork.LineItemsRepository.Items.Where(x => x.Code.StartsWith("01")).ToList();
+            viewModel.LineItemList = _itemManager.ReceivableList();
 
-            viewModel.BankAccountList = _unitOfWork.BankAccountsRepository.Items.ToList();
+            viewModel.BankAccountList = _bankAccountManager.GetBankAccounts();
 
             return View(viewModel);
         }
@@ -50,67 +57,35 @@ namespace FMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                int counter = _unitOfWork.BillReceivablesRepository.Items.ToList().Count;
-                
+                var receivable = _receivableManager.Save(viewModel);
 
-                var receivable = new BillReceivable()
-                {
-                    Id = viewModel.Id,
-                    PayeeId = viewModel.PayeeId,
-                    Description = viewModel.Description,
-                    Organisation = viewModel.Organisation,
-                    EconomicId = viewModel.Economic,
-                    GeoCode = viewModel.GeoCode,
-                    FundId = viewModel.Fund,
-                    Function = viewModel.Function,
-                    Quantity = viewModel.Quantity,
-                    Rate = viewModel.Rate,
-                    Amount = decimal.Parse(viewModel.Amount),
-                    TransactionDate = viewModel.TransactionDate,
-                    Status = BillStatusType.DRAFT,
-                };
-
-                //Random random = new Random();
-                //int randomNumber = random.Next(0, 10000);
-
-                int billNumber = ++counter;
-
-                receivable.BillNumber = Convert.ToString(billNumber);
-
-                _unitOfWork.BillReceivablesRepository.Insert(receivable);
-
-                _unitOfWork.SaveChanges();
-
-                TempData["AlertMessage"] = $"Your bill was created successfully. Your bill number is BR {billNumber}";
+                TempData["AlertMessage"] = $"Your bill was created successfully. Your bill number is BR-{receivable.BillNumber}";
 
                 return RedirectToAction("Index");
             }
 
-            viewModel.LineItemList = _unitOfWork.LineItemsRepository.Items.Where(x => x.AccountGroupType == AccountGroupType.Revenue).ToList();
 
-            viewModel.BankAccountList = _unitOfWork.BankAccountsRepository.Items.ToList();
+            viewModel.LineItemList = _itemManager.ReceivableList();
+
+            viewModel.BankAccountList = _bankAccountManager.GetBankAccounts();
 
             return View("CreateBill", viewModel);
         }
 
         public IActionResult BillList(string billStatus)
         {
-            BillStatusType type = BillStatusHelper.GetType(billStatus);
-
-            var viewModel = _unitOfWork.BillReceivablesRepository.Items.Where(x => x.Status == type).ToList();
+            var viewModel = _receivableManager.GetByStatus(billStatus);
 
             return View(viewModel);
         }
 
         public IActionResult BillDetail(string billId)
         {
-            Guid.TryParse(billId, out var id);
+           
 
             var viewModel = new ReceivableDetailView
             {
-                Receivable = _unitOfWork.BillReceivablesRepository
-                                        .Items.Include(x => x.Economic).Include(x => x.Fund)
-                                        .FirstOrDefault(p => p.Id == id)
+                Receivable = _receivableManager.GetByGuidId(billId)
             };
 
             return View(viewModel);
@@ -120,27 +95,7 @@ namespace FMS.Controllers
         public IActionResult ModifyStatus(ReceivableDetailView viewModel)
         {
 
-            var receivable = _unitOfWork.BillReceivablesRepository
-                                    .Items.FirstOrDefault(p => p.Id == viewModel.Receivable.Id);
-
-            receivable.Status = viewModel.Type;
-            
-            _unitOfWork.BillReceivablesRepository.Update(receivable);
-
-            if (viewModel.Type != BillStatusType.DRAFT)
-            {
-
-                var workflow = new ReceivableWorkFlow
-                {
-                    BillReceivable = receivable,
-                    Comment = viewModel.Comment,
-                    Date = DateTime.Now
-                };
-
-                _unitOfWork.ReceivableWorkFlowsRepository.Insert(workflow);
-            }
-
-            _unitOfWork.SaveChanges();
+            _receivableManager.SetWorkFlowStatus(viewModel);
 
             TempData["AlertMessage"] = $"Bill was {viewModel.Type.ToString().Replace("_"," ").ToLower()} successfully";
 

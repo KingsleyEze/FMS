@@ -5114,6 +5114,22 @@
           "bin/placeholder/FMS.Core.dll": {}
         }
       },
+      "FMS.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "ExcelDataReader": "3.3.0",
+          "ExcelDataReader.DataSet": "3.3.0",
+          "FMS.Core": "1.0.0",
+          "Microsoft.NETCore.App": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FMS.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FMS.Services.dll": {}
+        }
+      },
       "FMS.Utilities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
@@ -13274,6 +13290,11 @@
       "path": "../FMS.Core/FMS.Core.csproj",
       "msbuildProject": "../FMS.Core/FMS.Core.csproj"
     },
+    "FMS.Services/1.0.0": {
+      "type": "project",
+      "path": "../FMS.Services/FMS.Services.csproj",
+      "msbuildProject": "../FMS.Services/FMS.Services.csproj"
+    },
     "FMS.Utilities/1.0.0": {
       "type": "project",
       "path": "../FMS.Utilities/FMS.Utilities.csproj",
@@ -13286,6 +13307,7 @@
       "ExcelDataReader >= 3.3.0",
       "ExcelDataReader.DataSet >= 3.3.0",
       "FMS.Core >= 1.0.0",
+      "FMS.Services >= 1.0.0",
       "FMS.Utilities >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 2.0.1",
@@ -13332,6 +13354,9 @@
             },
             "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Core\\FMS.Core.csproj": {
               "projectPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Core\\FMS.Core.csproj"
+            },
+            "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Services\\FMS.Services.csproj": {
+              "projectPath": "C:\\_\\_Qube\\_iSource\\iKingsley\\_tune\\fms\\FMS.Services\\FMS.Services.csproj"
             }
           }
         }

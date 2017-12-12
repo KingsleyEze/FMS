@@ -27,6 +27,7 @@
           "ExcelDataReader": "3.3.0",
           "ExcelDataReader.DataSet": "3.3.0",
           "FMS.Core": "1.0.0",
+          "FMS.Services": "1.0.0",
           "FMS.Utilities": "1.0.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.0.1",
@@ -4144,6 +4145,20 @@
           "FMS.Core.dll": {}
         }
       },
+      "FMS.Services/1.0.0": {
+        "dependencies": {
+          "ExcelDataReader": "3.3.0",
+          "ExcelDataReader.DataSet": "3.3.0",
+          "FMS.Core": "1.0.0",
+          "Microsoft.NETCore.App": "2.0.0"
+        },
+        "runtime": {
+          "FMS.Services.dll": {}
+        },
+        "compile": {
+          "FMS.Services.dll": {}
+        }
+      },
       "FMS.Utilities/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authorization": "2.0.1",
@@ -6500,6 +6515,11 @@
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
     },
     "FMS.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FMS.Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

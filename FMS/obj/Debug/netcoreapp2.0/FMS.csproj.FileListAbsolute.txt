@@ -28,3 +28,5 @@ C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\obj\Debug\netcoreapp2.0\FMS.A
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\obj\Debug\netcoreapp2.0\FMS.AssemblyInfo.cs
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\obj\Debug\netcoreapp2.0\FMS.dll
 C:\xcore\_http\www\_codelab_\_tune\_minion\FMS\FMS\obj\Debug\netcoreapp2.0\FMS.pdb
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\bin\Debug\netcoreapp2.0\FMS.Services.dll
+C:\_\_Qube\_iSource\iKingsley\_tune\fms\FMS\bin\Debug\netcoreapp2.0\FMS.Services.pdb

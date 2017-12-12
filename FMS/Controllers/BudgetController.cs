@@ -4,13 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using FMS.Core.Abstract;
 using FMS.Core.Model;
-using FMS.Models.Budget;
 using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using ExcelDataReader;
 using System.Data;
+using FMS.Core.ViewModel.Budget;
+using FMS.Services.Managers;
+using FMS.Services.Managers.Abstract;
 using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,9 +26,13 @@ namespace FMS.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public BudgetController(IUnitOfWork unitOfWork)
+        private readonly IBudgetManager _budgetManager;
+
+
+        public BudgetController(IUnitOfWork unitOfWork, IBudgetManager budgetManager)
         {
             _unitOfWork = unitOfWork;
+            _budgetManager = budgetManager;
         }
 
         // GET: /<controller>/
@@ -116,53 +122,7 @@ namespace FMS.Controllers
             if (excel != null && excel.Length > 0)
             {
 
-                Stream stream = excel.OpenReadStream();
-
-                IExcelDataReader reader = null;
-
-                if (excel.FileName.EndsWith(".xls"))
-                {
-                    reader = ExcelReaderFactory.CreateBinaryReader(stream);
-                }
-                else if (excel.FileName.EndsWith(".xlsx"))
-                {
-                    reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                }
-                else
-                {
-                    ModelState.AddModelError("File", "This file format is not supported");
-                    return View();
-                }
-
-                DataSet result = reader.AsDataSet();
-
-                DataTable dataTable = result.Tables[0];
-
-                int numberOfRows = dataTable.Rows.Count;
-                int numberOfColumn = dataTable.Columns.Count;
-
-                for (int x = 1; x < numberOfRows; x++)
-                {
-                    var lineItemCode = $"0{dataTable.Rows[x][0].ToString()}";
-
-                    var economic = _unitOfWork.LineItemsRepository.Items
-                                    .FirstOrDefault(l => l.Code == lineItemCode);
-
-                    if (economic != null)
-                    {
-                        var budget = new Budget
-                        {
-                            TransactionDate = DateTime.Now.ToString("dd/MM/yyyy"),
-                            EconomicId = economic.Id,
-                            Description = dataTable.Rows[x][1].ToString(),
-                            Amount = Convert.ToDecimal(dataTable.Rows[x][2].ToString()),
-                        };
-
-                        _unitOfWork.BudgetsRepository.Insert(budget);
-
-                        _unitOfWork.SaveChanges();
-                    }
-                }
+                _budgetManager.UploadExcel(viewModel);
 
                 TempData["AlertMessage"] = $"Your budget was uploaded successfully.";
             }
