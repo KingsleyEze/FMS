@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,9 @@ using FMS.Core.Abstract;
 using FMS.Core.Model;
 using FMS.Core.ViewModel.Budget;
 using FMS.Services.Managers.Abstract;
+using FMS.Utilities.Enums;
+using FMS.Utilities.StringKeys;
+using Microsoft.EntityFrameworkCore;
 
 namespace FMS.Services.Managers
 {
@@ -17,6 +21,25 @@ namespace FMS.Services.Managers
         public BudgetManager(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public Budget GetById(string budgetId)
+        {
+            Guid.TryParse(budgetId, out var id);
+
+            return _unitOfWork.BudgetsRepository.Items.FirstOrDefault(x => x.Id == id);
+        }
+
+        public List<Budget> GetByLineItemId(Guid economicId)
+        {
+            return _unitOfWork.BudgetsRepository.Items
+                        .Where(x =>  x.EconomicId == economicId).ToList();
+        }
+
+        public List<Budget> GetBudgets()
+        {
+            return _unitOfWork.BudgetsRepository.Items
+                            .Include(m => m.Economic).ToList();
         }
 
         public void UploadExcel(LoadBudget viewModel)
@@ -70,6 +93,43 @@ namespace FMS.Services.Managers
                     _unitOfWork.SaveChanges();
                 }
             }
+        }
+
+        public Budget Save(CreateBudgetView viewModel)
+        {
+            var budget = new Budget
+            {
+                TransactionDate = viewModel.TransactionDate,
+                Description = viewModel.Description,
+                Amount = decimal.Parse(viewModel.Amount),
+                EconomicId = viewModel.Economic,
+                Type = BudgetStatusType.DRAFT,
+            };
+
+            if (viewModel.Id != Guid.Empty)
+            {
+                budget.Id = viewModel.Id;
+                _unitOfWork.BudgetsRepository.Update(budget);
+
+                var history = new BudgetAmendHistory
+                {
+                    Budget = budget,
+                    Amount = decimal.Parse(viewModel.PreviousAmount),
+                    TransactionDate = DateTime.Now.ToString(DateFormatKey.Default)
+                };
+
+                _unitOfWork.BudgetAmendHistoriesRepository.Insert(history);
+            }
+            else
+            {
+
+                _unitOfWork.BudgetsRepository.Insert(budget);
+            }
+
+
+            _unitOfWork.SaveChanges();
+
+            return budget;
         }
     }
 }

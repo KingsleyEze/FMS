@@ -7,6 +7,9 @@ namespace FMS.Core.ViewModel.BillPayable
 {
     public class CreatePayableView
     {
+        public const string  AmountLimitError = "The Amount entered is above this line item budget.";
+        public const string  EconomicConfigError = "Budget has not yet been configured for this economic item.";
+
         public Guid Id { get; set; }
         [Required]
         public string PayerId { get; set; }
@@ -32,5 +35,8 @@ namespace FMS.Core.ViewModel.BillPayable
 
         public virtual IList<LineItem> LineItemList { get; set; }
         public virtual IList<BankAccount> BankAccountList { get; set; }
+
+
+
     }
 }

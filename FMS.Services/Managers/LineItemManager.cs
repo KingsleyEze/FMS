@@ -19,6 +19,11 @@ namespace FMS.Services.Managers
             _unitOfWork = unitOfWork;
         }
 
+        public IList<LineItem> GetListItems()
+        {
+            return _unitOfWork.LineItemsRepository.Items.ToList();
+        }
+
         public List<LineItem> PayableList()
         {
             return _unitOfWork.LineItemsRepository.Items

@@ -7,6 +7,8 @@ namespace FMS.Core.ViewModel.Budget
 {
     public class CreateBudgetView
     {
+        public const string EconomicExistError = "This line item has already been configured";
+
         public Guid Id { get; set; }
         public string TransactionDate { get; set; }
         [Required]

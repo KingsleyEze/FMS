@@ -9,5 +9,6 @@ namespace FMS.Services.Managers.Abstract
     {
         List<LineItem> PayableList();
         List<LineItem> ReceivableList();
+        IList<LineItem> GetListItems();
     }
 }

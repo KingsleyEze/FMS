@@ -103,6 +103,61 @@ namespace FMS.Services.Managers
             return payable;
         }
 
+        /// <summary>
+        /// Checks if line item amout is below
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="lineItemId"></param>
+        /// <returns>Status</returns>
+        public bool IsBelowBudgetLimit(decimal amount, Guid lineItemId)
+        {
+            bool status;
+
+            decimal totalPayable = GetTotalPayable(lineItemId);
+
+            decimal lineItemBudget = GetLineItemBudget(lineItemId);
+
+            totalPayable += amount;
+
+            status = totalPayable <= lineItemBudget;
+
+            return status;
+        }
+
+        /// <summary>
+        /// Get Total Payable
+        /// </summary>
+        /// <param name="lineItemId"></param>
+        /// <returns>Amount</returns>
+        public  decimal GetTotalPayable(Guid lineItemId)
+        {
+            var payableListType = _unitOfWork.BillPayablesRepository.Items
+                .Where(x => x.EconomicId == lineItemId).ToList();
+
+            return payableListType.Sum(payable => payable.Amount);
+        }
+
+
+        /// <summary>
+        /// Get Line Item Budget
+        /// </summary>
+        /// <param name="lineItemId"></param>
+        /// <returns>Amount</returns>
+        public  decimal GetLineItemBudget(Guid lineItemId)
+        {
+            decimal lineItemBudget = 0;
+
+            var lineItem = _unitOfWork.BudgetsRepository.Items
+                .FirstOrDefault(x => x.EconomicId == lineItemId);
+
+            if (lineItem != null)
+            {
+                lineItemBudget = lineItem.Amount;
+            }
+
+            return lineItemBudget;
+        }
+
 
     }
 }

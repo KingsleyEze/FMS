@@ -12,5 +12,8 @@ namespace FMS.Services.Managers.Abstract
         BillPayable SetWorkFlowStatus(PayableDetailView viewModel);
         BillPayable GetByGuidId(string id);
         List<BillPayable> GetByStatus(string status);
+        bool IsBelowBudgetLimit(decimal amount, Guid lineItemId);
+        decimal GetTotalPayable(Guid lineItemId);
+        decimal GetLineItemBudget(Guid lineItemId);
     }
 }
