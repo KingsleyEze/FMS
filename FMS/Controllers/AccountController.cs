@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FMS.Models.Account;
 using FMS.Extensions;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Http;
-using FMS.Models.Constants;
 using FMS.Core.Model;
 using FMS.Core.Abstract;
-using FMS.Models;
+using FMS.Core.ViewModel.Account;
+using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 

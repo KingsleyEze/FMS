@@ -13,6 +13,7 @@ using FMS.Core;
 using FMS.Core.Model;
 using FMS.Utilities.StringKeys;
 using FMS.Infrastructure.Helpers;
+using FMS.Services;
 using Microsoft.AspNetCore.Identity;
 
 namespace FMS
@@ -68,7 +69,7 @@ namespace FMS
                 services.AddIdentity<AppUser, IdentityRole>()
                                 .AddEntityFrameworkStores<DataContext>();
                 
-
+                services.AddFMSServiceServices();
                 services.AddFMSCoreServices();
                 services.AddMvc();
                 services.AddDistributedMemoryCache();

@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using FMS.Core;
 using AutoMapper;
 using FMS.Core.Abstract;
-using FMS.Models.BillPayable;
 using FMS.Core.Model;
+using FMS.Core.ViewModel.BillPayable;
 using FMS.Extensions;
+using FMS.Services.Managers.Abstract;
 using FMS.Utilities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using FMS.Utilities.Helpers;
@@ -22,12 +23,18 @@ namespace FMS.Controllers
     [Authorize]
     public class BillPayableController : Controller
     {
-        //private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPayableManager _payableManager;
+        private readonly ILineItemManager _itemManager;
+        private readonly IBankAccountManager _bankAccountManager;
 
-        public BillPayableController( IUnitOfWork unitOfWork)
+        public BillPayableController(IUnitOfWork unitOfWork, IPayableManager payableManager, 
+                                    ILineItemManager itemManager, IBankAccountManager bankAccountManager)
         {
             _unitOfWork = unitOfWork;
+            _payableManager = payableManager;
+            _itemManager = itemManager;
+            _bankAccountManager = bankAccountManager;
         }
         
         [HttpGet]
@@ -43,11 +50,9 @@ namespace FMS.Controllers
 
             viewModel.TransactionDate = DateTime.Now.ToString("dd/MM/yyyy");
 
-            viewModel.LineItemList = _unitOfWork.LineItemsRepository.Items
-                                            .Where(x => x.AccountGroupType == AccountGroupType.Expenditure || x.AccountGroupType == AccountGroupType.Assets)
-                                            .ToList();
+            viewModel.LineItemList = _itemManager.PayableList();
 
-            viewModel.BankAccountList = _unitOfWork.BankAccountsRepository.Items.ToList();
+            viewModel.BankAccountList = _bankAccountManager.GetBankAccounts();
 
             return View(viewModel);
         }
@@ -64,6 +69,12 @@ namespace FMS.Controllers
 
             if (ModelState.IsValid)
             {
+<<<<<<< HEAD
+
+                var payable = _payableManager.Save(viewModel);
+
+                TempData["AlertMessage"] = $"Your bill was created successfully. Your bill number is BP-{payable.BillNumber}";
+=======
                 int counter = _unitOfWork.BillPayablesRepository.Items.ToList().Count;
 
                 if (GetLineItemBudget(viewModel.Economic) == 0)
@@ -108,18 +119,25 @@ namespace FMS.Controllers
                 _unitOfWork.SaveChanges();
 
                 TempData["AlertMessage"] = $"Your bill was created successfully. Your bill number is BP {billNumber}";
+>>>>>>> master
 
                 return RedirectToAction("Index");
             }
 
+<<<<<<< HEAD
+            viewModel.LineItemList = _itemManager.PayableList();
+
+            viewModel.BankAccountList = _bankAccountManager.GetBankAccounts();
+
+=======
+>>>>>>> master
             return View("CreateBill", viewModel);
         }
 
         public IActionResult BillList(string billStatus)
         {
-            BillStatusType type = BillStatusHelper.GetType(billStatus);
 
-            var viewModel = _unitOfWork.BillPayablesRepository.Items.Where(x => x.Status == type).ToList();
+            var viewModel = _payableManager.GetByStatus(billStatus);
 
             return View(viewModel);
         }
@@ -127,13 +145,9 @@ namespace FMS.Controllers
         public IActionResult BillDetail(string billId)
         {
            
-            Guid.TryParse(billId, out var id);
-
             var viewModel = new PayableDetailView
             {
-                Payable = _unitOfWork.BillPayablesRepository
-                                        .Items.Include(x => x.Economic).Include(x => x.Fund)
-                                        .FirstOrDefault(p => p.Id == id)
+                Payable = _payableManager.GetByGuidId(billId)
             };
             
             return View(viewModel);
@@ -142,27 +156,7 @@ namespace FMS.Controllers
         public IActionResult ModifyStatus(PayableDetailView viewModel)
         {
 
-            var payable = _unitOfWork.BillPayablesRepository
-                .Items.FirstOrDefault(p => p.Id == viewModel.Payable.Id);
-
-            payable.Status = viewModel.Type;
-
-            _unitOfWork.BillPayablesRepository.Update(payable);
-
-            if (viewModel.Type != BillStatusType.DRAFT)
-            {
-
-                var workflow = new PayableWorkFlow
-                {
-                    BillPayable = payable,
-                    Comment = viewModel.Comment,
-                    Date = DateTime.Now
-                };
-
-                _unitOfWork.PayableWorkFlowsRepository.Insert(workflow);
-            }
-
-            _unitOfWork.SaveChanges();
+            _payableManager.SetWorkFlowStatus(viewModel);
 
             TempData["AlertMessage"] = $"Bill was {viewModel.Type.ToString().Replace("_", " ").ToLower()} successfully";
 

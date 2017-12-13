@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FMS.Core\FMS.Core.csproj" />
+    <ProjectReference Include="..\FMS.Services\FMS.Services.csproj" />
     <ProjectReference Include="..\FMS.Utilities\FMS.Utilities.csproj" />
   </ItemGroup>
 
